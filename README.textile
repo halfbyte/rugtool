@@ -1,0 +1,15 @@
+h1. Das Rugtool 2009
+
+Rugtool soll eine kleine, aber feine Railsanwendung sein, die die Angebote auf rubyonrails-ug.de ergänzt.
+
+h2. Ideen für das Tool
+
+ * Aggregation von vorhandenen Daten für die Eventsliste
+   * Venteria-Events
+   * RSS-Feeds von den Rails-Usergroups?
+   * Freeform-Parsing?
+
+ * Aggregation von Newsquellen (RSS-Feed vom Planet)
+
+ * Management des Planets
+ 
