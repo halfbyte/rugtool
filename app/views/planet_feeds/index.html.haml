@@ -1,26 +1,14 @@
 .span-16
   %h2
-    Alle Planet-Feeds
+    Aktive Planet-Feeds
 
-  %ul
-    - @planet_feeds.each do |feed|
-      %li
-        = link_to h(feed.title), feed.source_url
-        %br
-        (
-        = h(feed.feed_url)
-        )
+  %ul.feed-list
+    = render :partial => 'feed', :collection => @planet_feeds
   %h2
     Neue Vorschläge
 
-  %ul
-    - @new_planet_feeds.each do |feed|
-      %li
-        = link_to h(feed.title), feed.source_url
-        %br
-        (
-        = h(feed.feed_url)
-        )
+  %ul.feed-list
+    = render :partial => 'feed', :collection => @new_planet_feeds
         
 .span-8.last    
   %h2 Neuen Feed vorschlagen

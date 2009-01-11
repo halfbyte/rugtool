@@ -71,3 +71,8 @@ Rails::Initializer.run do |config|
   # Please note that observers generated using script/generate observer need to have an _observer suffix
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
 end
+
+LOGIN_REQUIRED_REDIRECTION = { :controller => 'user_sessions', :action => 'new' }
+PERMISSION_DENIED_REDIRECTION = { :controller => 'home', :action => 'index' }
+
+

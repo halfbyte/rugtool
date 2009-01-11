@@ -1,0 +1,12 @@
+%li
+  %h3
+    = link_to h(feed.title), feed.source_url
+  - if permit?("moderator for PlanetFeed")
+    = link_to "edit", edit_planet_feed_path(feed)
+    | 
+    = link_to "delete", planet_feed_path(feed), :method => :delete, :confirm  => "Wirklich feed löschen?"    
+  - else
+    (
+    = h(feed.feed_url)
+    )
+

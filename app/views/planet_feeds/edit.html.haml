@@ -1,0 +1,19 @@
+%h1 Planet-Feed editieren
+
+- form_for(@planet_feed) do |f|
+  = f.error_messages
+  %p
+    = f.label :title
+    %br
+    = f.text_field :title
+  %p
+    = f.label :feed_url
+    %br
+    = f.text_field :feed_url
+  %p
+    = f.check_box :accepted
+    Aufnehmen?
+  %p
+    = f.submit "Update"
+
+= link_to 'Back', planet_feeds_path

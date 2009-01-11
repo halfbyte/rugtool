@@ -1,5 +1,6 @@
 class PlanetFeedsController < ApplicationController
-  before_filter
+
+  permit 'moderator for PlanetFeed', :only => [:edit, :update, :destroy]
   
   # GET /planet_feeds
   # GET /planet_feeds.xml
