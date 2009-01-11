@@ -1,0 +1,41 @@
+!!!
+%html{ "xml:lang" => "en", :lang => "en", :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
+    %title
+      = @title || "No Title set you bloody idiot"
+      \- rugtooler
+    = stylesheet_link_tag 'blueprint/screen', :media => 'screen, projection'
+    = stylesheet_link_tag 'blueprint/print', :media => 'print'
+    = stylesheet_link_tag 'screen', :media => 'screen, projection'
+    /[if IE]
+      = stylesheet_link_tag 'blueprint/ie', :media => 'screen, projection'
+  %body
+    .container
+      #header.span-24
+        %h1.span-20.prepend-4.last
+          = link_to "Rails Usergroup Deutschland", root_path
+        %ul#menu.span-20.prepend-4.last
+          %li 
+            =link_to "Mailingliste", 'http://mailman.headflash.com/listinfo/rubyonrails-ug'
+          %li
+            = link_to "Wiki", "http://rubyonrails-ug.de/wiki/"
+          %li
+            = link_to "Planet", "http://planet.rubyonrails-ug.de/"
+
+          - if !current_user
+            %li 
+              = link_to "Registrieren", new_account_path
+            %li 
+              = link_to "Anmelden", new_user_session_path
+          - else
+            %li 
+              = link_to "Mein Benutzerkonto", account_path
+            %li 
+              = link_to "Abmelden", user_session_path, :method => :delete, :confirm => "Willst Du Dich wirklich abmelden?"
+      = yield
+      #footer.span-24
+        rubyonrails-ug.de - eine Initiative von 
+        = link_to "jan.krutisch.de", "http://jan.krutisch.de/" 
+        und der 
+        = link_to "mindmatters GmbH &amp; Co. KG", "http://www.mindmatters.de/"
