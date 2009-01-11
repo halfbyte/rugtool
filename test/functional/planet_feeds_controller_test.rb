@@ -41,6 +41,24 @@ class PlanetFeedsControllerTest < ActionController::TestCase
         assert_select "a[href='#{planet_feed_path(@feed)}']", :text => 'delete'
       end
     end
+    
+    context "planet list format" do
+      setup do
+        @feed = Factory(:planet_feed, :accepted_at => Time.now)
+        get :index, :format => 'planet'
+      end
+      should "render with text/plain" do
+        assert_equal "text/plain", @response.content_type
+      end
+      should "contain link to given feed" do
+        assert_match /#{@feed.reload.feed_url}/, @response.body
+      end
+      
+      should "contain square brackets" do
+        assert_match /^\[.*\]$/, @response.body
+      end
+    end
+    
   end
   
   test "should get index" do

@@ -13,6 +13,8 @@ class PlanetFeed < ActiveRecord::Base
   
   acts_as_authorizable
   
+  attr_protected :accepted_at
+  
   def accepted
     !accepted_at.nil?
   end

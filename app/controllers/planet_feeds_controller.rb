@@ -13,7 +13,7 @@ class PlanetFeedsController < ApplicationController
     
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @planet_feeds }
+      format.planet  { }
     end
   end
 
