@@ -1,0 +1,12 @@
+%h1 Feed-Vorschlag
+
+%p
+  Um einen Feed vorzuschlagen brauchst Du nur die URL eines Feeds oder einer Webseite, die einen Feed anbietet hier einzutragen. Die Feeds werden regelmäßig überprüft und freigegeben.
+
+= error_messages_for :planet_feed
+
+- form_for(@planet_feed) do |f|
+  = f.label :feed_url
+  %br
+  = f.text_field :feed_url
+  = f.submit "Vorschlagen"

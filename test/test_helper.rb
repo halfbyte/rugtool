@@ -3,6 +3,8 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
 require File.expand_path(File.dirname(__FILE__) + "/factories.rb")
 
+require 'mocha'
+
 class Test::Unit::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
   # in a transaction that's rolled back on completion.  This ensures that the
@@ -36,4 +38,15 @@ class Test::Unit::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+
+  def stub_feedtools
+    FeedTools::Feed.stubs(:open).returns(FeedTools::Feed.new)
+
+    FeedTools::Feed.any_instance.stubs(:url).returns("http://www.example.com/rss")
+    FeedTools::Feed.any_instance.stubs(:link).returns("http://www.example.com")
+    FeedTools::Feed.any_instance.stubs(:feed_type).returns(:rss)
+    FeedTools::Feed.any_instance.stubs(:title).returns("example feed")
+    
+  end
 end

@@ -2,12 +2,24 @@ body
   :background white url(/images/mainbg.jpg) top left repeat-x
 
 #header
-  :border-bottom 1px solid black
+  :border-bottom 5px solid black
   :background transparent url(/images/rugde.png) top left no-repeat
   :height 97px
   :margin-top 10px
   :padding-top 50px
   
+  h1
+    :text-align right
+    a
+      :font-size 1.2em
+      :font-weight bold
+      :text-decoration none
+      :color #000
+  
+  
+#content
+  :background #fff
+
 #footer
   :border-top 1px solid black
   :margin-top 20px
@@ -18,7 +30,55 @@ ul#menu
   :list-style-type none
   :margin 0
   li
-    :display inline
-    :margin 0
-    :padding 0
+    :display block
+    :float left
+    :margin-right 4px
+    :margin-left 4px
+    :padding 2px
     :padding-right 10px
+    :border-right 1px solid black      
+    a
+      :font-size 1.2em
+      :font-weight bold
+      :text-decoration none
+      :color #000
+    a:hover
+      :text-decoration underline
+      :color blue
+  li.last
+    :border none
+
+.fieldWithErrors
+  :padding 2px
+  :background-color red
+  :display table
+
+#errorExplanation
+  :width 400px
+  :border 2px solid red
+  :padding 7px
+  :padding-bottom 12px
+  :margin-bottom 20px
+  :background-color #f0f0f0
+
+#errorExplanation h2
+  :text-align left
+  :font-weight bold
+  :padding 5px 5px 5px 15px
+  :font-size 12px
+  :margin -7px
+  :background-color #c00
+  :color #fff
+
+#errorExplanation p
+  :color #333
+  :margin-bottom 0
+  :padding 5px
+
+#errorExplanation ul li
+  :font-size 12px
+  :list-style square
+
+.flash-notice
+  :color red
+  :background-color yellow

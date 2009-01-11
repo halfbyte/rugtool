@@ -1,0 +1,36 @@
+.span-16
+  %h2
+    Alle Planet-Feeds
+
+  %ul
+    - @planet_feeds.each do |feed|
+      %li
+        = link_to h(feed.title), feed.source_url
+        %br
+        (
+        = h(feed.feed_url)
+        )
+  %h2
+    Neue Vorschläge
+
+  %ul
+    - @new_planet_feeds.each do |feed|
+      %li
+        = link_to h(feed.title), feed.source_url
+        %br
+        (
+        = h(feed.feed_url)
+        )
+        
+.span-8.last    
+  %h2 Neuen Feed vorschlagen
+  
+  %p
+    Um einen Feed vorzuschlagen brauchst Du nur die URL eines Feeds oder einer Webseite, die einen Feed anbietet hier einzutragen. Die Feeds werden regelmäßig überprüft und freigegeben.
+
+
+  - form_for(@planet_feed) do |f|
+    = f.label :feed_url
+    %br
+    = f.text_field :feed_url
+    = f.submit "Vorschlagen"
