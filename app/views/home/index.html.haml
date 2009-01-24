@@ -1,6 +1,6 @@
 .span-16
   :textile
-    h2. Willkommen bei der virtuellen Deutschen Rails-Usergroup. Das Original seit September 2005 :)
+    h2. Willkommen bei der Deutschen Rails-Usergroup.
 
     Die Rails-Usergroup Deutschland wurde von Jan Krutisch und Ramon Wartala 2005 gegründet. Die "Mailingliste":http://mailman.headflash.com/listinfo/rubyonrails-ug als Kern der Usergroup hat zur Zeit ca. 300 Mitglieder.
     
@@ -19,10 +19,17 @@
       = link_to "Planet (News-Aggregator)", ""
 
 .span-8
-  %h2 Events
+  %h2 
+    Events
+    (
+    = link_to "was ist das?", "#"
+    )
   %ul
-    %li Hier mal so ein Event stylen
-
+    - @events.each do |event|
+      %li
+        %h3= link_to h(event.title), event.url
+        %p= sanitize(event.description)
+    %li= link_to "Alle events", "#"
 .span-8
   %h2 Gruppen
   %ul
@@ -32,5 +39,3 @@
   %h2 Artikel
   %ul
     %li Hier mal so ein Event stylen
-
-

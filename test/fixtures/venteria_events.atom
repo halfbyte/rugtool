@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xml:lang="de-DE" xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:venteria.com:tagsrails?format=atom</id>
+  <link type="text/html" href="http://venteria.com/tags/rails" rel="alternate"/>
+  <link type="application/atom+xml" href="http://venteria.com/tags/rails.atom" rel="self"/>
+  <title>Mit &#8222;rails&#8220; getaggte Events</title>
+  <updated>2009-01-14T18:40:39+01:00</updated>
+  <generator uri="http://venteria.com">venteria</generator>
+  <icon>http://venteria.com/images/icon.png?1231170377</icon>
+  <entry>
+    <id>tag:venteria.com:Event82097</id>
+    <published>2009-01-14T18:40:39+01:00</published>
+    <updated>2009-01-21T18:50:29+01:00</updated>
+    <link type="text/html" href="http://venteria.com/events/82097-HH-Rails-Usergroup-Treffen" rel="alternate"/>
+    <title>HH-Rails-Usergroup-Treffen</title>
+    <summary>Mittwoch, 11. Februar 2009 - Xing (Genaue Addresse folgt) - Hamburger Rails-UG-Treffen. Details im Wiki
+
+
+
+
+
+</summary>
+    <content type="html">&lt;p&gt;&lt;abbr class=&quot;dtstart&quot; title=&quot;2009-02-11T19:00:00+01:00&quot;&gt;Mittwoch, 11. Februar 2009, 19:00 Uhr &lt;/abbr&gt;&lt;/p&gt;&lt;p&gt;Xing (Genaue Addresse folgt)&lt;/p&gt;
+      &lt;p class=&quot;description&quot;&gt;&lt;p&gt;Hamburger Rails-UG-Treffen. Details im &lt;a href=&quot;http://www.rubyonrails-ug.de/wiki/hamburgsync&quot;&gt;Wiki&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;
+      &lt;p class=&quot;total_of_attendees&quot;&gt;1 Teilnehmer&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:venteria.com:Event82098</id>
+    <published>2009-01-14T18:40:39+01:00</published>
+    <updated>2009-01-14T18:40:39+01:00</updated>
+    <link type="text/html" href="http://venteria.com/events/82098-HH-Rails-Usergroup-Treffen" rel="alternate"/>
+    <title>HH-Rails-Usergroup-Treffen</title>
+    <summary>Mittwoch, 11. M&#228;rz 2009 - tdb - Hamburger Rails-UG-Treffen. Details im Wiki
+
+
+
+
+
+</summary>
+    <content type="html">&lt;p&gt;&lt;abbr class=&quot;dtstart&quot; title=&quot;2009-03-11T19:00:00+01:00&quot;&gt;Mittwoch, 11. M&#228;rz 2009, 19:00 Uhr &lt;/abbr&gt;&lt;/p&gt;&lt;p&gt;tdb&lt;/p&gt;
+      &lt;p class=&quot;description&quot;&gt;&lt;p&gt;Hamburger Rails-UG-Treffen. Details im &lt;a href=&quot;http://www.rubyonrails-ug.de/wiki/hamburgsync&quot;&gt;Wiki&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;
+      &lt;p class=&quot;total_of_attendees&quot;&gt;0 Teilnehmer&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:venteria.com:Event82099</id>
+    <published>2009-01-14T18:40:39+01:00</published>
+    <updated>2009-01-14T18:40:39+01:00</updated>
+    <link type="text/html" href="http://venteria.com/events/82099-HH-Rails-Usergroup-Treffen" rel="alternate"/>
+    <title>HH-Rails-Usergroup-Treffen</title>
+    <summary>Mittwoch, 08. April 2009 - tdb - Hamburger Rails-UG-Treffen. Details im Wiki
+
+
+
+
+
+</summary>
+    <content type="html">&lt;p&gt;&lt;abbr class=&quot;dtstart&quot; title=&quot;2009-04-08T19:00:00+02:00&quot;&gt;Mittwoch, 08. April 2009, 19:00 Uhr &lt;/abbr&gt;&lt;/p&gt;&lt;p&gt;tdb&lt;/p&gt;
+      &lt;p class=&quot;description&quot;&gt;&lt;p&gt;Hamburger Rails-UG-Treffen. Details im &lt;a href=&quot;http://www.rubyonrails-ug.de/wiki/hamburgsync&quot;&gt;Wiki&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;
+      &lt;p class=&quot;total_of_attendees&quot;&gt;0 Teilnehmer&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:venteria.com:Event82100</id>
+    <published>2009-01-14T18:40:39+01:00</published>
+    <updated>2009-01-14T18:40:39+01:00</updated>
+    <link type="text/html" href="http://venteria.com/events/82100-HH-Rails-Usergroup-Treffen" rel="alternate"/>
+    <title>HH-Rails-Usergroup-Treffen</title>
+    <summary>Mittwoch, 13. Mai 2009 - tdb - Hamburger Rails-UG-Treffen. Details im Wiki
+
+
+
+
+
+</summary>
+    <content type="html">&lt;p&gt;&lt;abbr class=&quot;dtstart&quot; title=&quot;2009-05-13T19:00:00+02:00&quot;&gt;Mittwoch, 13. Mai 2009, 19:00 Uhr &lt;/abbr&gt;&lt;/p&gt;&lt;p&gt;tdb&lt;/p&gt;
+      &lt;p class=&quot;description&quot;&gt;&lt;p&gt;Hamburger Rails-UG-Treffen. Details im &lt;a href=&quot;http://www.rubyonrails-ug.de/wiki/hamburgsync&quot;&gt;Wiki&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;
+      &lt;p class=&quot;total_of_attendees&quot;&gt;0 Teilnehmer&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:venteria.com:Event82101</id>
+    <published>2009-01-14T18:40:39+01:00</published>
+    <updated>2009-01-14T18:40:40+01:00</updated>
+    <link type="text/html" href="http://venteria.com/events/82101-HH-Rails-Usergroup-Treffen" rel="alternate"/>
+    <title>HH-Rails-Usergroup-Treffen</title>
+    <summary>Mittwoch, 10. Juni 2009 - tdb - Hamburger Rails-UG-Treffen. Details im Wiki
+
+
+
+
+
+</summary>
+    <content type="html">&lt;p&gt;&lt;abbr class=&quot;dtstart&quot; title=&quot;2009-06-10T19:00:00+02:00&quot;&gt;Mittwoch, 10. Juni 2009, 19:00 Uhr &lt;/abbr&gt;&lt;/p&gt;&lt;p&gt;tdb&lt;/p&gt;
+      &lt;p class=&quot;description&quot;&gt;&lt;p&gt;Hamburger Rails-UG-Treffen. Details im &lt;a href=&quot;http://www.rubyonrails-ug.de/wiki/hamburgsync&quot;&gt;Wiki&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;
+      &lt;p class=&quot;total_of_attendees&quot;&gt;0 Teilnehmer&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:venteria.com:Event82102</id>
+    <published>2009-01-14T18:40:39+01:00</published>
+    <updated>2009-01-14T18:40:40+01:00</updated>
+    <link type="text/html" href="http://venteria.com/events/82102-HH-Rails-Usergroup-Treffen" rel="alternate"/>
+    <title>HH-Rails-Usergroup-Treffen</title>
+    <summary>Mittwoch, 08. Juli 2009 - tdb - Hamburger Rails-UG-Treffen. Details im Wiki
+
+
+
+
+
+</summary>
+    <content type="html">&lt;p&gt;&lt;abbr class=&quot;dtstart&quot; title=&quot;2009-07-08T19:00:00+02:00&quot;&gt;Mittwoch, 08. Juli 2009, 19:00 Uhr &lt;/abbr&gt;&lt;/p&gt;&lt;p&gt;tdb&lt;/p&gt;
+      &lt;p class=&quot;description&quot;&gt;&lt;p&gt;Hamburger Rails-UG-Treffen. Details im &lt;a href=&quot;http://www.rubyonrails-ug.de/wiki/hamburgsync&quot;&gt;Wiki&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;
+      &lt;p class=&quot;total_of_attendees&quot;&gt;0 Teilnehmer&lt;/p&gt;</content>
+  </entry>
+
+</feed>

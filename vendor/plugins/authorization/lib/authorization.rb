@@ -8,7 +8,7 @@ module Authorization
     # your authentication system
     if not Object.constants.include? "LOGIN_REQUIRED_REDIRECTION"
       LOGIN_REQUIRED_REDIRECTION = {
-        :controller => 'user_session',
+        :controller => 'session',
         :action => 'new'
       }
     end

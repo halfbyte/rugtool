@@ -7,6 +7,10 @@
 # Specifies gem version of Rails to use when vendor/rails is not present
 RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 
+LOGIN_REQUIRED_REDIRECTION = { :controller => 'user_sessions', :action => 'new' }
+PERMISSION_DENIED_REDIRECTION = { :controller => 'home', :action => 'index' }
+
+
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
@@ -29,6 +33,8 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
 
   config.gem 'authlogic'
+  config.gem 'mofo'
+  config.gem 'hpricot'
   config.gem 'feedtools', :lib => 'feed_tools'
 
   # Only load the plugins named here, in the order given. By default, all plugins 
@@ -71,8 +77,4 @@ Rails::Initializer.run do |config|
   # Please note that observers generated using script/generate observer need to have an _observer suffix
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
 end
-
-LOGIN_REQUIRED_REDIRECTION = { :controller => 'user_sessions', :action => 'new' }
-PERMISSION_DENIED_REDIRECTION = { :controller => 'home', :action => 'index' }
-
 
