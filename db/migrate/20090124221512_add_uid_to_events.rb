@@ -1,6 +1,6 @@
 class AddUidToEvents < ActiveRecord::Migration
   def self.up
-    add_column :events, :uid, :string,
+    add_column :events, :uid, :string
     execute "UPDATE events SET uid = url WHERE url IS NOT NULL"
   end
 
