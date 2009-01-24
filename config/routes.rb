@@ -1,4 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
+  
+  map.resources :events
+  
   map.resources :planet_feeds
 
   map.resources :users

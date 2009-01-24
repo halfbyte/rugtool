@@ -25,11 +25,8 @@
     = link_to "was ist das?", "#"
     )
   %ul
-    - @events.each do |event|
-      %li
-        %h3= link_to h(event.title), event.url
-        %p= sanitize(event.description)
-    %li= link_to "Alle events", "#"
+    = render :partial =>  @events
+    %li= link_to "Alle events", events_path
 .span-8
   %h2 Gruppen
   %ul

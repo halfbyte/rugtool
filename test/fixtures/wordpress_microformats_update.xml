@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	>
+
+<channel>
+	<title>localhost:3000</title>
+	<atom:link href="http://localhost3000.de/feed/" rel="self" type="application/rss+xml" />
+	<link>http://localhost3000.de</link>
+	<description>Jan Krutisch on ruby, rails, web applications and the life as a developer</description>
+	<pubDate>Sat, 24 Jan 2009 21:23:00 +0000</pubDate>
+
+	<generator>http://wordpress.org/?v=2.7</generator>
+	<language>en</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+			<item>
+		<title>Another event test, updated</title>
+
+		<link>http://localhost3000.de/2009/01/24/another-event-test/</link>
+		<comments>http://localhost3000.de/2009/01/24/another-event-test/#comments</comments>
+		<pubDate>Sat, 24 Jan 2009 21:40:00 +0000</pubDate>
+		<dc:creator>jan</dc:creator>
+		
+		<category><![CDATA[Uncategorized]]></category>
+
+		<guid isPermaLink="false">http://localhost3000.de/?p=74</guid>
+
+		<description><![CDATA[ 
+March 11th : January 8th, 2009 Sums it up best at Nowhere
+Just another event&#8230;
+
+]]></description>
+			<content:encoded><![CDATA[<p> </p>
+<div id="hcalendar-Sums-it-up-best" class="vevent"><abbr class="dtstart" title="2009-03-11">March 11th</abbr> : <abbr class="dtend" title="2009-01-08">January 8th, 2009</abbr> <span class="summary">Sums it up best</span> at <span class="location">Nowhere</span></p>
+<div class="description">Just another event&#8230;</div>
+</div>
+]]></content:encoded>
+			<wfw:commentRss>http://localhost3000.de/2009/01/24/another-event-test/feed/</wfw:commentRss>
+		</item>
+		<item>
+		<title>This is a test post</title>
+		<link>http://localhost3000.de/2009/01/24/this-is-a-test-post/</link>
+
+		<comments>http://localhost3000.de/2009/01/24/this-is-a-test-post/#comments</comments>
+		<pubDate>Sat, 24 Jan 2009 21:11:18 +0000</pubDate>
+		<dc:creator>jan</dc:creator>
+		
+		<category><![CDATA[Uncategorized]]></category>
+
+		<guid isPermaLink="false">http://localhost3000.de/?p=72</guid>
+		<description><![CDATA[Well, let&#8217;s just say I&#8217;m working on some stuff for the german rails user group. Stuff to aggregate events. And I try to make this stuff as flexible as possible.
+ 
+January 31th 8pm : 7th, 2009 The day it happened. at My Home
+This is just a test event.
+
+]]></description>
+
+			<content:encoded><![CDATA[<p>Well, let&#8217;s just say I&#8217;m working on some stuff for the german rails user group. Stuff to aggregate events. And I try to make this stuff as flexible as possible.</p>
+<p> </p>
+<div id="hcalendar-The-day-it-happened." class="vevent"><abbr class="dtstart" title="2009-01-31T20:00+01:0000">January 31th 8pm</abbr> : <abbr class="dtend" title="2009-01-07">7th, 2009</abbr> <span class="summary">The day it happened.</span> at <span class="location">My Home</span></p>
+<div class="description">This is just a test event.</div>
+</div>
+]]></content:encoded>
+			<wfw:commentRss>http://localhost3000.de/2009/01/24/this-is-a-test-post/feed/</wfw:commentRss>
+		</item>
+		<item>
+		<title>Finally played with REE and Passenger</title>
+		<link>http://localhost3000.de/2009/01/03/finally-played-with-ree-and-passenger/</link>
+		<comments>http://localhost3000.de/2009/01/03/finally-played-with-ree-and-passenger/#comments</comments>
+
+		<pubDate>Sat, 03 Jan 2009 21:35:07 +0000</pubDate>
+		<dc:creator>jan</dc:creator>
+		
+		<category><![CDATA[development]]></category>
+
+		<category><![CDATA[passenger]]></category>
+
+		<category><![CDATA[rack]]></category>
+
+		<category><![CDATA[ree]]></category>
+
+		<category><![CDATA[ruby]]></category>
+
+		<guid isPermaLink="false">http://localhost3000.de/?p=65</guid>
+		<description><![CDATA[We are  currently using mod_passenger for the first time on our spanking new staging server, simply because it is so easy to set up new applications. A colleague of mine even hacked together a script that completely automates the process by creating an apache vhost config, creating the database and generating the capistrano config. But [...]]]></description>
+			<content:encoded><![CDATA[<p>We are  currently using mod_passenger for the first time on our spanking new staging server, simply because it is so easy to set up new applications. A colleague of mine even hacked together a script that completely automates the process by creating an apache vhost config, creating the database and generating the capistrano config. But until now, we had this running on a standard ruby version, mostly because it seemed the easiest way to set it up and performance and memory usage didn&#8217;t really matter.</p>
+<p>Over the last few days, I reinstalled my private root server with Ubuntu 8.10 (Intrepid Ibex? These names get a bit silly, if you ask me). Since it was based on a very old version of SuSE Linux before, this was a very painful, work intensive process. Anyone following me on twitter might have an idea on what I went through :) But being back on track with the system simply feels great.  </p>
+<p>Today, to reward me with something for the chores, I tried out REE and Passenger on it. All in all a very smooth experience with two small kinks:</p>
+<ol>
+<li>Installing REE was a breeze on Ubuntu (The Ubuntu package seems to work fine under Ubuntu 8.10, despite the advertisement for 8.04), but installing Passenger after that didn&#8217;t work out. It appears that the installer needs rake in the PATH, so adding /opt/ruby-enterprise/bin to the PATH fixed that. I suspect that the installer silently assumes a normal ruby install on the system.</li>
+<li>While experimenting with Rack support in Passenger, I tried out a minimal Sinatra app and the configuration <a href="http://www.modrails.com/documentation/Users%20guide.html#_sinatra" onclick="javascript:pageTracker._trackPageview('/outbound/article/www.modrails.com');">example on the Passenger Website</a> does not work. I didn&#8217;t look into the problem too deep, as the example on the sinatra website works. I&#8217;ll have to check it this is due some recent changes in sinatra or if this is an error in the phusion docs. [EDIT] I can&#8217;t reproduce this on my local machine. This is weird, but I&#8217;m not in the mood of digging deeper here right now.</li>
+</ol>
+<p>I hope to play a bit more with REE and Passenger at mindmatters during the next few weeks. This is really the smoothest rails hosting setup I ever had - And I had a lot of the during the last year.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://localhost3000.de/2009/01/03/finally-played-with-ree-and-passenger/feed/</wfw:commentRss>
+		</item>
+		<item>
+
+		<title>Did you guys even listen?</title>
+		<link>http://localhost3000.de/2008/10/21/did-you-guys-even-listen/</link>
+		<comments>http://localhost3000.de/2008/10/21/did-you-guys-even-listen/#comments</comments>
+		<pubDate>Tue, 21 Oct 2008 09:04:36 +0000</pubDate>
+		<dc:creator>jan</dc:creator>
+		
+		<category><![CDATA[Uncategorized]]></category>
+
+		<guid isPermaLink="false">http://localhost3000.de/?p=58</guid>
+		<description><![CDATA[So I took a fast look yesterday at the rails rumble applications. One thing that surprisingly didn&#8217;t change from last year was that every other app greets you with a login/signup screen, or, second best, with a splash screen that has a link to signup.
+I think that&#8217;s plain stupid. And it makes me kinda sad. [...]]]></description>
+			<content:encoded><![CDATA[<p>So I took a fast look yesterday at the rails rumble applications. One thing that surprisingly didn&#8217;t change from last year was that every other app greets you with a login/signup screen, or, second best, with a splash screen that has a link to signup.</p>
+<p>I think that&#8217;s plain stupid. And it makes me kinda sad. Because, if people really would have listened, they would have noticed that one of the reasons that we&#8217;ve won the &#8220;most innovative&#8221; category last year was that we didn&#8217;t force the user to signup before we was able to play with the badge generation. So people could actually find out how frickin&#8217; innovative we&#8217;ve been :)</p>
+<p>Mind you, this years restriction to OpenID logins in some way rounds the edges of the experience.But still: Why should I invest as much as a full OpenID roundtrip without beeing able to see what&#8217;s awaiting me?</p>
+<p>One could easily claim that the restrictions of the rumble timeframe make it impossible to deliver a perfect user experience, and thats of course quite correct. But I&#8217;d argue that if you really want to win something, you don&#8217;t stand much of a chance but to put UX on top of your priorities - Simply because the judges, with something like a hundred apps to judge, will only take a very brief glance at your piece. And only if the first impression is really good, you will suck them in and this will probably make you some rating stars already.</p>
+<p>As soon as the rating period is officially open, I&#8217;ll try to give you a list of the apps that I think do their best with this.</p>
+<p>(Damn, I am still kinda pished that I couldn&#8217;t make it into the rumble. Lisbon was not exactly more relaxing than rumblin&#8217;, though. I am getting old, I tell you.)</p>
+]]></content:encoded>
+			<wfw:commentRss>http://localhost3000.de/2008/10/21/did-you-guys-even-listen/feed/</wfw:commentRss>
+		</item>
+		<item>
+		<title>Trying things&#8230;</title>
+
+		<link>http://localhost3000.de/2008/09/04/trying-things/</link>
+		<comments>http://localhost3000.de/2008/09/04/trying-things/#comments</comments>
+		<pubDate>Thu, 04 Sep 2008 21:22:43 +0000</pubDate>
+		<dc:creator>jan</dc:creator>
+		
+		<guid isPermaLink="false">http://localhost3000.de/2008/09/04/trying-things/</guid>
+		<description><![CDATA[This is a test to post from shozu, something that never really worked on my old phone.
+
+]]></description>
+
+			<content:encoded><![CDATA[<p>This is a test to post from shozu, something that never really worked on my old phone.
+<p align="right" ><a href="http://www.shozu.com/portal/?utm_source=upload&amp;utm_medium=graphic&amp;utm_campaign=upload_graphic/" onclick="javascript:pageTracker._trackPageview('/outbound/article/www.shozu.com');" target="_blank" ><img src="http://www.shozu.com/resources/messages/logo_blog.gif" alt="Posted by ShoZu" border="0" /></a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://localhost3000.de/2008/09/04/trying-things/feed/</wfw:commentRss>
+		</item>
+		<item>
+		<title>Problem with Cruisecontrol and Rails 2.1</title>
+		<link>http://localhost3000.de/2008/07/22/problem-with-cruisecontrol-and-rails-21/</link>
+		<comments>http://localhost3000.de/2008/07/22/problem-with-cruisecontrol-and-rails-21/#comments</comments>
+
+		<pubDate>Tue, 22 Jul 2008 09:06:01 +0000</pubDate>
+		<dc:creator>jan</dc:creator>
+		
+		<category><![CDATA[Uncategorized]]></category>
+
+		<guid isPermaLink="false">http://localhost3000.de/?p=56</guid>
+		<description><![CDATA[This is just a quick note, I will try to expand later on as I gather more details on the issue.
+After upgrading our first application to rails 2.1, the cruisecontrol.rb integration suddenly stopped working. The reason is still a bit cloudy, it seems as if rails 2.1 changed the place where the environment is determined, [...]]]></description>
+			<content:encoded><![CDATA[<p>This is just a quick note, I will try to expand later on as I gather more details on the issue.</p>
+<p>After upgrading our first application to rails 2.1, the cruisecontrol.rb integration suddenly stopped working. The reason is still a bit cloudy, it seems as if rails 2.1 changed the place where the environment is determined, which in turn means that the line ENV['RAILS_ENV']=&#8217;test&#8217; (used in the cc_build.rake from cc.rb) doesn&#8217;t really switch rails into test mode. Instead, development.rb is loaded and the development database credentials are used, which don&#8217;t really exist on my ccrb box, thus, bringing the build process to a grinding halt.</p>
+<p>I have yet to find any details on this, and surprisingly, a quick google search suggests that I am really the only one having that problem.</p>
+<p>The quick fix is to use project.build_command = &#8216;RAILS_ENV=test rake cruise&#8217; in cruise_config.rb but that surely sucks big time.</p>
+<p>As I wrote, I still have to investigate a little more here to make sure it is really an issue with cc.rb and rails and note any of the obscure plugins in the project, so watch this space for updates on the issue.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://localhost3000.de/2008/07/22/problem-with-cruisecontrol-and-rails-21/feed/</wfw:commentRss>
+
+		</item>
+		<item>
+		<title>Android doomed?</title>
+		<link>http://localhost3000.de/2008/06/23/android-doomed/</link>
+		<comments>http://localhost3000.de/2008/06/23/android-doomed/#comments</comments>
+		<pubDate>Mon, 23 Jun 2008 09:55:39 +0000</pubDate>
+		<dc:creator>jan</dc:creator>
+
+		
+		<category><![CDATA[Uncategorized]]></category>
+
+		<guid isPermaLink="false">http://localhost3000.de/?p=55</guid>
+		<description><![CDATA[Now, finally I was able to take a look at the iPhone SDK. Man, this is one heck of a cool piece of software. XCode may not be the bestest IDE out there, but in combination with the excellent InterfaceBuilder and the absolutely stunning API set, phone software development finally turns out to be enjoyable [...]]]></description>
+			<content:encoded><![CDATA[<p>Now, finally I was able to take a look at the iPhone SDK. Man, this is one heck of a cool piece of software. XCode may not be the bestest IDE out there, but in combination with the excellent InterfaceBuilder and the absolutely stunning API set, phone software development finally turns out to be enjoyable (As soon as you get over the quirks that Objective C brings with itself).</p>
+<p>The Android SDK on the other hand, is in a terrible state. Every new &#8220;preview release&#8221; changes the API&#8217;s, the UI, and everything else at will. The apps that won the Android challenge were, in my humble opinion, pretty disappointing altogether. Now, this all is not without consequence for the introduction of real life handsets, which now, as reported,&nbsp; will not enter the market before Q4.</p>
+<p>I still would like to think that the Android way of doing things (keeping the platform completely open) is way better than the &#8220;almost closed up&#8221; Apple way.</p>
+<p>Only, as the saying goes, &#8220;real artists ship&#8221;, and Android is far away from doing so. Which will draw a lot of developers to the iPhone platform. It is, at least for the moment, the only place to be, if you want to develop feature-rich, beautiful and slick mobile apps.</p>
+<p>Let&#8217;s cross our fingers that the first Android handsets WILL be available in Q4, that the SDK will, in some point between now and then, become stable and the SDK/IDE will improve. While ObjC/Cocoa will always be the cooler stuff to develop with and will yield results faster, in my opinion, the Java eco system will hopefully produce some great code for the Platform and the openness of the Platform will hopefully foster creativity and new business models for the mobile market.</p>
+<p></p>
+]]></content:encoded>
+			<wfw:commentRss>http://localhost3000.de/2008/06/23/android-doomed/feed/</wfw:commentRss>
+		</item>
+		<item>
+
+		<title>We rawk hard!</title>
+		<link>http://localhost3000.de/2008/05/30/we-rawk-hard/</link>
+		<comments>http://localhost3000.de/2008/05/30/we-rawk-hard/#comments</comments>
+		<pubDate>Fri, 30 May 2008 08:55:34 +0000</pubDate>
+		<dc:creator>jan</dc:creator>
+		
+		<category><![CDATA[development]]></category>
+
+		<category><![CDATA[maeshroom]]></category>
+
+		<category><![CDATA[reactable]]></category>
+
+		<category><![CDATA[ruby]]></category>
+
+		<category><![CDATA[tangible]]></category>
+
+		<guid isPermaLink="false">http://localhost3000.de/?p=54</guid>
+		<description><![CDATA[When was the last time you played with something you built and you started to feel like a small child, grinning all the time, drunk with possibilites (and beer, in my case)? Well, yesterday evening was one of that moments. We had a real, working, prototype of the reacTIVision-Stuff I talked about last time, running [...]]]></description>
+
+			<content:encoded><![CDATA[<p>When was the last time you played with something you built and you started to feel like a small child, grinning all the time, drunk with possibilites (and beer, in my case)? Well, yesterday evening was one of that moments. We had a real, working, prototype of the reacTIVision-Stuff I talked about <a href="http://localhost3000.de/2008/05/17/tangible-interfaces-me-wants/" >last time</a>, running with a slightly modified version of my test app. Simple stuff that took a lot of work in setting up the hardware, calibrating the reacTIVision software, playing with lighting, modifying the glass surface and on and on. But the result was&#8230;special. It is almost weird how great it feels to move some small magnets on a glass surface and seeing some lines drawn in a color that&#8217;s modified by turning the magnets. (we used magnets because they had a good knobby shape and nothing else was in reach&#8230;no need for magnetism). Now, the hardware is improvable. We need a better mirror, maybe a better camera, we need a real table like setup, we need real IR lighting, and whatnot.</p>
+<p>But what we have learned yesterday is that it&#8217;s absolutely feasible to build that thing. It will work. So, while the hardware is built, we&#8217;ll also go back to the software lab and try to find ideas and turn them into working code.</p>
+<p>Yes, I am one happy camper today. Still smiling from the experience of yesterday evening. Go, <a href="http://www.maeshroom.de" onclick="javascript:pageTracker._trackPageview('/outbound/article/www.maeshroom.de');">mæshroom</a>, go.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://localhost3000.de/2008/05/30/we-rawk-hard/feed/</wfw:commentRss>
+		</item>
+		<item>
+		<title>Tangible Interfaces. Me wants!</title>
+		<link>http://localhost3000.de/2008/05/17/tangible-interfaces-me-wants/</link>
+		<comments>http://localhost3000.de/2008/05/17/tangible-interfaces-me-wants/#comments</comments>
+
+		<pubDate>Sat, 17 May 2008 21:48:11 +0000</pubDate>
+		<dc:creator>jan</dc:creator>
+		
+		<category><![CDATA[development]]></category>
+
+		<category><![CDATA[gosu]]></category>
+
+		<category><![CDATA[maeshroom]]></category>
+
+		<category><![CDATA[reactable]]></category>
+
+		<category><![CDATA[ruby]]></category>
+
+		<category><![CDATA[tangible interfaces]]></category>
+
+		<guid isPermaLink="false">http://localhost3000.de/?p=53</guid>
+		<description><![CDATA[If you are, like me, a sucker for cool, new interface ideas and, at the same time, a wanna-be-electronic-musician, the reacTable stuff is just, you know, mouth watering. But somehow I guess I will never ever be able to buy one..
+Fortunately, the software to do the actual motion/symbol tracking is open source - It is [...]]]></description>
+			<content:encoded><![CDATA[<p>If you are, like me, a sucker for cool, new interface ideas and, at the same time, a wanna-be-electronic-musician, the <a href="http://mtg.upf.edu/reactable/" onclick="javascript:pageTracker._trackPageview('/outbound/article/mtg.upf.edu');">reacTable</a> stuff is just, you know, mouth watering. But somehow I guess I will never ever be able to buy one..</p>
+<p>Fortunately, the software to do the actual motion/symbol tracking is open source - It is a standalone application that sends the tracking data in consumable form over OSC, which is a lightweight network based MIDI replacement of some sorts.</p>
+<p>After some trouble with finding a both working AND fast-enough ruby implementation of the OSC protocol, I finally managed to build a <a href="http://github.com/halfbyte/reactivision_test/tree/master" onclick="javascript:pageTracker._trackPageview('/outbound/article/github.com');">simple application</a> that only displays the tracked markers and cursors. It uses GOSU for displaying things. Details on the project are to be found on the <a href="http://www.maeshroom.de/wiki/doku.php?id=reactable" onclick="javascript:pageTracker._trackPageview('/outbound/article/www.maeshroom.de');">maeshroom wiki</a>.</p>
+<p>That&#8217;s pretty basic stuff for now, because developing real applications for that are not that interesting as long as you don&#8217;t have the hardware to use it. And the hardware part IS kinda hard, mostly because you have to differentiate the marker symbols from the projection itself which is usually done by using IR-pass-filters on the camera and &#8220;illuminating&#8221; the marker symbols using IR light. As we currently use a sony mini-DV cam that has the infamous &#8220;nightshot&#8221; mode, this should be relatively easy. I&#8217;ll make some tests next week using developed film as a fake IR-pass filter (simply because these beasts are rather expensive and hard to get)</p>
+]]></content:encoded>
+			<wfw:commentRss>http://localhost3000.de/2008/05/17/tangible-interfaces-me-wants/feed/</wfw:commentRss>
+
+		</item>
+		<item>
+		<title>The positive aspects of sick leave&#8230;</title>
+		<link>http://localhost3000.de/2008/04/24/the-positive-aspects-of-sick-leave/</link>
+		<comments>http://localhost3000.de/2008/04/24/the-positive-aspects-of-sick-leave/#comments</comments>
+		<pubDate>Thu, 24 Apr 2008 17:09:35 +0000</pubDate>
+		<dc:creator>jan</dc:creator>
+
+		
+		<category><![CDATA[development]]></category>
+
+		<category><![CDATA[knowledge]]></category>
+
+		<category><![CDATA[rails]]></category>
+
+		<category><![CDATA[research]]></category>
+
+		<category><![CDATA[ruby]]></category>
+
+		<guid isPermaLink="false">http://localhost3000.de/?p=51</guid>
+
+		<description><![CDATA[Essentially I stayed the last few days in bed. I have a bad, very stubborn cold, that doesn&#8217;t really seem to respond too well to my massive Vitamine C + Zinc + Loads of vedgies + Loads of Water and Tea treatment. The upside of this is that I have a lot of time to [...]]]></description>
+			<content:encoded><![CDATA[<p>Essentially I stayed the last few days in bed. I have a bad, very stubborn cold, that doesn&#8217;t really seem to respond too well to my massive Vitamine C + Zinc + Loads of vedgies + Loads of Water and Tea treatment. The upside of this is that I have a lot of time to read and look and listen. Videos from conferences (aren&#8217;t those confreaks videos simply great?), Podcasts, Blogs and all that. The downside of this is that I now officially know that I am not able to follow the whole &#8220;ruby&#8221; thing under normal circumstances. So much to learn, so much to read, so very much too much.</p>
+<p>One example: I am, as everybody, always struggling with fixtures in Rails. And while Thorsten and I have a strategy which works pretty well so far and is only slightly messy (read: has its drawbacks), I took the time and tried to find out the best way to deal with it. Whoah - So many different opinions on it, so many different ways to work around the problem that I don&#8217;t even know where to start to test these ideas out.</p>
+<p>The lesson? It&#8217;s illusional to think I could keep myself completely up-to-date on everything ruby or even everything rails. So I must try harder to  filter out the relevant stuff and probably take my time for very intensive research projects as soon as I have a problem to solve. Relying on the stuff I &#8220;read somewhere, sometimes&#8221; doesn&#8217;t work anymore.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://localhost3000.de/2008/04/24/the-positive-aspects-of-sick-leave/feed/</wfw:commentRss>
+		</item>
+	</channel>
+</rss>

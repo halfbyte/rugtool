@@ -1,0 +1,4 @@
+%li.vevent
+  %h3= link_to h(event.title), event.url, :class => 'url'
+  %abbr.dtstart{:title => event.starts_at.to_s(:iso)}= event.starts_at.to_s(:short)
+  %p.summary= sanitize(event.description)

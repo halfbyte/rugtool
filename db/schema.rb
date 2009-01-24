@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090123162140) do
+ActiveRecord::Schema.define(:version => 20090124221512) do
 
   create_table "cached_feeds", :force => true do |t|
     t.string   "href"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(:version => 20090123162140) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "remote_updated_at"
+    t.string   "uid"
   end
 
   create_table "planet_feeds", :force => true do |t|
