@@ -11,11 +11,11 @@ Ich hoffe allerdings auch auf Eure Hilfe.
  * Der Sourcecode kann aus meinem Github-Repository geforked werden
  * Ich werde alle Erweiterungen, die ein paar Bedingungen erfüllen, per 
    Pull-Requests übernehmen:
-   * Alle Erweiterungen müssen gut getestet sein
-   * Getestet wird mit Test::Unit bzw. Shoulda
-   * Keine Fixtures, statt dessen FactoryGirl für Factories
-   * HAML und SASS sind installiert und dürfen benutzt werden :)
-   * Ich halte sie für sinnvoll :)
+ ** Alle Erweiterungen müssen gut getestet sein
+ ** Getestet wird mit Test::Unit bzw. Shoulda
+ ** Keine Fixtures, statt dessen FactoryGirl für Factories
+ ** HAML und SASS sind installiert und dürfen benutzt werden :)
+ ** Ich halte sie für sinnvoll :)
 
 h2. Vision
 
@@ -26,8 +26,8 @@ h2. Ideen für das Tool
 (bitte gern per Patch ergänzen)
 
  * Aggregation von vorhandenen Daten für die Eventsliste
-   * Venteria-Events
-   * RSS-Feeds von den Rails-Usergroups?
-   * Freeform-Parsing?
+ ** Venteria-Events
+ ** RSS-Feeds von den Rails-Usergroups?
+ ** Freeform-Parsing?
  * Aggregation von Newsquellen (RSS-Feed vom Planet)
  * Management des Planets
