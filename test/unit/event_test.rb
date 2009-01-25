@@ -2,9 +2,9 @@ require 'test_helper'
 
 class EventTest < ActiveSupport::TestCase
   
-  should_require_attributes :title, :description, :uid, :starts_at
+  should_require_attributes :title, :uid, :starts_at
   
-  context "Import processes" do
+  context "Importing Feeds with feedtools" do
     context "generic" do
       should "create event from rss feed with microformats" do
         assert_difference "Event.count",2 do
@@ -40,5 +40,15 @@ class EventTest < ActiveSupport::TestCase
         end
       end
     end
+    
+    context "importing ics files" do
+      should "create new events" do
+        assert_difference "Event.count", 6 do
+          Event.import_from_ics(File.join(RAILS_ROOT, "test", "fixtures", "venteria_ical.ics"))
+        end
+      end
+      
+    end
+    
   end
 end

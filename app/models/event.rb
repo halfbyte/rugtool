@@ -1,6 +1,8 @@
 class Event < ActiveRecord::Base
 
-  validates_presence_of :title, :description, :uid, :starts_at
+  require 'open-uri'
+
+  validates_presence_of :title, :uid, :starts_at
   
   ##############################################
   # Import actions
@@ -10,6 +12,8 @@ class Event < ActiveRecord::Base
   # mofo parsing is skipped and you can do your own parsing.
   # the parser should set starts_at, since this is the only field that we can not populate
   # from standard feed elements
+  # TODO: Try to autodetect xcal elements in feed, since this is what upcoming.yahoo.com is using
+  # 
   
   def self.import_from_feed(url)
     feed = FeedTools::Feed.open(url)
@@ -34,4 +38,28 @@ class Event < ActiveRecord::Base
       end
     end
   end
+  
+  def self.import_from_ics(url)
+    cals = Icalendar.parse(open(url))
+    cal = cals.first
+    cal.events.each do |item|
+      event = Event.find_by_uid(item.uid) || Event.new
+      if event.new_record? || (event.remote_updated_at < item.dtstamp)
+        event.attributes = {
+          :uid => item.uid,
+          :url => item.url,
+          :description => item.description || "", #might be empty. too bad.
+          :title => item.summary,
+          :starts_at => item.dtstart,
+          :remote_updated_at => item.dtstamp
+        }
+        if event.save
+          logger.info "imported/updated #{event.title}"
+        else
+          logger.info "discarding #{event.url} because save failed"
+        end                  
+      end
+    end
+  end
+  
 end

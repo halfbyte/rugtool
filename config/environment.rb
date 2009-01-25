@@ -36,6 +36,7 @@ Rails::Initializer.run do |config|
   config.gem 'mofo'
   config.gem 'hpricot'
   config.gem 'feedtools', :lib => 'feed_tools'
+  config.gem 'icalendar'
 
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
@@ -52,7 +53,7 @@ Rails::Initializer.run do |config|
   # Make Time.zone default to the specified zone, and make Active Record store time values
   # in the database in UTC, and return them converted to the specified local zone.
   # Run "rake -D time" for a list of tasks for finding time zone names. Comment line to use default local time.
-  config.time_zone = 'UTC'
+  config.time_zone = 'Berlin'
 
   # Your secret key for verifying cookie session data integrity.
   # If you change this key, all old sessions will become invalid!
