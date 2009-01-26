@@ -1,3 +1,8 @@
-%h2 Alle Events
+.span-16
+  %h2 Alle Events
 
-= render :partial => @events
+  = render :partial => @events
+
+.span-8.last
+  %ul
+    %li= link_to "Event-Quellen", event_sources_path

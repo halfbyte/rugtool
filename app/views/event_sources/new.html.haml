@@ -1,0 +1,9 @@
+%h2 Neuen Feed vorschlagen
+%p
+  Um eine Event-Quelle vorzuschlagen, bitte eine URL eines Feeds oder eines ics-Links angeben.
+= error_messages_for :event_source
+
+- form_for @event_source do |f|
+  = render :partial => 'form', :locals => {:f => f}
+  %p
+    = f.submit "Vorschlagen"

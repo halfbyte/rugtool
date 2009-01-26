@@ -1,0 +1,15 @@
+.span-16
+  %h2 Event-Quellen
+  %h3 Aktive Quellen
+  %ul= render :partial => 'event_sources/event_source', :collection => @accepted_event_sources
+
+  %h3 Nicht aktive Quellen
+  %ul= render :partial => 'event_sources/event_source', :collection => @not_accepted_event_sources
+.span-8.last
+  %h2 Neue Quelle vorschlagen
+  %p
+    Um eine Event-Quelle vorzuschlagen, bitte eine URL eines Feeds oder eines ics-Links angeben.
+  - form_for @event_source do |f|
+    = render :partial => 'form', :locals => {:f => f}
+    %p
+      = f.submit "Vorschlagen"

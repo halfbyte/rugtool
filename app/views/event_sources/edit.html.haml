@@ -1,0 +1,14 @@
+%h2 Event-Quelle editieren
+%p
+  
+= error_messages_for :event_source
+
+- form_for @event_source do |f|
+  = render :partial => 'form', :locals => {:f => f}
+  %p
+    = f.check_box :accepted
+    Aufnehmen?  
+  %p
+    = f.submit "Vorschlagen"
+
+= link_to 'Back', planet_feeds_path

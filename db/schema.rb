@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090124221512) do
+ActiveRecord::Schema.define(:version => 20090125192755) do
 
   create_table "cached_feeds", :force => true do |t|
     t.string   "href"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(:version => 20090124221512) do
     t.datetime "last_retrieved"
     t.integer  "time_to_live"
     t.text     "serialized"
+  end
+
+  create_table "event_sources", :force => true do |t|
+    t.string   "url"
+    t.string   "source_type"
+    t.datetime "accepted_at"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "events", :force => true do |t|

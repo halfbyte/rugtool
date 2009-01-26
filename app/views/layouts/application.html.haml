@@ -23,8 +23,13 @@
           %li
             = link_to "Planet", "http://planet.rubyonrails-ug.de/"
             (
-            = link_to "feeds", planet_feeds_path
+            = link_to "Feeds", planet_feeds_path
             )
+          %li
+            = link_to "Events", events_path
+            (
+            = link_to "Quellen", event_sources_path
+            )            
           - if !current_user
             %li 
               = link_to "Registrieren", new_account_path

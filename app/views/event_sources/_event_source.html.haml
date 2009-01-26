@@ -1,0 +1,7 @@
+%li
+  %h4= h(event_source.title)
+  - if permit?("moderator for EventSource")
+    = link_to "edit", edit_event_source_path(event_source)
+    | 
+    = link_to "delete", event_source_path(event_source), :method => :delete, :confirm  => "Wirklich feed löschen?"      
+  %p.url= event_source.url
