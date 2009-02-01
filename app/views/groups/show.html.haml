@@ -1,0 +1,6 @@
+%h2
+  &= @group.title
+  - unless @group.url.blank?
+    ==(#{link_to "Website", @group.url})
+    
+%p= textilize(sanitize(@group.description))

@@ -13,11 +13,13 @@
   %body
     .container
       #header.span-24
-        %h1.span-20.prepend-4.last
+        %h1.span-16.prepend-8.last
           = link_to "Rails Usergroup Deutschland", root_path
-        %ul#menu.span-18.prepend-6.last
+        %ul#menu.span-16.prepend-8.last
           %li 
             =link_to "Mailingliste", 'http://mailman.headflash.com/listinfo/rubyonrails-ug'
+          %li 
+            =link_to "Lokale Gruppen", groups_path
           %li
             = link_to "Wiki", "http://rubyonrails-ug.de/wiki/"
           %li
@@ -25,24 +27,14 @@
             (
             = link_to "Feeds", planet_feeds_path
             )
-          %li
+          %li.last
             = link_to "Events", events_path
             (
             = link_to "Quellen", event_sources_path
             )            
-          - if !current_user
-            %li 
-              = link_to "Registrieren", new_account_path
-            %li.last 
-              = link_to "Anmelden", new_user_session_path
-          - else
-            %li 
-              = link_to "Mein Benutzerkonto", account_path
-            %li.last 
-              = link_to "Abmelden", user_session_path, :method => :delete, :confirm => "Willst Du Dich wirklich abmelden?"
       #content.span-24
         - if flash[:notice]
-          .span-24.flash-notice
+          .notice
             = flash[:notice]
         = yield
       #footer.span-22.prepend-1.append-1
@@ -50,3 +42,15 @@
         = link_to "jan.krutisch.de", "http://jan.krutisch.de/" 
         und der 
         = link_to "mindmatters GmbH &amp; Co. KG", "http://www.mindmatters.de/"
+    #login-box
+      - if !current_user
+        = link_to "Registrieren", new_account_path
+        = link_to "Anmelden", new_user_session_path
+      - else
+        Angemeldet als
+        = link_to h(current_user.login), account_path
+        (
+        = link_to "Abmelden", user_session_path, :method => :delete, :confirm => "Willst Du Dich wirklich abmelden?"
+        )
+        
+    

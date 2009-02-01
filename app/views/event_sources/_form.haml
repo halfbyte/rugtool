@@ -1,9 +1,12 @@
 %p
   = f.label :title
-  = f.text_field :title  
+  %br
+  = f.text_field :title, :class => 'title'
 %p
   = f.label :url
-  = f.text_field :url
+  %br
+  = f.text_field :url, :class => 'text'
 %p
   = f.label :source_type
+  %br
   = f.select :source_type, EventSource::SOURCE_TYPES

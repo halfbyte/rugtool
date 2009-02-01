@@ -20,5 +20,5 @@
   - form_for(@planet_feed) do |f|
     = f.label :feed_url
     %br
-    = f.text_field :feed_url
+    = f.text_field :feed_url, :class => 'text'
     = f.submit "Vorschlagen"

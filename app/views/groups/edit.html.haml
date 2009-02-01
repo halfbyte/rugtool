@@ -1,0 +1,5 @@
+%h1 Gruppe editieren
+
+- form_for @group do |f|
+  = render :partial => 'form', :locals => {:f => f}
+  = submit_tag 'Speichern'

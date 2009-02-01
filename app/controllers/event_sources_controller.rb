@@ -3,6 +3,8 @@ class EventSourcesController < ApplicationController
   before_filter :load_event_source, :only => [:edit, :update, :destroy]
   permit 'moderator for EventSource', :only => [:edit, :update, :destroy]
   
+  
+  
   def index
     @accepted_event_sources = EventSource.accepted
     @not_accepted_event_sources = EventSource.not_accepted

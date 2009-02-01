@@ -3,13 +3,13 @@ body
 
 #header
   :border-bottom 5px solid black
-  :background transparent url(/images/rugde.png) top left no-repeat
+  :background transparent url(/images/rugde.png) -20px 0 no-repeat
   :height 97px
   :margin-top 10px
   :padding-top 50px
   
   h1
-    :text-align right
+    :text-align left
     a
       :font-size 1.2em
       :font-weight bold
@@ -26,15 +26,22 @@ body
   :padding-top 5px
   :text-align center
 
+#login-box
+  :position absolute
+  :top 0
+  :right 0
+  :background #eee
+  
+
 ul#menu
   :list-style-type none
-  :margin 0
+  :margin 0  
   li
     :display block
     :float left
     :margin-right 4px
-    :margin-left 4px
-    :padding 2px
+    :margin-left 0px
+    :padding 4px
     :padding-right 10px
     :border-right 1px solid black      
     a

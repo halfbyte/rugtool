@@ -25,7 +25,8 @@
 .span-8
   %h2 Gruppen
   %ul
-    %li Hier mal so ein Event stylen
+    = render :partial => @groups
+    %li= link_to "Alle Gruppen", groups_path
 
 .span-8.last
   %h2 Artikel

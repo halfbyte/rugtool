@@ -1,0 +1,12 @@
+.span-24
+  %h2 Gruppen
+.span-12
+  %ul
+    = render :partial => @groups
+
+.span-12.last
+  %h3 Neue Gruppe vorschlagen
+  - form_for @group do |f|
+    = render :partial => 'form', :locals => {:f => f}
+    = submit_tag 'Anlegen'
+  

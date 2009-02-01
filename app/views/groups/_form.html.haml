@@ -1,0 +1,29 @@
+= error_messages_for :group
+%p
+  = f.label :title
+  %br
+  = f.text_field :title, :class => 'title'
+
+%p
+  Über den URL-Slug wird die Adresse Deiner Usergroup festgelegt. Wenn der URL-Slug beispielsweise "hamburg" lautet, kann man die 
+  Usergroup über rubyonrails-ug.de/hamburg erreichen, was natürlich ein schöner, und gut zu kommunizierender Shortcut ist.
+%p
+  = f.label :url_slug
+  %br
+  = f.text_field :url_slug, :class => 'text'
+
+%p
+  Bitte erzähl doch kurz, wie und wann und wo Ihr Euch trefft, wie viele Leute 
+  da so kommen, wie Ihr Euch organisiert und was Du sonst noch dazu sagen 
+  möchtest.
+  Die Beschreibung kann per Textile formatiert werden.
+%p
+  = f.label :description
+  %br
+  = f.text_area :description
+%p
+  Hat Deine Usergroup eine eigene Homepage? Her damit!
+%p
+  = f.label :url
+  %br
+  = f.text_field :url, :class => 'text'

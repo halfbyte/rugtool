@@ -1,0 +1,4 @@
+%li
+  %h3= link_to h(group.title), group_path(group)
+  %p
+    = link_to "Edit", edit_group_path(group) if permit?("moderator for Group")

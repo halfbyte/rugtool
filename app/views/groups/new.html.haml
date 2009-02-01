@@ -1,0 +1,6 @@
+%h1 Neue Gruppe vorschlagen
+
+- form_for @group do |f|
+  = render :partial => 'form', :locals => {:f => f}
+  = submit_tag 'Anlegen'
+  
