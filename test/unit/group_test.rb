@@ -3,7 +3,13 @@ require 'test_helper'
 class GroupTest < ActiveSupport::TestCase
   
   should_require_attributes :title, :url_slug, :description
-  should_require_unique_attributes :url_slug
+  
+  context "validations" do
+    setup do
+      Factory(:group)
+    end
+    should_require_unique_attributes :url_slug    
+  end
   
   context "additional validations" do
     setup do

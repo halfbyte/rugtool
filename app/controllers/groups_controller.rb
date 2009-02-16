@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   
-  permit 'moderator for Group', :only => [:edit, :update, :destroy]
+  permit 'moderator for Group', :only => [:destroy]
   
   resource_controller
 

@@ -4,13 +4,14 @@
   %br
   = f.text_field :title, :class => 'title'
 
-%p
-  Über den URL-Slug wird die Adresse Deiner Usergroup festgelegt. Wenn der URL-Slug beispielsweise "hamburg" lautet, kann man die 
-  Usergroup über rubyonrails-ug.de/hamburg erreichen, was natürlich ein schöner, und gut zu kommunizierender Shortcut ist.
-%p
-  = f.label :url_slug
-  %br
-  = f.text_field :url_slug, :class => 'text'
+- if allowed_for_create_or_moderator?(@group)
+  %p
+    Über den URL-Slug wird die Adresse Deiner Usergroup festgelegt. Wenn der URL-Slug beispielsweise "hamburg" lautet, kann man die 
+    Usergroup über rubyonrails-ug.de/hamburg erreichen, was natürlich ein schöner, und gut zu kommunizierender Shortcut ist.
+  %p
+    = f.label :url_slug
+    %br
+    = f.text_field :url_slug, :class => 'text'
 
 %p
   Bitte erzähl doch kurz, wie und wann und wo Ihr Euch trefft, wie viele Leute 
