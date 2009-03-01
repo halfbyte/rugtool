@@ -13,9 +13,7 @@
   .span-8
     %h2 
       Events
-      (
-      = link_to "was ist das?", "#"
-      )
+      == (#{link_to "was ist das?", "#"})
     %ul
       = render :partial =>  @events
       %li= link_to "Alle events", events_path

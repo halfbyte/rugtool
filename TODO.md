@@ -4,7 +4,6 @@ Lo-Tech Featureplanung
 Vor Prod-Launch
 ---------------
 
-* Karte der Usergroups auf Homepage
 * Planet-Konfig aus der Liste erzeugen
 * Mehr design (Content von Background trennen...)
 * Event-Imports aus Event-Quellen speisen
