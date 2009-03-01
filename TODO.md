@@ -4,7 +4,6 @@ Lo-Tech Featureplanung
 Vor Prod-Launch
 ---------------
 
-* Usergroups können eine Adresse haben
 * Karte der Usergroups auf Homepage
 * Planet-Konfig aus der Liste erzeugen
 * Mehr design (Content von Background trennen...)

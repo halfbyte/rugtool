@@ -1,5 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+
   map.resources :groups
+  map.group ':id', :controller => 'groups', :action => 'show', :id => /[a-z\-\_0-9]+/, :conditions => { :method => :get }
+  map.group ':id', :controller => 'groups', :action => 'update', :id => /[a-z\-\_0-9]+/, :conditions => { :method => :put }
 
   map.resources :event_sources
 
@@ -14,7 +17,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session
 
 
-  map.group ':id', :controller => 'groups', :action => 'show', :id => /[a-z\-\_0-9]+/
+  
   
   # The priority is based upon order of creation: first created -> highest priority.
 

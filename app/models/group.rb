@@ -1,4 +1,6 @@
 class Group < ActiveRecord::Base
+
+  include Geokit::Geocoders
   
   acts_as_mappable :default_units => :kms, :default_formula => :flat
   
@@ -16,10 +18,14 @@ class Group < ActiveRecord::Base
     self.url_slug
   end
 
+  def geocoded?
+    self.lat && self.lng
+  end
+
 private
   def validates_against_url_slug_blacklist
     if BLACKLISTED_URL_SLUGS.include?(self.url_slug)
-      errors.add(:url_slug, 'is invalid, probably blacklisted. choose a different one')
+      errors.add(:url_slug, 'ist nicht erlaubt, weils vermutlich auf einer Blacklist steht.')
     end
   end
   

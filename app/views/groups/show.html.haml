@@ -1,6 +1,18 @@
-%h2
-  &= @group.title
-  - unless @group.url.blank?
-    ==(#{link_to "Website", @group.url})
+- content_for :head do
+  - if @group.geocoded?
+    = GMap.header(:host => request.host)
+    = @map.to_html
+.span-16
+  %h2
+    &= @group.title
+    - unless @group.url.blank?
+      ==(#{link_to "Website", @group.url})
     
-%p= textilize(sanitize(@group.description))
+  %p= textilize(sanitize(@group.description))
+.span-8.last
+  - if @group.geocoded?
+    = @map.div(:width => 310, :height => 310)
+  %ul
+    %li
+      = link_to "Bearbeiten", edit_group_path(@group)
+    

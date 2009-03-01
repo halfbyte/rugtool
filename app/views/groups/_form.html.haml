@@ -28,3 +28,12 @@
   = f.label :url
   %br
   = f.text_field :url, :class => 'text'
+
+%p
+  Um das Auffinden einer Usergroup zu erleichtern, kannst Du hier einen Ort angeben,
+  der dann über Google Maps verortet wird. Das kann z.B. einfach nur der Städtename sein ("Hamburg")
+  oder aber, wenn Ihr Euch z.B. immer in der selben Kneipe trefft, auch die genaue Adresse der Kneipe.
+%p
+  = f.label :location
+  %br
+  = f.text_field :location, :class => 'text'

@@ -1,3 +1,7 @@
+- content_for :head do
+  = GMap.header(:host => request.host)
+  = @map.to_html
+
 .span-16
   :textile
     h2. Willkommen bei der Deutschen Rails-Usergroup.
@@ -6,29 +10,28 @@
     
     Um den Gebrauchswert der Usergroup-Webseite deutlich zu erhöhen, wurde Anfang 2009 mit dem Start einer kleinen, aber feinen Rails-Software begonnen. Die Software wird von Jan und den Mitgliedern der Usergroup kollektiv auf "GitHub.com":http://github.com/halfbyte/rugtool entwickelt.
 
-.span-8.last
-  %h2 Links
-  :textile
-    * "Mailingliste":http://mailman.headflash.com/listinfo/rubyonrails-ug ("Archiv":http://mailman.headflash.com/private/rubyonrails-ug/)
-    * "Wiki":http://www.rubyonrails-ug.de/wiki
-    * "Planet (Blog-Aggregator)":http://planet.rubyonrails-ug.de/
-    
-.span-8
-  %h2 
-    Events
-    (
-    = link_to "was ist das?", "#"
-    )
-  %ul
-    = render :partial =>  @events
-    %li= link_to "Alle events", events_path
-.span-8
-  %h2 Gruppen
-  %ul
-    = render :partial => @groups
-    %li= link_to "Alle Gruppen", groups_path
+  .span-8
+    %h2 
+      Events
+      (
+      = link_to "was ist das?", "#"
+      )
+    %ul
+      = render :partial =>  @events
+      %li= link_to "Alle events", events_path
+  .span-8.last
+    %h2 Gruppen
+    %ul
+      = render :partial => @groups
+      %li= link_to "Alle Gruppen", groups_path
 
 .span-8.last
+  %h2
+    Map
+  = @map.div(:width => 310, :height => 310)
   %h2 Artikel
   %ul
     %li Hier mal so ein Event stylen
+  
+
+.span-8.last

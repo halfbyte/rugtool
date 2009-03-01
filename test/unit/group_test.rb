@@ -51,5 +51,11 @@ class GroupTest < ActiveSupport::TestCase
       group.expects(:geocode_for).with('hamburg').returns([1.0,2.0])
       assert group.valid?
     end
+    
+    should "return geocoded? if geocoded" do
+      group = Factory.build(:group, :location => 'hamburg', :lat => 10.0, :lng => 55.2)
+      assert group.geocoded?
+    end
+    
   end
 end
