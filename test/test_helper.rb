@@ -49,4 +49,5 @@ class Test::Unit::TestCase
     FeedTools::Feed.any_instance.stubs(:title).returns("example feed")
     
   end
+  
 end

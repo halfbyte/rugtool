@@ -8,7 +8,16 @@ class GroupTest < ActiveSupport::TestCase
     setup do
       Factory(:group)
     end
-    should_require_unique_attributes :url_slug    
+    should_require_unique_attributes :url_slug
+    
+    should "not allow blacklisted group slugs" do
+      group = Factory.build(:group)
+      Group::BLACKLISTED_URL_SLUGS.each do |name|
+        group.url_slug = name
+        assert !group.valid?, "group is not invalid with url slug <#{name}>"
+      end
+    end
+    
   end
   
   context "additional validations" do
@@ -35,6 +44,12 @@ class GroupTest < ActiveSupport::TestCase
       assert_equal "test_url_slug", group.to_param
     end
   end
-  
-  
+
+  context "geocoding" do
+    should "call geocoder" do
+      group = Factory.build(:group, :location => 'hamburg')
+      group.expects(:geocode_for).with('hamburg').returns([1.0,2.0])
+      assert group.valid?
+    end
+  end
 end
