@@ -1,0 +1,42 @@
+body {
+  background: #fff url(/img/mainbg.jpg) repeat-x;
+  font-family:Arial,sans-serif;
+  font-size: 80%;
+  text-align:center;
+  margin:10px 0;
+  padding:0;
+}
+#main {
+ border: 3px solid #E8E2D5;
+ background-color:#F8F2E5;
+ width:762px;
+ margin:10px auto;
+ padding:20px;
+ text-align:left;
+}
+#footer {
+ width:40em;
+ margin:0 auto;
+ font-size:0.8em;
+ text-align:center;
+}
+h1,h2,h3 { padding:0;margin:5px 0 5px 0; border-bottom:2px solid #a00;}
+h1 { font-size:1.3em;}
+h2 { font-size:1.2em;}
+h3 { font-size:1.1em;}
+p { margin:0 5px}
+
+#commonHeader { text-align:center; height:86px; background:transparent
+url(img/commonbar.gif) top left repeat-x; }
+#commonNav { margin:0 auto; text-align:right; width:600px; height:86px;
+background: transparent url(img/commonheader.gif) top left no-repeat;}
+#commonNav ul { display:block; float:right; margin:0; padding:0;
+padding-top:55px; padding-right:50px; list-style-type:none;}
+#commonNav li { float:left; padding-left:5px; height:20px;}
+#commonNav li a { display:block; padding: 3px 10px; border:1px solid black;
+font-weight:bold; text-decoration:none; font-size:12px;
+background:#E8E2D5;color:#000; line-height:15px;}
+#commonNav li.commonActive a { background: #FCF7F1; border-bottom: 1px solid
+#FCF7F1; color:#000;} 
+#commonNav li a:hover { background-color:#fff;
+color:#AC2C2D;text-decoration:underline;}
