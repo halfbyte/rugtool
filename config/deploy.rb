@@ -37,4 +37,6 @@ after 'deploy:update_code', :set_symlinks
 
 task :set_symlinks do
   run "ln -f -s #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+  run "ln -f -s #{shared_path}/wiki/data #{release_path}/public/wiki/data"
+  run "ln -f -s #{shared_path}/wiki/conf #{release_path}/public/wiki/conf"
 end
