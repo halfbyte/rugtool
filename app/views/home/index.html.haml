@@ -2,7 +2,7 @@
   = GMap.header(:host => request.host)
   = @map.to_html
 
-.span-16
+.span-14
   :textile
     h2. Willkommen bei der Deutschen Rails-Usergroup.
 
@@ -10,14 +10,14 @@
     
     Um den Gebrauchswert der Usergroup-Webseite deutlich zu erhöhen, wurde Anfang 2009 mit dem Start einer kleinen, aber feinen Rails-Software begonnen. Die Software wird von Jan und den Mitgliedern der Usergroup kollektiv auf "GitHub.com":http://github.com/halfbyte/rugtool entwickelt.
 
-  .span-8
+  .span-7
     %h2 
       Events
       == (#{link_to "was ist das?", "#"})
     %ul
       = render :partial =>  @events
       %li= link_to "Alle events", events_path
-  .span-8.last
+  .span-7.last
     %h2 Gruppen
     %ul
       = render :partial => @groups

@@ -5,7 +5,6 @@ Vor Prod-Launch
 ---------------
 
 * Planet-Konfig aus der Liste erzeugen
-* Mehr design (Content von Background trennen...)
 * i18n
 
 Nach Prod-Launch

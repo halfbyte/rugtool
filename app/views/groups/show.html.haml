@@ -2,7 +2,7 @@
   - if @group.geocoded?
     = GMap.header(:host => request.host)
     = @map.to_html
-.span-16
+.span-14
   %h2
     &= @group.title
     - unless @group.url.blank?
@@ -11,6 +11,7 @@
   %p= textilize(sanitize(@group.description))
 .span-8.last
   - if @group.geocoded?
+    %h2 Map
     = @map.div(:width => 310, :height => 310)
   %ul
     %li

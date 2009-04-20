@@ -50,7 +50,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   map.root :controller => "home"
-
+  map.imprint '/impressum', :controller => 'home', :action => 'imprint'
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.

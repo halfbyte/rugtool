@@ -28,21 +28,28 @@
             (
             = link_to "Feeds", planet_feeds_path
             )
-          %li.last
+          %li
             = link_to "Events", events_path
             (
             = link_to "Quellen", event_sources_path
-            )            
-      #content.span-24
+            )
+          %li.last
+            = link_to "Impressum", imprint_path
+      #content.span-22.prepend-1.append-1
         - if flash[:notice]
           .notice
             = flash[:notice]
+        .advertisement
+          :plain
+            <object width="486" height="60">
+            <param name="movie" value="http://rubyonrails-ug.de/railswaycon_468x60.swf">
+            <embed src="http://rubyonrails-ug.de/railswaycon_468x60.swf" width="468" height="60">
+            </embed>
+            </object>
         = yield
       #footer.span-22.prepend-1.append-1
-        rubyonrails-ug.de - eine Initiative von 
+        rubyonrails-ug.de - betreut von
         = link_to "jan.krutisch.de", "http://jan.krutisch.de/" 
-        und der 
-        = link_to "mindmatters GmbH &amp; Co. KG", "http://www.mindmatters.de/"
     #login-box
       - if !current_user
         = link_to "Registrieren", new_account_path
