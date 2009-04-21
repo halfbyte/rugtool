@@ -14,8 +14,17 @@ namespace :events do
     end
   end
   
+  
   #
   # add your own event importer tasks here
   #
   
+end
+
+namespace :feeds do
+  desc "import news feed from tumblr"
+  task :import_tumblr_news do
+    Rake::Task['environment'].invoke
+    FeedCache.read_feed('http://rubyonrails-ug-de.tumblr.com/rss', 'ug-tumble')
+  end
 end

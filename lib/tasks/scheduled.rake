@@ -3,6 +3,7 @@ namespace :scheduled do
   task :hourly do
     Rake::Task['events:import_venteria'].invoke
     # add your own task calls here for very active content
+    Rake::Task['feeds:import_tumblr_news'].invoke
   end
 
   desc "this task will be executed every morning in the production system"

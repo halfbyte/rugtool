@@ -27,7 +27,12 @@
   %h2
     Map
   = @map.div(:width => 310, :height => 310)
-  :plain
-    
+  %h2 News
+  %ul
+    - @news.each do |item|
+      %li
+        %h3= link_to(h(item.title), item.url)
+        = simple_format(h(item.description))
+    %li= link_to('Alle News', "http://rubyonrails-ug-de.tumblr.com/")
 
 .span-8.last
