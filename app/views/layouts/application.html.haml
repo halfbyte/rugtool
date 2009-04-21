@@ -42,8 +42,8 @@
         .advertisement
           :plain
             <object width="486" height="60">
-            <param name="movie" value="http://rubyonrails-ug.de/railswaycon_468x60.swf">
-            <embed src="http://rubyonrails-ug.de/railswaycon_468x60.swf" width="468" height="60">
+            <param name="movie" value="/railswaycon_468x60.swf">
+            <embed src="/railswaycon_468x60.swf" width="468" height="60">
             </embed>
             </object>
         = yield
@@ -52,15 +52,4 @@
         = link_to "jan.krutisch.de", "http://jan.krutisch.de/"
         \- news auf
         = link_to "tumblr", "http://rubyonrails-ug-de.tumblr.com/"
-    #login-box
-      - if !current_user
-        = link_to "Registrieren", new_account_path
-        = link_to "Anmelden", new_user_session_path
-      - else
-        Angemeldet als
-        = link_to h(current_user.login), account_path
-        (
-        = link_to "Abmelden", user_session_path, :method => :delete, :confirm => "Willst Du Dich wirklich abmelden?"
-        )
-        
-    
+    = yield :loginbox

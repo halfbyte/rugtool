@@ -12,8 +12,9 @@ class FeedCache < ActiveRecord::Base
     feed.items.each do |item|
       fc = FeedCache.find_by_url(item.link) || FeedCache.new(:source_url => url)
       if fc.new_record? || (fc.posted_at < (item.updated || item.published))
-        fc.attributes = { :url => item.link, :source_url => url, :source => source, :title => item.title, :description => item.description }
+        fc.attributes = { :url => item.link, :source => source, :title => item.title, :description => item.description }
         fc.posted_at = (item.updated || item.published)
+        fc.save
       end
     end
   end

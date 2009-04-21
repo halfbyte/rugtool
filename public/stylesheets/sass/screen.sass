@@ -23,7 +23,14 @@ body
   :background #fff url(/images/content_shadow.png) top left repeat-y
   h2
     :margin-top 0.75em
-    :margin-bottom 0.1em
+    :margin-bottom 0.4em
+    :font-size 1.6em
+    :border-bottom 1px solid #eee
+    :font-weight bold
+  h3
+    :margin-bottom 0.4em
+    :font-size 1.2em
+    :font-weight bold
 
 #content .advertisement
   :text-align center
@@ -108,3 +115,25 @@ ul#menu
   h3
     :margin 0
     :padding 0
+    
+    
+ul.news,ul.groups,ul.events
+  :list-style-type none
+  :margin 0
+  :padding 0
+  :margin-bottom 20px
+  li
+    :padding-left 20px
+    :margin-bottom 10px
+  li.more
+    :background transparent url(/images/plus.png) 0 2px no-repeat
+
+ul.news li
+  :background transparent url(/images/blog.png) 0 2px no-repeat
+
+ul.groups li
+  :background transparent url(/images/users.png) 0 2px no-repeat
+
+ul.events li
+  :background transparent url(/images/calendar-day.png) 0 2px no-repeat
+

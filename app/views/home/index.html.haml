@@ -11,28 +11,26 @@
     Um den Gebrauchswert der Usergroup-Webseite deutlich zu erhöhen, wurde Anfang 2009 mit dem Start einer kleinen, aber feinen Rails-Software begonnen. Die Software wird von Jan und den Mitgliedern der Usergroup kollektiv auf "GitHub.com":http://github.com/halfbyte/rugtool entwickelt.
 
   .span-7
-    %h2 
-      Events
-      == (#{link_to "was ist das?", "#"})
-    %ul
+    %h2 Events
+    %ul.events
       = render :partial =>  @events
-      %li= link_to "Alle events", events_path
+      %li.more= link_to "Alle events", events_path
   .span-7.last
     %h2 Gruppen
-    %ul
+    %ul.groups
       = render :partial => @groups
-      %li= link_to "Alle Gruppen", groups_path
+      %li.more= link_to "Alle Gruppen", groups_path
 
 .span-8.last
   %h2
     Map
   = @map.div(:width => 310, :height => 310)
-  %h2 News
-  %ul
+.span-14.last
+  %h2 Meta-News
+  %ul.news
     - @news.each do |item|
       %li
         %h3= link_to(h(item.title), item.url)
-        = simple_format(h(item.description))
-    %li= link_to('Alle News', "http://rubyonrails-ug-de.tumblr.com/")
+        = sanitize(item.description)
+    %li.more= link_to('Alle News', "http://rubyonrails-ug-de.tumblr.com/")
 
-.span-8.last
