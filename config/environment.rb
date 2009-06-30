@@ -32,7 +32,7 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
 
-  config.gem 'authlogic'
+  config.gem 'authlogic', :version => "1.4.3"
   config.gem 'mofo'
   config.gem 'hpricot'
   config.gem 'feedtools', :lib => 'feed_tools'

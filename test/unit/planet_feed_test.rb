@@ -8,7 +8,7 @@ class PlanetFeedTest < ActiveSupport::TestCase
     #@feed = Factory(:planet_feed)
   end
 
-  should_require_attributes(:feed_url)
+  should_validate_presence_of :feed_url
   
   context "validations" do
     should "require attribute source_url" do

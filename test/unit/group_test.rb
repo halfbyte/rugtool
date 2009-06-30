@@ -2,13 +2,13 @@ require 'test_helper'
 
 class GroupTest < ActiveSupport::TestCase
   
-  should_require_attributes :title, :url_slug, :description
+  should_validate_presence_of :title, :url_slug, :description
   
   context "validations" do
     setup do
       Factory(:group)
     end
-    should_require_unique_attributes :url_slug
+    should_validate_uniqueness_of :url_slug
     
     should "not allow blacklisted group slugs" do
       group = Factory.build(:group)

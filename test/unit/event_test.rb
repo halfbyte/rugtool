@@ -2,7 +2,7 @@ require 'test_helper'
 
 class EventTest < ActiveSupport::TestCase
   
-  should_require_attributes :title, :uid, :starts_at
+  should_validate_presence_of :title, :uid, :starts_at
   
   context "Importing Feeds with feedtools" do
     context "generic" do

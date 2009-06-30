@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class EventSourceTest < ActiveSupport::TestCase
-  should_require_attributes :title, :url, :source_type
+  should_validate_presence_of :title, :url, :source_type
   
   context "named scopes" do
     should "find only accepted event sources on accepted"

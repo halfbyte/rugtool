@@ -42,3 +42,11 @@ Factory.define :group do |f|
   f.description 'Description'
   f.url_slug Factory.next(:url_slug)
 end
+
+Factory.define :feed_cache, :class => FeedCache do |f|
+  f.title "FeedCache title"
+  f.description "FeedCache description"
+  f.source_url "http://www.test.com/feed"
+  f.url "http://www.test.com/dings/"
+  f.source "FeedCache source"
+end
