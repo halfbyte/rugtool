@@ -41,6 +41,7 @@ Factory.define :group do |f|
   f.title 'Group'
   f.description 'Description'
   f.url_slug Factory.next(:url_slug)
+  f.sum_field "2"
 end
 
 Factory.define :feed_cache, :class => FeedCache do |f|

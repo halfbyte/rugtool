@@ -1,5 +1,7 @@
 class Group < ActiveRecord::Base
 
+  attr_accessor :sum_field
+
   include Geokit::Geocoders
   
   acts_as_mappable :default_units => :kms, :default_formula => :flat
@@ -13,6 +15,8 @@ class Group < ActiveRecord::Base
   before_validation :geocode_before_validation
   
   validate :validates_against_url_slug_blacklist
+  
+  validate :stupid_captcha
 
   def to_param
     self.url_slug
@@ -46,6 +50,12 @@ private
       [res.lat,res.lng]
     else
       nil
+    end
+  end
+  
+  def stupid_captcha
+    if self.sum_field != "2"
+      errors.add(:sum_field, "Bist Du etwa ein böser Spam-Robot?")
     end
   end
     

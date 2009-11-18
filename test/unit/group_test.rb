@@ -22,7 +22,7 @@ class GroupTest < ActiveSupport::TestCase
   
   context "additional validations" do
     setup do
-      @group = Group.new(:title => 'test', :description => 'description', :url_slug => 'test_url-slug')
+      @group = Group.new(:title => 'test', :description => 'description', :url_slug => 'test_url-slug', :sum_field => "2")
     end
     should "validate format of url_slug" do
       assert @group.valid?
@@ -40,7 +40,7 @@ class GroupTest < ActiveSupport::TestCase
   
   context "to_param" do
     should "form correct to_param" do
-      group = Group.new(:title => 'test', :description => 'description', :url_slug => 'test_url_slug')
+      group = Group.new(:title => 'test', :description => 'description', :url_slug => 'test_url_slug', :sum_field => "2")
       assert_equal "test_url_slug", group.to_param
     end
   end
@@ -56,6 +56,15 @@ class GroupTest < ActiveSupport::TestCase
       group = Factory.build(:group, :location => 'hamburg', :lat => 10.0, :lng => 55.2)
       assert group.geocoded?
     end
-    
   end
+  
+  context "stupid captcha" do
+    should "validate sum captcha" do
+      group = Factory.build(:group)
+      group.sum_field = 1
+      assert !group.valid?
+      assert_not_nil group.errors.on(:sum_field)
+    end
+  end
+  
 end
