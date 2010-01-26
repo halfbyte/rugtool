@@ -29,9 +29,6 @@ class auth_ldap extends auth_basic {
 
         if(empty($this->cnf['groupkey'])) $this->cnf['groupkey'] = 'cn';
 
-        // try to connect
-        if(!$this->_openLDAP()) $this->success = false;
-
         // auth_ldap currently just handles authentication, so no
         // capabilities are set
     }
@@ -176,11 +173,13 @@ class auth_ldap extends auth_basic {
 
         $sr     = @ldap_search($this->con, $base, $filter);
         $result = @ldap_get_entries($this->con, $sr);
-        if($this->cnf['debug'])
+        if($this->cnf['debug']){
             msg('LDAP user search: '.htmlspecialchars(ldap_error($this->con)),0,__LINE__,__FILE__);
+            msg('LDAP search at: '.htmlspecialchars($base.' '.$filter),0,__LINE__,__FILE__);
+        }
 
         // Don't accept more or less than one response
-        if($result['count'] != 1){
+        if(!is_array($result) || $result['count'] != 1){
             return false; //user not found
         }
 
@@ -220,18 +219,19 @@ class auth_ldap extends auth_basic {
         if ($this->cnf['grouptree'] && $this->cnf['groupfilter']) {
             $base   = $this->_makeFilter($this->cnf['grouptree'], $user_result);
             $filter = $this->_makeFilter($this->cnf['groupfilter'], $user_result);
-
             $sr = @ldap_search($this->con, $base, $filter, array($this->cnf['groupkey']));
             if(!$sr){
                 msg("LDAP: Reading group memberships failed",-1);
-                if($this->cnf['debug'])
+                if($this->cnf['debug']){
                     msg('LDAP group search: '.htmlspecialchars(ldap_error($this->con)),0,__LINE__,__FILE__);
+                    msg('LDAP search at: '.htmlspecialchars($base.' '.$filter),0,__LINE__,__FILE__);
+                }
                 return false;
             }
             $result = ldap_get_entries($this->con, $sr);
             ldap_free_result($sr);
 
-            foreach($result as $grp){
+            if(is_array($result)) foreach($result as $grp){
                 if(!empty($grp[$this->cnf['groupkey']][0])){
                     if($this->cnf['debug'])
                         msg('LDAP usergroup: '.htmlspecialchars($grp[$this->cnf['groupkey']][0]),0,__LINE__,__FILE__);
@@ -245,6 +245,13 @@ class auth_ldap extends auth_basic {
             $info['grps'][] = $conf['defaultgroup'];
         }
         return $info;
+    }
+
+    /**
+     * Most values in LDAP are case-insensitive
+     */
+    function isCaseSensitive(){
+        return false;
     }
 
     /**

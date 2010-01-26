@@ -13,6 +13,9 @@ $lang['updated']               = 'Els paràmetres s\'han actualitzat amb èxit.'
 $lang['nochoice']              = '(no hi altres opcions disponibles)';
 $lang['locked']                = 'El fitxer de paràmetres no es pot actualitzar. Si això és involuntari, <br />
 assegureu-vos que el nom i els permisos del fitxer local de paràmetres són correctes.';
+$lang['danger']                = 'Alerta: si canvieu aquesta opció podeu fer que el wiki i el menú de configuració no siguin accessibles.';
+$lang['warning']               = 'Avís: modificar aquesta opció pot provocar un comportament no desitjat.';
+$lang['security']              = 'Avís de seguretat: modificar aquesta opció pot implicar un risc de seguretat.';
 $lang['_configuration_manager'] = 'Gestió de la configuració';
 $lang['_header_dokuwiki']      = 'Paràmetres de DokuWiki';
 $lang['_header_plugin']        = 'Paràmetres de connectors';
@@ -84,6 +87,8 @@ $lang['disableactions_other']  = 'Altres accions (separades per comes)';
 $lang['sneaky_index']          = 'Per defecte, DokuWiki mostrarà tots els espai en la visualització d\'índex. Si activeu aquest paràmetre, s\'ocultaran aquells espais en els quals l\'usuari no té accés de lectura. Això pot fer que s\'ocultin subespais que sí que són accessibles. En algunes configuracions ACL pot fer que l\'índex resulti inutilitzable.';
 $lang['auth_security_timeout'] = 'Temps d\'espera de seguretat en l\'autenticació (segons)';
 $lang['securecookie']          = 'Les galetes que s\'han creat via HTTPS, només s\'han d\'enviar des del navegador per HTTPS? Inhabiliteu aquesta opció si només l\'inici de sessió del wiki es fa amb SSL i la navegació del wiki es fa sense seguretat.';
+$lang['xmlrpc']                = 'Habilita/inhabilita la interfície XML-RPC';
+$lang['xmlrpcuser']            = 'Restringeix l\'accés per XML-RPC als usuaris o grups següents, separats per comes. Deixeu aquest camp en blanc per donar accés a tothom.';
 $lang['updatecheck']           = 'Comprova actualitzacions i avisos de seguretat. DokuWiki necessitarà contactar amb splitbrain.org per utilitzar aquesta característica.';
 $lang['userewrite']            = 'Utilitza URL nets';
 $lang['useslash']              = 'Utilitza la barra / com a separador d\'espais en els URL';
@@ -109,7 +114,6 @@ $lang['send404']               = 'Envia "HTTP 404/Page Not Found" per a les pàg
 $lang['sitemap']               = 'Genera mapa del lloc en format Google (dies)';
 $lang['broken_iua']            = 'No funciona en el vostre sistema la funció ignore_user_abort? Això podria malmetre l\'índex de cerques. Amb IIS+PHP/CGI se sap que no funciona. Vg. <a href="http://bugs.splitbrain.org/?do=details&amp;task_id=852">Bug 852</a> per a més informació.';
 $lang['xsendfile']             = 'Utilitza la capçalera X-Sendfile perquè el servidor web distribueixi fitxers estàtics. No funciona amb tots els servidors web.';
-$lang['xmlrpc']                = 'Habilita/inhabilita la interfície XML-RPC';
 $lang['renderer_xhtml']        = 'Renderitzador que cal utilitzar per a la sortida principal (xhtml) del wiki';
 $lang['renderer__core']        = '% (ànima del dokuwiki)';
 $lang['renderer__plugin']      = '% (connector)';

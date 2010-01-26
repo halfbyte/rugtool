@@ -13,7 +13,7 @@ require_once(DOKU_INC.'inc/JSON.php');
 /**
  * Prepares and prints an JavaScript array with all toolbar buttons
  *
- * @todo add toolbar plugins
+ * @emits  TOOLBAR_DEFINE
  * @param  string $varname Name of the JS variable to fill
  * @author Andreas Gohr <andi@splitbrain.org>
  */
@@ -69,48 +69,83 @@ function toolbar_JSdefines($varname){
                 'open'  => '<del>',
                 'close'   => '</del>',
                 ),
+
            array(
-                'type'   => 'format',
-                'title'  => $lang['qb_h1'],
-                'icon'   => 'h1.png',
-                'key'    => '1',
-                'open'   => '====== ',
-                'close'  => ' ======\n',
+                'type'   => 'autohead',
+                'title'  => $lang['qb_hequal'],
+                'icon'   => 'hequal.png',
+                'key'    => '8',
+                'text'   => $lang['qb_h'],
+                'mod'    => 0
+               ),
+           array(
+                'type'   => 'autohead',
+                'title'  => $lang['qb_hminus'],
+                'icon'   => 'hminus.png',
+                'key'    => '9',
+                'text'   => $lang['qb_h'],
+                'mod'    => 1
+               ),
+           array(
+                'type'   => 'autohead',
+                'title'  => $lang['qb_hplus'],
+                'icon'   => 'hplus.png',
+                'key'    => '0',
+                'text'   => $lang['qb_h'],
+                'mod'    => -1
+               ),
+
+           array(
+                'type'   => 'picker',
+                'title'  => $lang['qb_hs'],
+                'icon'   => 'h.png',
+                'class'  => 'pk_hl',
+                'list'   => array(
+                               array(
+                                    'type'   => 'format',
+                                    'title'  => $lang['qb_h1'],
+                                    'icon'   => 'h1.png',
+                                    'key'    => '1',
+                                    'open'   => '====== ',
+                                    'close'  => ' ======\n',
+                                    ),
+                               array(
+                                    'type'   => 'format',
+                                    'title'  => $lang['qb_h2'],
+                                    'icon'   => 'h2.png',
+                                    'key'    => '2',
+                                    'open'   => '===== ',
+                                    'close'  => ' =====\n',
+                                    ),
+                               array(
+                                    'type'   => 'format',
+                                    'title'  => $lang['qb_h3'],
+                                    'icon'   => 'h3.png',
+                                    'key'    => '3',
+                                    'open'   => '==== ',
+                                    'close'  => ' ====\n',
+                                    ),
+                               array(
+                                    'type'   => 'format',
+                                    'title'  => $lang['qb_h4'],
+                                    'icon'   => 'h4.png',
+                                    'key'    => '4',
+                                    'open'   => '=== ',
+                                    'close'  => ' ===\n',
+                                    ),
+                               array(
+                                    'type'   => 'format',
+                                    'title'  => $lang['qb_h5'],
+                                    'icon'   => 'h5.png',
+                                    'key'    => '5',
+                                    'open'   => '== ',
+                                    'close'  => ' ==\n',
+                                    ),
+                            )
                 ),
+
            array(
-                'type'   => 'format',
-                'title'  => $lang['qb_h2'],
-                'icon'   => 'h2.png',
-                'key'    => '2',
-                'open'   => '===== ',
-                'close'  => ' =====\n',
-                ),
-           array(
-                'type'   => 'format',
-                'title'  => $lang['qb_h3'],
-                'icon'   => 'h3.png',
-                'key'    => '3',
-                'open'   => '==== ',
-                'close'  => ' ====\n',
-                ),
-           array(
-                'type'   => 'format',
-                'title'  => $lang['qb_h4'],
-                'icon'   => 'h4.png',
-                'key'    => '4',
-                'open'   => '=== ',
-                'close'  => ' ===\n',
-                ),
-           array(
-                'type'   => 'format',
-                'title'  => $lang['qb_h5'],
-                'icon'   => 'h5.png',
-                'key'    => '5',
-                'open'   => '== ',
-                'close'  => ' ==\n',
-                ),
-           array(
-                'type'   => 'format',
+                'type'   => 'linkwiz',
                 'title'  => $lang['qb_link'],
                 'icon'   => 'link.png',
                 'key'    => 'l',
@@ -126,18 +161,20 @@ function toolbar_JSdefines($varname){
                 'sample' => 'http://example.com|'.$lang['qb_extlink'],
                 ),
            array(
-                'type'   => 'format',
+                'type'   => 'formatln',
                 'title'  => $lang['qb_ol'],
                 'icon'   => 'ol.png',
                 'open'   => '  - ',
-                'close'  => '\n',
+                'close'  => '',
+                'key'    => '-',
                 ),
            array(
-                'type'   => 'format',
+                'type'   => 'formatln',
                 'title'  => $lang['qb_ul'],
                 'icon'   => 'ul.png',
                 'open'   => '  * ',
-                'close'  => '\n',
+                'close'  => '',
+                'key'    => '.',
                 ),
            array(
                 'type'   => 'insert',
@@ -149,7 +186,7 @@ function toolbar_JSdefines($varname){
                 'type'   => 'mediapopup',
                 'title'  => $lang['qb_media'],
                 'icon'   => 'image.png',
-                'url'    => DOKU_BASE.'lib/exe/mediamanager.php?ns=',
+                'url'    => 'lib/exe/mediamanager.php?ns=',
                 'name'   => 'mediaselect',
                 'options'=> 'width=750,height=500,left=20,top=20,scrollbars=yes,resizable=yes',
                 ),
@@ -188,17 +225,17 @@ function toolbar_JSdefines($varname){
  * @author Andreas Gohr <andi@splitbrain.org>
  */
 function toolbar_signature(){
-  global $conf;
-  global $INFO;
+    global $conf;
+    global $INFO;
 
-  $sig = $conf['signature'];
-  $sig = strftime($sig);
-  $sig = str_replace('@USER@',$_SERVER['REMOTE_USER'],$sig);
-  $sig = str_replace('@NAME@',$INFO['userinfo']['name'],$sig);
-  $sig = str_replace('@MAIL@',$INFO['userinfo']['mail'],$sig);
-  $sig = str_replace('@DATE@',strftime($conf['dformat']),$sig);
-  $sig = str_replace('\\\\n','\\n',addslashes($sig));
-  return $sig;
+    $sig = $conf['signature'];
+    $sig = strftime($sig);
+    $sig = str_replace('@USER@',$_SERVER['REMOTE_USER'],$sig);
+    $sig = str_replace('@NAME@',$INFO['userinfo']['name'],$sig);
+    $sig = str_replace('@MAIL@',$INFO['userinfo']['mail'],$sig);
+    $sig = str_replace('@DATE@',dformat(),$sig);
+    $sig = str_replace('\\\\n','\\n',addslashes($sig));
+    return $sig;
 }
 
 //Setup VIM: ex: et ts=4 enc=utf-8 :

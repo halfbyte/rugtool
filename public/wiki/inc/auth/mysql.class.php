@@ -401,6 +401,13 @@ class auth_mysql extends auth_basic {
     }
 
     /**
+     * MySQL is case-insensitive
+     */
+    function isCaseSensitive(){
+        return false;
+    }
+
+    /**
      * Adds a user to a group.
      *
      * If $force is set to '1' non existing groups would be created.
@@ -772,6 +779,10 @@ class auth_mysql extends auth_basic {
      * @author Matthias Grimm <matthiasgrimm@users.sourceforge.net>
      */
     function _queryDB($query) {
+      if($this->cnf['debug'] >= 2){
+        msg('MySQL query: '.hsc($query),0,__LINE__,__FILE__);
+      }
+
       $resultarray = array();
       if ($this->dbcon) {
         $result = @mysql_query($query,$this->dbcon);

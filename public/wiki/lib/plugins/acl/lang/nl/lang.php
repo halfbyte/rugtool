@@ -11,6 +11,9 @@
  * @author John de Graaff <john@de-graaff.net>
  * @author Niels Schoot <niels.schoot@quintiq.com>
  * @author Dion Nicolaas <dion@nicolaas.net>
+ * @author Danny Rotsaert <danny.rotsaert@edpnet.be>
+ * @author Marijn Hofstra hofstra.m@gmail.com
+ * @author Matthias Carchon webmaster@c-mattic.be
  */
 $lang['admin_acl']             = 'Toegangsrechten';
 $lang['acl_group']             = 'Groep';

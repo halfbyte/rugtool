@@ -12,12 +12,12 @@
   require_once(DOKU_INC.'inc/common.php');
   require_once(DOKU_INC.'inc/media.php');
   require_once(DOKU_INC.'inc/pageutils.php');
+  require_once(DOKU_INC.'inc/httputils.php');
   require_once(DOKU_INC.'inc/confutils.php');
   require_once(DOKU_INC.'inc/auth.php');
 
   //close sesseion
   session_write_close();
-  if(!defined('CHUNK_SIZE')) define('CHUNK_SIZE',16*1024);
 
   $mimetypes = getMimeTypes();
 
@@ -26,7 +26,7 @@
   $CACHE  = calc_cache($_REQUEST['cache']);
   $WIDTH  = (int) $_REQUEST['w'];
   $HEIGHT = (int) $_REQUEST['h'];
-  list($EXT,$MIME,$DL) = mimetype($MEDIA);
+  list($EXT,$MIME,$DL) = mimetype($MEDIA,false);
   if($EXT === false){
     $EXT  = 'unknown';
     $MIME = 'application/octet-stream';
@@ -35,6 +35,12 @@
 
   //media to local file
   if(preg_match('#^(https?)://#i',$MEDIA)){
+    //check hash
+    if(substr(md5(auth_cookiesalt().$MEDIA),0,6) != $_REQUEST['hash']){
+      header("HTTP/1.0 412 Precondition Failed");
+      print 'Precondition Failed';
+      exit;
+    }
     //handle external images
     if(strncmp($MIME,'image/',6) == 0) $FILE = media_get_from_URL($MEDIA,$EXT,$CACHE);
     if(!$FILE){
@@ -139,66 +145,14 @@ function sendFile($file,$mime,$dl,$cache){
   //use x-sendfile header to pass the delivery to compatible webservers
   if (http_sendfile($file)) exit;
 
-  //support download continueing
-  header('Accept-Ranges: bytes');
-  list($start,$len) = http_rangeRequest(filesize($file));
-
   // send file contents
   $fp = @fopen($file,"rb");
   if($fp){
-    fseek($fp,$start); //seek to start of range
-
-    $chunk = ($len > CHUNK_SIZE) ? CHUNK_SIZE : $len;
-    while (!feof($fp) && $chunk > 0) {
-      @set_time_limit(30); // large files can take a lot of time
-      print fread($fp, $chunk);
-      flush();
-      $len -= $chunk;
-      $chunk = ($len > CHUNK_SIZE) ? CHUNK_SIZE : $len;
-    }
-    fclose($fp);
+    http_rangeRequest($fp,filesize($file),$mime);
   }else{
     header("HTTP/1.0 500 Internal Server Error");
     print "Could not read $file - bad permissions?";
   }
-}
-
-/**
- * Checks and sets headers to handle range requets
- *
- * @author  Andreas Gohr <andi@splitbrain.org>
- * @returns array The start byte and the amount of bytes to send
- */
-function http_rangeRequest($size){
-  if(!isset($_SERVER['HTTP_RANGE'])){
-    // no range requested - send the whole file
-    header("Content-Length: $size");
-    return array(0,$size);
-  }
-
-  $t = explode('=', $_SERVER['HTTP_RANGE']);
-  if (!$t[0]=='bytes') {
-    // we only understand byte ranges - send the whole file
-    header("Content-Length: $size");
-    return array(0,$size);
-  }
-
-  $r = explode('-', $t[1]);
-  $start = (int)$r[0];
-  $end = (int)$r[1];
-  if (!$end) $end = $size - 1;
-  if ($start > $end || $start > $size || $end > $size){
-    header('HTTP/1.1 416 Requested Range Not Satisfiable');
-    print 'Bad Range Request!';
-    exit;
-  }
-
-  $tot = $end - $start + 1;
-  header('HTTP/1.1 206 Partial Content');
-  header("Content-Range: bytes {$start}-{$end}/{$size}");
-  header("Content-Length: $tot");
-
-  return array($start,$tot);
 }
 
 /**
@@ -217,4 +171,3 @@ function calc_cache($cache){
 }
 
 //Setup VIM: ex: et ts=2 enc=utf-8 :
-?>

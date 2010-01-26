@@ -323,13 +323,6 @@ class Doku_Handler {
         return true;
     }
 
-    function file($match, $state, $pos) {
-        if ( $state == DOKU_LEXER_UNMATCHED ) {
-            $this->_addCall('file',array($match), $pos);
-        }
-        return true;
-    }
-
     function quote($match, $state, $pos) {
 
         switch ( $state ) {
@@ -360,23 +353,28 @@ class Doku_Handler {
         return true;
     }
 
-    function code($match, $state, $pos) {
-        switch ( $state ) {
-            case DOKU_LEXER_UNMATCHED:
-                $matches = preg_split('/>/u',$match,2);
-                $matches[0] = trim($matches[0]);
-                if ( trim($matches[0]) == '' ) {
-                    $matches[0] = NULL;
-                }
-                # $matches[0] contains name of programming language
-                # if available, We shortcut html here.
-                if($matches[0] == 'html') $matches[0] = 'html4strict';
-                $this->_addCall(
-                        'code',
-                        array($matches[1],$matches[0]),
-                        $pos
-                    );
-            break;
+    function file($match, $state, $pos) {
+        return $this->code($match, $state, $pos, 'file');
+    }
+
+    function code($match, $state, $pos, $type='code') {
+        if ( $state == DOKU_LEXER_UNMATCHED ) {
+            $matches = explode('>',$match,2);
+            $matches[0] = trim($matches[0]);
+
+            list($language,$filename) = explode(' ',$matches[0],2);
+            $language = trim($language);
+            $filename = trim($filename);
+            if ( $language == '' )  $language = null;
+            if ( $language == '-' ) $language = null;
+            if ( $filename == '' )  $filename = null;
+            # We shortcut html here.
+            if($language == 'html') $language = 'html4strict';
+            $this->_addCall(
+                    $type,
+                    array($matches[1],$language,$filename),
+                    $pos
+                );
         }
         return true;
     }
@@ -444,7 +442,7 @@ class Doku_Handler {
         $link = preg_replace(array('/^\[\[/','/\]\]$/u'),'',$match);
 
         // Split title from URL
-        $link = preg_split('/\|/u',$link,2);
+        $link = explode('|',$link,2);
         if ( !isset($link[1]) ) {
             $link[1] = NULL;
         } else if ( preg_match('/^\{\{[^\}]+\}\}$/',$link[1]) ) {
@@ -457,7 +455,7 @@ class Doku_Handler {
 
         if ( preg_match('/^[a-zA-Z0-9\.]+>{1}.*$/u',$link[0]) ) {
         // Interwiki
-            $interwiki = preg_split('/>/u',$link[0]);
+            $interwiki = explode('>',$link[0],2);
             $this->_addCall(
                 'interwikilink',
                 array($link[0],$link[1],strtolower($interwiki[0]),$interwiki[1]),
@@ -586,7 +584,6 @@ class Doku_Handler {
                 $this->CallWriter = & $ReWriter;
 
                 $this->_addCall('table_start', array(), $pos);
-                //$this->_addCall('table_row', array(), $pos);
                 if ( trim($match) == '^' ) {
                     $this->_addCall('tableheader', array(), $pos);
                 } else {
@@ -610,6 +607,8 @@ class Doku_Handler {
             case DOKU_LEXER_MATCHED:
                 if ( $match == ' ' ){
                     $this->_addCall('cdata', array($match), $pos);
+                } else if ( preg_match('/:::/',$match) ) {
+                    $this->_addCall('rowspan', array($match), $pos);
                 } else if ( preg_match('/\t+/',$match) ) {
                     $this->_addCall('table_align', array($match), $pos);
                 } else if ( preg_match('/ {2,}/',$match) ) {
@@ -638,7 +637,7 @@ function Doku_Handler_Parse_Media($match) {
     $link = preg_replace(array('/^\{\{/','/\}\}$/u'),'',$match);
 
     // Split title from URL
-    $link = preg_split('/\|/u',$link,2);
+    $link = explode('|',$link,2);
 
 
     // Check alignment
@@ -803,6 +802,8 @@ class Doku_Handler_Nest {
         $key = count($this->calls);
         if ($key and ($call[0] == 'cdata') and ($this->calls[$key-1][0] == 'cdata')) {
             $this->calls[$key-1][1][0] .= $call[1][0];
+        } else if ($call[0] == 'eol') {
+            // do nothing (eol shouldn't be allowed, to counter preformatted fix in #1652 & #1699)
         } else {
             $this->calls[] = $call;
         }
@@ -997,7 +998,9 @@ class Doku_Handler_List {
         } else {
             $type = 'o';
         }
-        return count(explode('  ',str_replace("\t",'  ',$match)));
+        // Is the +1 needed? It used to be count(explode(...))
+        // but I don't think the number is seen outside this handler
+        return substr_count(str_replace("\t",'  ',$match), '  ') + 1;
     }
 }
 
@@ -1050,6 +1053,9 @@ class Doku_Handler_Preformatted {
                     if (trim($this->text)) {
                       $this->CallWriter->writeCall(array('preformatted',array($this->text),$this->pos));
                     }
+                    // see FS#1699 & FS#1652, add 'eol' instructions to ensure proper triggering of following p_open
+                    $this->CallWriter->writeCall(array('eol',array(),$this->pos));
+                    $this->CallWriter->writeCall(array('eol',array(),$this->pos));
                 break;
             }
         }
@@ -1114,7 +1120,7 @@ class Doku_Handler_Quote {
                         }
                     } else {
                         if ($call[0] != 'quote_start') $this->quoteCalls[] = array('linebreak',array(),$call[2]);
-                    } 
+                    }
 
                     $quoteDepth = $quoteLength;
 
@@ -1233,19 +1239,6 @@ class Doku_Handler_Table {
         while ( $discard = array_pop($this->tableCalls ) ) {
 
             if ( $discard[0] == 'tablecell_open' || $discard[0] == 'tableheader_open') {
-
-                // Its a spanning element - put it back and close it
-                if ( $discard[1][0] > 1 ) {
-
-                    $this->tableCalls[] = $discard;
-                    if ( strstr($discard[0],'cell') ) {
-                        $name = 'tablecell';
-                    } else {
-                        $name = 'tableheader';
-                    }
-                    $this->tableCalls[] = array($name.'_close',array(),$call[2]);
-                }
-
                 break;
             }
         }
@@ -1269,12 +1262,12 @@ class Doku_Handler_Table {
             }
 
             $this->tableCalls[] = array($this->lastCellType.'_close',array(),$call[2]);
-            $this->tableCalls[] = array($call[0].'_open',array(1,NULL),$call[2]);
+            $this->tableCalls[] = array($call[0].'_open',array(1,NULL,1),$call[2]);
             $this->lastCellType = $call[0];
 
         } else {
 
-            $this->tableCalls[] = array($call[0].'_open',array(1,NULL),$call[2]);
+            $this->tableCalls[] = array($call[0].'_open',array(1,NULL,1),$call[2]);
             $this->lastCellType = $call[0];
             $this->firstCell = false;
 
@@ -1300,6 +1293,7 @@ class Doku_Handler_Table {
 
         $lastRow = 0;
         $lastCell = 0;
+        $cellKey = array();
         $toDelete = array();
 
         // Look for the colspan elements and increment the colspan on the
@@ -1309,24 +1303,32 @@ class Doku_Handler_Table {
 
             if ( $call[0] == 'tablerow_open' ) {
 
-                $lastRow = $key;
+                $lastRow++;
+                $lastCell = 0;
 
             } else if ( $call[0] == 'tablecell_open' || $call[0] == 'tableheader_open' ) {
 
-                $lastCell = $key;
+                $lastCell++;
+                $cellKey[$lastRow][$lastCell] = $key;
 
             } else if ( $call[0] == 'table_align' ) {
 
+                $prev = in_array($this->tableCalls[$key-1][0], array('tablecell_open', 'tableheader_open'));
+                $next = in_array($this->tableCalls[$key+1][0], array('tablecell_close', 'tableheader_close'));
+                // If the cell is empty, align left
+                if ($prev && $next) {
+                    $this->tableCalls[$key-1][1][1] = 'left';
+
                 // If the previous element was a cell open, align right
-                if ( $this->tableCalls[$key-1][0] == 'tablecell_open' || $this->tableCalls[$key-1][0] == 'tableheader_open' ) {
+                } elseif ($prev) {
                     $this->tableCalls[$key-1][1][1] = 'right';
 
-                // If the next element if the close of an element, align either center or left
-                } else if ( $this->tableCalls[$key+1][0] == 'tablecell_close' || $this->tableCalls[$key+1][0] == 'tableheader_close' ) {
-                    if ( $this->tableCalls[$lastCell][1][1] == 'right' ) {
-                        $this->tableCalls[$lastCell][1][1] = 'center';
+                // If the next element is the close of an element, align either center or left
+                } elseif ( $next) {
+                    if ( $this->tableCalls[$cellKey[$lastRow][$lastCell]][1][1] == 'right' ) {
+                        $this->tableCalls[$cellKey[$lastRow][$lastCell]][1][1] = 'center';
                     } else {
-                        $this->tableCalls[$lastCell][1][1] = 'left';
+                        $this->tableCalls[$cellKey[$lastRow][$lastCell]][1][1] = 'left';
                     }
 
                 }
@@ -1338,7 +1340,7 @@ class Doku_Handler_Table {
 
                 $this->tableCalls[$key-1][1][0] = false;
 
-                for($i = $key-2; $i > $lastRow; $i--) {
+                for($i = $key-2; $i >= $cellKey[$lastRow][1]; $i--) {
 
                     if ( $this->tableCalls[$i][0] == 'tablecell_open' || $this->tableCalls[$i][0] == 'tableheader_open' ) {
 
@@ -1354,6 +1356,34 @@ class Doku_Handler_Table {
                 $toDelete[] = $key-1;
                 $toDelete[] = $key;
                 $toDelete[] = $key+1;
+
+            } else if ( $call[0] == 'rowspan' ) {
+
+                if ( $this->tableCalls[$key-1][0] == 'cdata' ) {
+                    // ignore rowspan if previous call was cdata (text mixed with :::) we don't have to check next call as that wont match regex
+                    $this->tableCalls[$key][0] = 'cdata';
+
+                } else {
+
+                    $this->tableCalls[$key-1][1][2] = false;
+
+                    for($i = $lastRow-1; $i > 0; $i--) {
+
+                        if ( $this->tableCalls[$cellKey[$i][$lastCell]][0] == 'tablecell_open' || $this->tableCalls[$cellKey[$i][$lastCell]][0] == 'tableheader_open' ) {
+
+                            if ( false !== $this->tableCalls[$cellKey[$i][$lastCell]][1][2] ) {
+                                $this->tableCalls[$cellKey[$i][$lastCell]][1][2]++;
+                                break;
+                            }
+
+
+                        }
+                    }
+
+                    $toDelete[] = $key-1;
+                    $toDelete[] = $key;
+                    $toDelete[] = $key+1; 
+                }
             }
         }
 
@@ -1380,45 +1410,6 @@ class Doku_Handler_Table {
     }
 }
 
-//------------------------------------------------------------------------
-class Doku_Handler_Section {
-
-    function process($calls) {
-
-        $sectionCalls = array();
-        $inSection = false;
-
-        foreach ( $calls as $call ) {
-
-            if ( $call[0] == 'header' ) {
-
-                if ( $inSection ) {
-                    $sectionCalls[] = array('section_close',array(), $call[2]);
-                }
-
-                $sectionCalls[] = $call;
-                $sectionCalls[] = array('section_open',array($call[1][1]), $call[2]);
-                $inSection = true;
-
-            } else {
-
-                if ($call[0] == 'section_open' )  {
-                    $inSection = true;
-                } else if ($call[0] == 'section_open' ) {
-                    $inSection = false;
-                }
-                $sectionCalls[] = $call;
-            }
-        }
-
-        if ( $inSection ) {
-            $sectionCalls[] = array('section_close',array(), $call[2]);
-        }
-
-        return $sectionCalls;
-    }
-
-}
 
 /**
  * Handler for paragraphs
@@ -1620,7 +1611,7 @@ class Doku_Handler_Block {
                             $cname_plusone = $calls[$key+1][0];
                             if ($cname_plusone == 'plugin') {
                                 $cname_plusone = 'plugin'.$calls[$key+1][1][0];
-                                
+
                                 // plugin test, true if plugin has a state which precludes it requiring blockOpen or blockClose
                                 $plugin_plusone = true;
                                 $plugin_test = ($call[$key+1][1][2] == DOKU_LEXER_MATCHED) || ($call[$key+1][1][2] == DOKU_LEXER_MATCHED);

@@ -8,6 +8,7 @@
  * @author Aydın Coşkuner <aydinweb@gmail.com>
  * @author yavuzselim@gmail.com
  * @author Cihan Kahveci kahvecicihan@gmail.com
+ * @author Yavuz Selim <yavuzselim@gmail.com>
  */
 $lang['encoding']              = 'utf-8';
 $lang['direction']             = 'ltr';
@@ -16,7 +17,7 @@ $lang['doublequoteclosing']    = '”';
 $lang['singlequoteopening']    = '‘';
 $lang['singlequoteclosing']    = '’';
 $lang['apostrophe']            = '’';
-$lang['btn_edit']              = 'Sayfayı değiştir';
+$lang['btn_edit']              = 'Sayfayı düzenle';
 $lang['btn_source']            = 'Kaynağı göster';
 $lang['btn_show']              = 'Sayfayı göster';
 $lang['btn_create']            = 'Bu sayfayı oluştur';
@@ -31,7 +32,7 @@ $lang['btn_recent']            = 'En son değişiklikler';
 $lang['btn_upload']            = 'Yükle';
 $lang['btn_cancel']            = 'İptal';
 $lang['btn_index']             = 'İndeks';
-$lang['btn_secedit']           = 'Değiştir';
+$lang['btn_secedit']           = 'Düzenle';
 $lang['btn_login']             = 'Giriş yap';
 $lang['btn_logout']            = 'Çıkış yap';
 $lang['btn_admin']             = 'Yönetici';
@@ -146,7 +147,6 @@ $lang['mail_newpage']          = 'sayfa eklenme:';
 $lang['mail_changed']          = 'sayfa değiştirilme:';
 $lang['mail_new_user']         = 'yeni kullanıcı';
 $lang['mail_upload']           = 'dosya yüklendi:';
-$lang['qb_alert']              = 'Lütfen biçimlendirmek istediğin yazıyı gir.\nSayfanın sonuna eklenecektir.';
 $lang['qb_bold']               = 'Kalın Yazı';
 $lang['qb_italic']             = 'Eğik Yazı';
 $lang['qb_underl']             = 'Altı Çizgili Yazı';
@@ -166,7 +166,7 @@ $lang['qb_media']              = 'Resim ve başka dosyalar ekle';
 $lang['qb_sig']                = 'İmza Ekle';
 $lang['qb_smileys']            = 'Gülen Yüzler';
 $lang['qb_chars']              = 'Özel Karakterler';
-$lang['del_confirm']           = 'Bu girişi sil?';
+$lang['js']['del_confirm']           = 'Bu girişi sil?';
 $lang['admin_register']        = 'Yeni kullanıcı ekle...';
 $lang['metaedit']              = 'Metaverileri Değiştir';
 $lang['metasaveerr']           = 'Metaveri yazma başarısız ';

@@ -3,7 +3,7 @@
  *
  * @author Andreas Gohr <andi@splitbrain.org>
  */
-media = {
+var media_manager = {
     keepopen: false,
     hide: false,
 
@@ -22,12 +22,12 @@ media = {
             // attach action to make the +/- clickable
             var clicky = elem.getElementsByTagName('img')[0];
             clicky.style.cursor = 'pointer';
-            addEvent(clicky,'click',function(event){ return media.toggle(event,this); });
+            addEvent(clicky,'click',function(event){ return media_manager.toggle(event,this); });
 
             // attach action load folder list via AJAX
             var link = elem.getElementsByTagName('a')[0];
             link.style.cursor = 'pointer';
-            addEvent(link,'click',function(event){ return media.list(event,this); });
+            addEvent(link,'click',function(event){ return media_manager.list(event,this); });
         }
     },
 
@@ -44,7 +44,7 @@ media = {
         for(var i=0; i<items.length; i++){
             var elem = items[i];
             elem.style.cursor = 'pointer';
-            addEvent(elem,'click',function(event){ return media.select(event,this); });
+            addEvent(elem,'click',function(event){ return media_manager.select(event,this); });
         }
 
         // hide syntax example
@@ -56,7 +56,7 @@ media = {
 
         var file = $('upload__file');
         if(!file) return;
-        addEvent(file,'change',media.suggest);
+        addEvent(file,'change',media_manager.suggest);
     },
 
     /**
@@ -76,7 +76,7 @@ media = {
                 }else{
                     var name = e.target.title;
                 }
-                if(!confirm(reallyDel + "\n" + name)) {
+                if(!confirm(LANG['del_confirm'] + "\n" + name)) {
                     e.preventDefault();
                     return false;
                 } else {
@@ -102,9 +102,9 @@ media = {
             if(DokuCookie.getValue('keepopen')){
                 kobox.checked  = true;
                 kobox.defaultChecked = true; //IE wants this
-                media.keepopen = true;
+                media_manager.keepopen = true;
             }
-            addEvent(kobox,'click',function(event){ return media.togglekeepopen(event,this); });
+            addEvent(kobox,'click',function(event){ return media_manager.togglekeepopen(event,this); });
 
             var kolbl  = document.createElement('label');
             kolbl.htmlFor   = 'media__keepopen';
@@ -124,9 +124,9 @@ media = {
         if(DokuCookie.getValue('hide')){
             hdbox.checked = true;
             hdbox.defaultChecked = true; //IE wants this
-            media.hide    = true;
+            media_manager.hide    = true;
         }
-        addEvent(hdbox,'click',function(event){ return media.togglehide(event,this); });
+        addEvent(hdbox,'click',function(event){ return media_manager.togglehide(event,this); });
 
         var hdlbl  = document.createElement('label');
         hdlbl.htmlFor   = 'media__hide';
@@ -137,7 +137,34 @@ media = {
         obj.appendChild(hdbox);
         obj.appendChild(hdlbl);
         obj.appendChild(hdbr);
-        media.updatehide();
+        media_manager.updatehide();
+    },
+
+    /**
+     * Opens the searchfield
+     *
+     * @author Tobias Sarnowski <sarnowski@cosmocode.de>
+     */
+    showsearchfield: function(event,link){
+        // prepare an AJAX call to fetch the search
+        var ajax = new sack(DOKU_BASE + 'lib/exe/ajax.php');
+        ajax.AjaxFailedAlert = '';
+        ajax.encodeURIString = false;
+        if(ajax.failed) return true;
+
+        cleanMsgArea();
+
+        var content = $('media__content');
+        content.innerHTML = '<img src="'+DOKU_BASE+'lib/images/loading.gif" alt="..." class="load" />';
+
+        ajax.elementObj = content;
+        ajax.afterCompletion = function(){
+            media_manager.selectorattach(content);
+            media_manager.confirmattach(content);
+            media_manager.updatehide();
+        };
+        ajax.runAJAX(link.search.substr(1)+'&call=mediasearchlist');
+        return false;
     },
 
     /**
@@ -148,10 +175,10 @@ media = {
     togglekeepopen: function(event,cb){
         if(cb.checked){
             DokuCookie.setValue('keepopen',1);
-            media.keepopen = true;
+            media_manager.keepopen = true;
         }else{
             DokuCookie.setValue('keepopen','');
-            media.keepopen = false;
+            media_manager.keepopen = false;
         }
     },
 
@@ -163,12 +190,12 @@ media = {
     togglehide: function(event,cb){
         if(cb.checked){
             DokuCookie.setValue('hide',1);
-            media.hide = true;
+            media_manager.hide = true;
         }else{
             DokuCookie.setValue('hide','');
-            media.hide = false;
+            media_manager.hide = false;
         }
-        media.updatehide();
+        media_manager.updatehide();
     },
 
     /**
@@ -182,7 +209,7 @@ media = {
         if(!obj) return;
         var details = getElementsByClass('detail',obj,'div');
         for(var i=0; i<details.length; i++){
-            if(media.hide){
+            if(media_manager.hide){
                 details[i].style.display = 'none';
             }else{
                 details[i].style.display = '';
@@ -208,9 +235,9 @@ media = {
             }
             return false;
         }
-        opener.insertTags('wiki__text','{{:'+id+'|','}}','');
+        opener.insertTags('wiki__text','{{'+id+'|','}}','');
 
-        if(!media.keepopen) window.close();
+        if(!media_manager.keepopen) window.close();
         opener.focus();
         return false;
     },
@@ -234,10 +261,10 @@ media = {
 
         ajax.elementObj = content;
         ajax.afterCompletion = function(){
-            media.selectorattach(content);
-            media.confirmattach(content);
-            media.updatehide();
-            media.initFlashUpload();
+            media_manager.selectorattach(content);
+            media_manager.confirmattach(content);
+            media_manager.updatehide();
+            media_manager.initFlashUpload();
         };
         ajax.runAJAX(link.search.substr(1)+'&call=medialist');
         return false;
@@ -274,7 +301,7 @@ media = {
         //fixme add classname here
         listitem.appendChild(ul);
         ajax.elementObj = ul;
-        ajax.afterCompletion = function(){ media.treeattach(ul); };
+        ajax.afterCompletion = function(){ media_manager.treeattach(ul); };
         ajax.runAJAX(link.search.substr(1)+'&call=medians');
         clicky.src = DOKU_BASE+'lib/images/minus.gif';
         return false;
@@ -317,9 +344,9 @@ media = {
 };
 
 addInitEvent(function(){
-    media.treeattach($('media__tree'));
-    media.selectorattach($('media__content'));
-    media.confirmattach($('media__content'));
-    media.attachoptions($('media__opts'));
-    media.initFlashUpload();
+    media_manager.treeattach($('media__tree'));
+    media_manager.selectorattach($('media__content'));
+    media_manager.confirmattach($('media__content'));
+    media_manager.attachoptions($('media__opts'));
+    media_manager.initFlashUpload();
 });

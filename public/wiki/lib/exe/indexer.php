@@ -20,20 +20,18 @@ define('INDEXER_VERSION', 2);
 @ignore_user_abort(true);
 
 // check if user abort worked, if yes send output early
-if(@ignore_user_abort() && !$conf['broken_iua']){
+$defer = !@ignore_user_abort() || $conf['broken_iua'];
+if(!$defer){
     sendGIF(); // send gif
-    $defer = false;
-}else{
-    $defer = true;
 }
 
 $ID = cleanID($_REQUEST['id']);
 
 // Catch any possible output (e.g. errors)
-if(!$_REQUEST['debug']) ob_start();
+if(!isset($_REQUEST['debug'])) ob_start();
 
 // run one of the jobs
-$tmp = array();
+$tmp = array(); // No event data
 $evt = new Doku_Event('INDEXER_TASKS_RUN', $tmp);
 if ($evt->advise_before()) {
   runIndexer() or
@@ -45,7 +43,7 @@ if ($evt->advise_before()) {
 }
 if($defer) sendGIF();
 
-if(!$_REQUEST['debug']) ob_end_clean();
+if(!isset($_REQUEST['debug'])) ob_end_clean();
 exit;
 
 // --------------------------------------------------------------------
@@ -68,8 +66,9 @@ function runTrimRecentChanges($media_changes = false) {
     // changes or $conf['recent'] items, which ever is larger.
     // The trimming is only done once a day.
     if (@file_exists($fn) &&
-        (filectime($fn)+86400)<time() &&
+        (@filemtime($fn.'.trimmed')+86400)<time() &&
         !@file_exists($fn.'_tmp')) {
+            @touch($fn.'.trimmed');
             io_lock($fn);
             $lines = file($fn);
             if (count($lines)<=$conf['recent']) {
@@ -90,6 +89,13 @@ function runTrimRecentChanges($media_changes = false) {
               } else {
                 $out_lines[$log['date'].".$i"] = $lines[$i];     // definitely keep these lines
               }
+            }
+
+            if (count($lines)==count($out_lines)) {
+              // nothing to trim
+              @unlink($fn.'_tmp');
+              io_unlock($fn);
+              return false;
             }
 
             // sort the final result, it shouldn't be necessary,
@@ -318,7 +324,7 @@ function runSitemapper(){
 
     //ping microsoft
     print 'runSitemapper(): pinging microsoft'.NL;
-    $url  = 'http://webmaster.live.com/webmaster/ping.aspx?sitemap=';
+    $url  = 'http://www.bing.com/webmaster/ping.aspx?siteMap=';
     $url .= urlencode(DOKU_URL.$sitemap);
     $resp = $http->get($url);
     if($http->error) print 'runSitemapper(): '.$http->error.NL;
@@ -350,7 +356,7 @@ function date_iso8601($int_date) {
  * @author Harry Fuecks <fuecks@gmail.com>
  */
 function sendGIF(){
-    if($_REQUEST['debug']){
+    if(isset($_REQUEST['debug'])){
         header('Content-Type: text/plain');
         return;
     }

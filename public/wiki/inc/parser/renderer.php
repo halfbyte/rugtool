@@ -161,13 +161,13 @@ class Doku_Renderer extends DokuWiki_Plugin {
 
     function preformatted($text) {}
 
-    function file($text) {}
-
     function quote_open() {}
 
     function quote_close() {}
 
-    function code($text, $lang = NULL) {}
+    function file($text, $lang = null, $file = null ) {}
+
+    function code($text, $lang = null, $file = null ) {}
 
     function acronym($acronym) {}
 
@@ -239,11 +239,11 @@ class Doku_Renderer extends DokuWiki_Plugin {
 
     function tablerow_close(){}
 
-    function tableheader_open($colspan = 1, $align = NULL){}
+    function tableheader_open($colspan = 1, $align = NULL, $rowspan = 1){}
 
     function tableheader_close(){}
 
-    function tablecell_open($colspan = 1, $align = NULL){}
+    function tablecell_open($colspan = 1, $align = NULL, $rowspan = 1){}
 
     function tablecell_close(){}
 
@@ -294,7 +294,7 @@ class Doku_Renderer extends DokuWiki_Plugin {
         }
 
         //split into hash and url part
-        list($wikiUri,$hash) = explode('#',$wikiUri,2);
+        list($reference,$hash) = explode('#',$reference,2);
 
         //replace placeholder
         if(preg_match('#\{(URL|NAME|SCHEME|HOST|PORT|PATH|QUERY)\}#',$url)){

@@ -17,9 +17,6 @@ if (clientPC.indexOf('opera')!=-1) {
     var is_opera_seven = (window.opera && document.childNodes);
 }
 
-// prepare empty toolbar for checks by lazy plugins
-var toolbar = '';
-
 /**
  * Handy shortcut to document.getElementById
  *
@@ -69,7 +66,7 @@ function getElementsByClass(searchClass,node,tag) {
     var els = node.getElementsByTagName(tag);
     var elsLen = els.length;
     var pattern = new RegExp("(^|\\s)"+searchClass+"(\\s|$)");
-    for (i = 0, j = 0; i < elsLen; i++) {
+    for (var i = 0, j = 0; i < elsLen; i++) {
         if ( pattern.test(els[i].className) ) {
             classElements[j] = els[i];
             j++;
@@ -203,12 +200,18 @@ function addTocToggle() {
     if(!document.getElementById) return;
     var header = $('toc__header');
     if(!header) return;
+    var toc = $('toc__inside');
 
     var obj          = document.createElement('span');
     obj.id           = 'toc__toggle';
-    obj.innerHTML    = '<span>&minus;</span>';
-    obj.className    = 'toc_close';
     obj.style.cursor = 'pointer';
+    if (toc && toc.style.display == 'none') {
+        obj.innerHTML    = '<span>+</span>';
+        obj.className    = 'toc_open';
+    } else {
+        obj.innerHTML    = '<span>&minus;</span>';
+        obj.className    = 'toc_close';
+    }
 
     prependChild(header,obj);
     obj.parentNode.onclick = toggleToc;
@@ -232,29 +235,6 @@ function toggleToc() {
     toc.style.display   = 'none';
     obj.innerHTML       = '<span>+</span>';
     obj.className       = 'toc_open';
-  }
-}
-
-/**
- * This enables/disables checkboxes for acl-administration
- *
- * @author Frank Schubert <frank@schokilade.de>
- */
-function checkAclLevel(){
-  if(document.getElementById) {
-    var scope = $('acl_scope').value;
-
-    //check for namespace
-    if( (scope.indexOf(":*") > 0) || (scope == "*") ){
-      document.getElementsByName('acl_checkbox[4]')[0].disabled=false;
-      document.getElementsByName('acl_checkbox[8]')[0].disabled=false;
-    }else{
-      document.getElementsByName('acl_checkbox[4]')[0].checked=false;
-      document.getElementsByName('acl_checkbox[8]')[0].checked=false;
-
-      document.getElementsByName('acl_checkbox[4]')[0].disabled=true;
-      document.getElementsByName('acl_checkbox[8]')[0].disabled=true;
-    }
   }
 }
 
@@ -497,6 +477,9 @@ addInitEvent(function(){
                     else input2.disabled = (input2.type!='checkbox');
                 }
             });
+            input1.checked = false; // chrome reselects on back button which messes up the logic
+        } else if(input1.type=='submit'){
+            input1.disabled = true;
         }
     }
 });
@@ -520,9 +503,10 @@ addInitEvent(function(){
 /**
  * Display error for Windows Shares on browsers other than IE
  *
- * Michael Klier <chi@chimeric.de>
+ * @author Michael Klier <chi@chimeric.de>
  */
 function checkWindowsShares() {
+    if(!LANG['nosmblinks']) return true;
     var elems = getElementsByClass('windows',document,'a');
     if(elems){
         for(var i=0; i<elems.length; i++){
@@ -539,8 +523,39 @@ function checkWindowsShares() {
 /**
  * Add the event handler for the Windows Shares check
  *
- * Michael Klier <chi@chimeric.de>
+ * @author Michael Klier <chi@chimeric.de>
  */
 addInitEvent(function(){
     checkWindowsShares();
+});
+
+/**
+ * Highlight the section when hovering over the appropriate section edit button
+ *
+ * @author Andreas Gohr <andi@splitbrain.org>
+ */
+addInitEvent(function(){
+    var break_classes = new RegExp('secedit|toc|page');
+    var btns = getElementsByClass('btn_secedit',document,'form');
+    for(var i=0; i<btns.length; i++){
+        addEvent(btns[i],'mouseover',function(e){
+            var tgt = e.target;
+            if(tgt.form) tgt = tgt.form;
+            tgt = tgt.parentNode.previousSibling;
+            if(tgt.nodeName != "DIV") tgt = tgt.previousSibling;
+            while(!break_classes.test(tgt.className)) {
+                tgt.className += ' section_highlight';
+                if (tgt.tagName == 'H1') break;
+                tgt = (tgt.previousSibling != null) ? tgt.previousSibling : tgt.parentNode;
+            }
+        });
+
+        addEvent(btns[i],'mouseout',function(e){
+            var secs = getElementsByClass('section_highlight');
+            for(var j=0; j<secs.length; j++){
+                secs[j].className = secs[j].className.replace(/section_highlight/,'');
+            }
+            var secs = getElementsByClass('section_highlight');
+        });
+    }
 });

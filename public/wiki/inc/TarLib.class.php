@@ -274,7 +274,7 @@ class TarLib
       $fp = @fopen($archive,'rb');
       if(!$fp) return -4;
 
-      while(!foef($fp)) echo fread($fp,2048);
+      while(!feof($fp)) echo fread($fp,2048);
     }
     else
     {
@@ -331,7 +331,7 @@ class TarLib
    * contents are only stored in memory. This function should not be used to
    * add files to an existing archive, you should use Add() instead.
    *
-   * The FileList supports actually three différents modes :
+   * The FileList actually supports three different modes :
    *
    * - You can pass a string containing filenames separated by pipes '|'.
    *   In this case the file are read from the webserver filesystem and the
@@ -341,7 +341,7 @@ class TarLib
    *   filenames. The behaviour for the content reading is the same that a
    *   '|'ed string.
    *
-   * - The more useful usage is to pass bidimentional arrays, where the
+   * - The more useful usage is to pass bidimensional arrays, where the
    *   first element contains the filename and the second contains the file
    *   contents. You can even add empty folders to the package if the filename
    *   has a leading '/'. Once again, have a look at the exemples to understand
@@ -824,7 +824,7 @@ $p_add, $p_rem);
 
   function _extractList($p_to, $p_files, $p_remdir, $p_mode = 0755)
   {
-    if (!$p_to || ($p_to[0]!="/"&&substr($p_to,0,3)!="../"&&substr($p_to,1,2)!=":\\")) /*" // <- PHP Coder bug */
+    if (!$p_to || ($p_to[0]!="/"&&substr($p_to,0,3)!="../"&&substr($p_to,1,3)!=":\\"&&substr($p_to,1,2)!=":/")) /*" // <- PHP Coder bug */
       $p_to = "./$p_to";
 
     if ($p_remdir && substr($p_remdir,-1)!='/') $p_remdir .= '/';

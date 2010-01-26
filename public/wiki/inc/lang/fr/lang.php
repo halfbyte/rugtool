@@ -15,6 +15,9 @@
  * @author gb@isis.u-strasbg.fr
  * @author stephane.gully@gmail.com
  * @author Guillaume Turri <guillaume.turri@gmail.com>
+ * @author Erik Pedersen <erik.pedersen@shaw.ca>
+ * @author olivier duperray <duperray.olivier@laposte.net>
+ * @author Vincent Feltz <psycho@feltzv.fr>
  */
 $lang['encoding']              = 'utf-8';
 $lang['direction']             = 'ltr';
@@ -57,6 +60,7 @@ $lang['btn_resendpwd']         = 'Envoyer le mot de passe';
 $lang['btn_draft']             = 'Éditer brouillon';
 $lang['btn_recover']           = 'Récupérer brouillon';
 $lang['btn_draftdel']          = 'Effacer brouillon';
+$lang['btn_revert']            = 'Restaurer';
 $lang['loggedinas']            = 'Connecté en tant que ';
 $lang['user']                  = 'Utilisateur';
 $lang['pass']                  = 'Mot de passe';
@@ -95,6 +99,8 @@ $lang['resendpwdconfirm']      = 'Un lien de confirmation vous a été envoyé p
 $lang['resendpwdsuccess']      = 'Votre nouveau mot de passe vous a été expédié par courriel.';
 $lang['license']               = 'Sauf mention contraire, le contenu de ce wiki est placé sous la licence suivante:';
 $lang['licenseok']             = 'Note : En éditant cette page vous acceptez que le contenu soit placé sous les termes de la licence suivante :';
+$lang['searchmedia']           = 'Chercher le nom de fichier :';
+$lang['searchmedia_in']        = 'Chercher dans %s';
 $lang['txt_upload']            = 'Sélectionnez un fichier à envoyer ';
 $lang['txt_filename']          = 'Donnez un "wikiname" (optionnel) ';
 $lang['txt_overwrt']           = 'Écraser le fichier cible';
@@ -119,10 +125,14 @@ $lang['deletefail']            = 'Le fichier "%s" n\'a pu être effacé - vérif
 $lang['mediainuse']            = 'Le fichier "%s" n\'a pas été effacé - il est en cours d\'utilisation.';
 $lang['namespaces']            = 'Catégories';
 $lang['mediafiles']            = 'Fichiers disponibles dans';
+$lang['js']['searchmedia']     = 'Chercher des fichiers';
 $lang['js']['keepopen']        = 'Gardez la fenêtre ouverte pendant la sélection';
 $lang['js']['hidedetails']     = 'Masquer détails';
 $lang['js']['nosmblinks']      = 'Les liens vers les partages Windows ne fonctionnent qu\'avec Microsoft Internet Explorer.
 Vous pouvez toujours faire un copier/coller du lien.';
+$lang['js']['linkwiz']         = 'Assistant Lien';
+$lang['js']['linkto']          = 'Lien vers:';
+$lang['js']['del_confirm']     = 'Effacer cette entrée ?';
 $lang['js']['mu_btn']          = 'Envoyer plusieurs fichiers en même temps';
 $lang['mediausage']            = 'Utilisez la syntaxe suivante pour faire référence à ce fichier :';
 $lang['mediaview']             = 'Voir fichier original';
@@ -150,11 +160,11 @@ $lang['restored']              = 'ancienne révision restaurée';
 $lang['external_edit']         = 'édition externe';
 $lang['summary']               = 'Résumé';
 $lang['noflash']               = 'L"extension <a href="http://www.adobe.com/products/flashplayer/">Adobe Flash Plugin</a> est nécessaire pour afficher ce contenu.';
+$lang['download']              = 'Télécharger un extrait';
 $lang['mail_newpage']          = 'page ajoutée :';
 $lang['mail_changed']          = 'page changée :';
 $lang['mail_new_user']         = 'nouvel utilisateur :';
 $lang['mail_upload']           = 'fichier envoyé :';
-$lang['qb_alert']              = 'SVP, entrez le texte que vous souhaitez formater.\nIl sera ajouté à la fin du document.';
 $lang['qb_bold']               = 'Gras';
 $lang['qb_italic']             = 'Italique';
 $lang['qb_underl']             = 'Souligné';
@@ -165,6 +175,11 @@ $lang['qb_h2']                 = 'En-tête 2';
 $lang['qb_h3']                 = 'En-tête 3';
 $lang['qb_h4']                 = 'En-tête 4';
 $lang['qb_h5']                 = 'En-tête 5';
+$lang['qb_h']                  = 'Titre';
+$lang['qb_hs']                 = 'Sélectionner la ligne de titre';
+$lang['qb_hplus']              = 'Titre supérieur';
+$lang['qb_hminus']             = 'Titre inférieur';
+$lang['qb_hequal']             = 'Titre de même niveau';
 $lang['qb_link']               = 'Lien interne';
 $lang['qb_extlink']            = 'Lien externe';
 $lang['qb_hr']                 = 'Ligne horizontale';
@@ -174,11 +189,11 @@ $lang['qb_media']              = 'Ajouter des images et autres fichiers';
 $lang['qb_sig']                = 'Insérer une signature';
 $lang['qb_smileys']            = 'Émoticons';
 $lang['qb_chars']              = 'Caractères spéciaux';
-$lang['del_confirm']           = 'Effacer cette entrée ?';
+$lang['upperns']               = 'Aller à la catégorie parente';
 $lang['admin_register']        = 'Ajouter un nouvel utilisateur';
-$lang['metaedit']              = 'Éditer les metadonnées';
-$lang['metasaveerr']           = 'Erreur à l\'écriture des metadonnées';
-$lang['metasaveok']            = 'Metadonnées enregistrées';
+$lang['metaedit']              = 'Éditer les métadonnées';
+$lang['metasaveerr']           = 'Erreur à l\'écriture des métadonnées';
+$lang['metasaveok']            = 'Métadonnées enregistrées';
 $lang['img_backto']            = 'Retour à';
 $lang['img_title']             = 'Titre';
 $lang['img_caption']           = 'Légende';
@@ -231,4 +246,13 @@ $lang['mu_fail']               = 'Échoué';
 $lang['mu_authfail']           = 'Session expirée';
 $lang['mu_progress']           = '@PCT@% envoyé';
 $lang['mu_filetypes']          = 'Types de fichiers acceptés';
-$lang['recent_global']         = 'Vous êtes actuellement en train de regarder les modifications au sein du namespace <b>%s</b>. Vous pouvez aussi <a href="%s">voir les récentes modifications sur tout le wiki</a>';
+$lang['mu_info']               = 'fichiers envoyés.';
+$lang['mu_lasterr']            = 'Dernière erreur : ';
+$lang['recent_global']         = 'Vous êtes actuellement en train de regarder les modifications au sein du namespace <b>%s</b>. Vous pouvez aussi <a href="%s">voir les récentes modifications sur tout le wiki</a>.';
+$lang['years']                 = 'il y a %d ans';
+$lang['months']                = 'il y a %d mois';
+$lang['weeks']                 = 'il y a %d semaines';
+$lang['days']                  = 'il y a %d jours';
+$lang['hours']                 = 'il y a %d heures';
+$lang['minutes']               = 'il y a %d minutes';
+$lang['seconds']               = 'il y a %d secondes';

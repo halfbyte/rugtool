@@ -176,6 +176,7 @@ class IXR_Message {
     }
     function tag_open($parser, $tag, $attr) {
         $this->currentTag = $tag;
+        $this->_currentTagContents = '';
         switch($tag) {
             case 'methodCall':
             case 'methodResponse':
@@ -211,7 +212,7 @@ class IXR_Message {
                 $valueFlag = true;
                 break;
             case 'string':
-                $value = (string)trim($this->_currentTagContents);
+                $value = (string)$this->_currentTagContents;
                 $this->_currentTagContents = '';
                 $valueFlag = true;
                 break;
@@ -350,6 +351,9 @@ EOD;
 
 # Adjusted for DokuWiki to use call_user_func_array
 
+        // args need to be an array
+        $args = (array) $args;
+
         // Are we dealing with a function or a method?
         if (substr($method, 0, 5) == 'this:') {
             // It's a class method - check it exists
@@ -360,15 +364,15 @@ EOD;
             // Call the method
             #$result = $this->$method($args);
             $result = call_user_func_array(array(&$this,$method),$args);
-		} elseif (substr($method, 0, 7) == 'plugin:') {
-			require_once(DOKU_INC.'inc/pluginutils.php');
-			list($pluginname, $callback) = explode(':', substr($method, 7), 2);
-			if(!plugin_isdisabled($pluginname)) {
-				$plugin = plugin_load('action', $pluginname);
-				return call_user_func_array(array($plugin, $callback), $args);
-			} else {
-				return new IXR_Error(-99999, 'server error');
-			}
+        } elseif (substr($method, 0, 7) == 'plugin:') {
+            require_once(DOKU_INC.'inc/pluginutils.php');
+            list($pluginname, $callback) = explode(':', substr($method, 7), 2);
+            if(!plugin_isdisabled($pluginname)) {
+                $plugin = plugin_load('action', $pluginname);
+                return call_user_func_array(array($plugin, $callback), $args);
+            } else {
+                return new IXR_Error(-99999, 'server error');
+            }
         } else {
             // It's a function - does it exist?
             if (!function_exists($method)) {
@@ -521,16 +525,22 @@ class IXR_Client extends DokuHTTPClient {
             return false;
         }
 
+        // Check HTTP Response code
+        if($this->status < 200 || $this->status > 206){
+            $this->xmlerror = new IXR_Error(-32300, 'transport error - HTTP status '.$this->status);
+            return false;
+        }
+
         // Now parse what we've got back
         $this->message = new IXR_Message($this->resp_body);
         if (!$this->message->parse()) {
             // XML error
-            $this->error = new IXR_Error(-32700, 'parse error. not well formed');
+            $this->xmlerror = new IXR_Error(-32700, 'parse error. not well formed');
             return false;
         }
         // Is the message a fault?
         if ($this->message->messageType == 'fault') {
-            $this->error = new IXR_Error($this->message->faultCode, $this->message->faultString);
+            $this->xmlerror = new IXR_Error($this->message->faultCode, $this->message->faultString);
             return false;
         }
         // Message must be OK
@@ -600,20 +610,20 @@ class IXR_Date {
         }
     }
     function parseTimestamp($timestamp) {
-        $this->year = date('Y', $timestamp);
-        $this->month = date('m', $timestamp);
-        $this->day = date('d', $timestamp);
-        $this->hour = date('H', $timestamp);
-        $this->minute = date('i', $timestamp);
-        $this->second = date('s', $timestamp);
+        $this->year = gmdate('Y', $timestamp);
+        $this->month = gmdate('m', $timestamp);
+        $this->day = gmdate('d', $timestamp);
+        $this->hour = gmdate('H', $timestamp);
+        $this->minute = gmdate('i', $timestamp);
+        $this->second = gmdate('s', $timestamp);
     }
     function parseIso($iso) {
         $this->year = substr($iso, 0, 4);
-        $this->month = substr($iso, 4, 2);
-        $this->day = substr($iso, 6, 2);
-        $this->hour = substr($iso, 9, 2);
-        $this->minute = substr($iso, 12, 2);
-        $this->second = substr($iso, 15, 2);
+        $this->month = substr($iso, 5, 2);
+        $this->day = substr($iso, 8, 2);
+        $this->hour = substr($iso, 11, 2);
+        $this->minute = substr($iso, 14, 2);
+        $this->second = substr($iso, 17, 2);
     }
     function getIso() {
         return $this->year.'-'.$this->month.'-'.$this->day.'T'.$this->hour.':'.$this->minute.':'.$this->second;
@@ -622,7 +632,7 @@ class IXR_Date {
         return '<dateTime.iso8601>'.$this->getIso().'</dateTime.iso8601>';
     }
     function getTimestamp() {
-        return mktime($this->hour, $this->minute, $this->second, $this->month, $this->day, $this->year);
+        return gmmktime($this->hour, $this->minute, $this->second, $this->month, $this->day, $this->year);
     }
 }
 
@@ -805,4 +815,3 @@ class IXR_ClientMulticall extends IXR_Client {
     }
 }
 
-?>

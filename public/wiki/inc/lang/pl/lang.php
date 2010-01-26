@@ -6,6 +6,7 @@
  * @author Grzegorz Żur <grzegorz.zur@gmail.com>
  * @author Mariusz Kujawski <marinespl@gmail.com>
  * @author Maciej Kurczewski <pipijajko@gmail.com>
+ * @author Sławomir Boczek <slawkens@gmail.com>
  */
 $lang['encoding']              = 'utf-8';
 $lang['direction']             = 'ltr';
@@ -48,6 +49,7 @@ $lang['btn_resendpwd']         = 'Prześlij nowe hasło';
 $lang['btn_draft']             = 'Edytuj szkic';
 $lang['btn_recover']           = 'Przywróć szkic';
 $lang['btn_draftdel']          = 'Usuń szkic';
+$lang['btn_revert']            = 'Przywróć';
 $lang['loggedinas']            = 'Zalogowany jako';
 $lang['user']                  = 'Użytkownik';
 $lang['pass']                  = 'Hasło';
@@ -86,6 +88,8 @@ $lang['resendpwdconfirm']      = 'Prośba o potwierdzenie została przesłana po
 $lang['resendpwdsuccess']      = 'Nowe hasło zostało wysłane pocztą.';
 $lang['license']               = 'Wszystkie treści w tym wiki, którym nie przyporządkowano licencji, podlegają licencji:';
 $lang['licenseok']             = 'Uwaga: edytując tę stronę zgadzasz się na publikowanie jej treści pod licencją:';
+$lang['searchmedia']           = 'Szukaj pliku o nazwie:';
+$lang['searchmedia_in']        = 'Szukaj w  %s';
 $lang['txt_upload']            = 'Wybierz plik do wysłania';
 $lang['txt_filename']          = 'Nazwa pliku (opcjonalnie)';
 $lang['txt_overwrt']           = 'Nadpisać istniejący plik?';
@@ -104,15 +108,20 @@ $lang['uploadexist']           = 'Plik już istnieje, nie wykonano operacji.';
 $lang['uploadbadcontent']      = 'Typ pliku "%s" nie odpowiadał jego rozszerzeniu.';
 $lang['uploadspam']            = 'Plik zablokowany przez filtr antyspamowy.';
 $lang['uploadxss']             = 'Plik zablokowany ze względu na podejrzaną zawartość.';
+$lang['uploadsize']            = 'Plik jest za duży (maksymalny rozmiar %s)';
 $lang['deletesucc']            = 'Plik "%s" został usunięty.';
 $lang['deletefail']            = 'Plik "%s" nie został usunięty, sprawdź uprawnienia.';
 $lang['mediainuse']            = 'Plik "%s" nie został usunięty, ponieważ jest używany.';
 $lang['namespaces']            = 'Katalogi';
 $lang['mediafiles']            = 'Dostępne pliki';
+$lang['js']['searchmedia']     = 'Szukaj plików';
 $lang['js']['keepopen']        = 'Nie zamykaj okna po wyborze';
 $lang['js']['hidedetails']     = 'Ukryj szczegóły';
-$lang['js']['nosmblinks']      = 'Odnośniki do zasobów sieci Windows działają tylko w przeglądarce Internet Explorer. 
+$lang['js']['nosmblinks']      = 'Odnośniki do zasobów sieci Windows działają tylko w przeglądarce Internet Explorer.
 Możesz skopiować odnośnik.';
+$lang['js']['linkwiz']         = 'Tworzenie odnośników';
+$lang['js']['linkto']          = 'Link do';
+$lang['js']['del_confirm']     = 'Czy na pewno usunąć?';
 $lang['js']['mu_btn']          = 'Wyślij wiele plików na raz';
 $lang['mediausage']            = 'Użyj następującej składni w odnośniku do tego pliku:';
 $lang['mediaview']             = 'Pokaż oryginalny plik';
@@ -140,11 +149,11 @@ $lang['restored']              = 'przywrócono poprzednią wersję';
 $lang['external_edit']         = 'edycja zewnętrzna';
 $lang['summary']               = 'Opis zmian';
 $lang['noflash']               = 'Plugin <a href="http://www.adobe.com/products/flashplayer/">Adobe Flash Plugin</a> jest niezbędny do obejrzenia tej zawartości.';
+$lang['download']              = 'Pobierz zrzut';
 $lang['mail_newpage']          = 'Strona dodana:';
 $lang['mail_changed']          = 'Strona zmieniona:';
 $lang['mail_new_user']         = 'Nowy użytkownik:';
 $lang['mail_upload']           = 'Umieszczono plik:';
-$lang['qb_alert']              = 'Wpisz tekst, który chcesz sformatować. \nBędzie on dołączony na koniec strony.';
 $lang['qb_bold']               = 'Pogrubienie';
 $lang['qb_italic']             = 'Pochylenie';
 $lang['qb_underl']             = 'Podkreślenie';
@@ -155,6 +164,11 @@ $lang['qb_h2']                 = 'Nagłówek 2 stopnia';
 $lang['qb_h3']                 = 'Nagłówek 3 stopnia';
 $lang['qb_h4']                 = 'Nagłówek 4 stopnia';
 $lang['qb_h5']                 = 'Nagłówek 5 stopnia';
+$lang['qb_h']                  = 'Nagłówek';
+$lang['qb_hs']                 = 'Wybierz nagłówek';
+$lang['qb_hplus']              = 'Nagłówek wyższego stopnia';
+$lang['qb_hminus']             = 'Nagłówek niższego stopnia';
+$lang['qb_hequal']             = 'Nagłówek tego samego stopnia';
 $lang['qb_link']               = 'Odnośnik wewnętrzny';
 $lang['qb_extlink']            = 'Odnośnik zewnętrzny';
 $lang['qb_hr']                 = 'Linia pozioma';
@@ -164,7 +178,7 @@ $lang['qb_media']              = 'Dodaj obrazek lub inny plik';
 $lang['qb_sig']                = 'Wstaw podpis';
 $lang['qb_smileys']            = 'Emotikony';
 $lang['qb_chars']              = 'Znaki specjalne';
-$lang['del_confirm']           = 'Czy na pewno usunąć?';
+$lang['upperns']               = 'Skok piętro wyżej';
 $lang['admin_register']        = 'Dodawanie użytkownika';
 $lang['metaedit']              = 'Edytuj metadane';
 $lang['metasaveerr']           = 'Zapis metadanych nie powiódł się';
@@ -222,4 +236,13 @@ $lang['mu_fail']               = 'nie powiodło się';
 $lang['mu_authfail']           = 'sesja wygasła';
 $lang['mu_progress']           = '@PCT@% wysłano';
 $lang['mu_filetypes']          = 'Dozwolone typy plików';
+$lang['mu_info']               = 'wysłanych plików.';
+$lang['mu_lasterr']            = 'Ostatni błąd:';
 $lang['recent_global']         = 'W tej chwili przeglądasz zmiany w katalogu <b>%s</b>. Możesz przejrzeć także <a href="%s">zmiany w całym wiki</a>.';
+$lang['years']                 = '%d lat temu';
+$lang['months']                = '%d miesięcy temu';
+$lang['weeks']                 = '%d tygodni temu';
+$lang['days']                  = '%d dni temu';
+$lang['hours']                 = '%d godzin temu';
+$lang['minutes']               = '%d minut temu';
+$lang['seconds']               = '%d sekund temu';

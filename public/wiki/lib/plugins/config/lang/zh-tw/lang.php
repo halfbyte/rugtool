@@ -5,6 +5,8 @@
  * @author Li-Jiun Huang <ljhuang.tw@gmail.com>
  * @author http://www.chinese-tools.com/tools/converter-simptrad.html
  * @author Wayne San <waynesan@zerozone.tw>
+ * @author Li-Jiun Huang <ljhuang.tw@gmai.com>
+ * @author Cheng-Wei Chien <e.cwchien@gmail.com>
  */
 $lang['menu']                  = '系統配置設定';
 $lang['error']                 = '設定因為不合法的值而失敗，請檢查您的改變並重新送出。
@@ -13,6 +15,9 @@ $lang['updated']               = '成功地更新設定。';
 $lang['nochoice']              = '(無其他選項可選)';
 $lang['locked']                = '設定檔無法被更新, 如果這不是故意的, <br />
 請確定設定檔名以及權限是正確的.';
+$lang['danger']                = '危險：改變此選項可能使得您的 wiki 以及其設定選單無法存取。';
+$lang['warning']               = '警告：改變此選項可能導致未預期的行為。';
+$lang['security']              = '安全性警告：改變此選項可能造成安全上的危險。';
 $lang['_configuration_manager'] = '設定管理';
 $lang['_header_dokuwiki']      = 'DokuWiki 設定';
 $lang['_header_plugin']        = '外掛設定';
@@ -41,6 +46,7 @@ $lang['savedir']               = '儲存資料的目錄';
 $lang['start']                 = '開始頁面的名稱';
 $lang['title']                 = 'Wiki 標題';
 $lang['template']              = '樣板';
+$lang['license']               = '您希望您的內容為何種授權方式？';
 $lang['fullpath']              = '顯示完整的路徑於頁面底部';
 $lang['recent']                = '最近更新';
 $lang['breadcrumbs']           = '显示“足迹”的数量';
@@ -51,10 +57,11 @@ $lang['phpok']                 = '允許嵌入式PHP';
 $lang['dformat']               = '日期格式(請見 PHP\'s <a href="http://www.php.net/strftime">strftime</a> function)';
 $lang['signature']             = '簽名';
 $lang['toptoclevel']           = '本頁目錄的最高層級';
+$lang['tocminheads']           = '決定是否建立本頁目錄的最少標題數量';
 $lang['maxtoclevel']           = '本頁目錄顯示的最大層級';
 $lang['maxseclevel']           = '可編輯段落的最大層級';
 $lang['camelcase']             = '對鏈接使用 CamelCase';
-$lang['deaccent']              = '清理页面名称';
+$lang['deaccent']              = '清理頁面名稱';
 $lang['useheading']            = '使用第一個標題作為頁面名稱';
 $lang['refcheck']              = '媒體連結檢查';
 $lang['refshow']               = '媒體連結的顯示數量';
@@ -64,6 +71,7 @@ $lang['indexdelay']            = '建立索引前的延遲時間(秒)';
 $lang['relnofollow']           = '使用 rel="nofollow" 於外部連結';
 $lang['mailguard']             = '暗化E-mail位址';
 $lang['iexssprotect']          = '檢查上傳的檔案中是否隱含惡意的 JavaScript 或 HTML 碼';
+$lang['showuseras']            = '在顯示最近修改頁面，將使用者顯示為：';
 $lang['useacl']                = '使用存取控制名單';
 $lang['autopasswd']            = '自動產生密碼';
 $lang['authtype']              = '认证后台管理方式';
@@ -80,6 +88,9 @@ $lang['disableactions_wikicode'] = '查看源文件/導出源文件';
 $lang['disableactions_other']  = '其他功能(以逗號分隔)';
 $lang['sneaky_index']          = '默認情況下，DokuWiki 在索引頁會顯示所有 namespace。啟用該選項能隱藏那些用戶沒有權限閱讀的頁面。但也可能將用戶能夠閱讀的子頁面一並隱藏。這有可能導致在特定 ACL 設置下，索引功能不可用。';
 $lang['auth_security_timeout'] = '認證確定的 Timeout (秒)';
+$lang['securecookie']          = '「cookies set via HTTPS」是否只能由瀏覽器經 HTTPS 傳送？當你登入 wiki 是被 SSL 所保護但瀏覽 wiki 是沒有被保護時，取消此選項。';
+$lang['xmlrpc']                = '啟用/停用 XML-RPC 介面';
+$lang['xmlrpcuser']            = 'XML-RPC 存取權限將局限於在此提供的群組或使用者（逗點分隔）。若要開放權限給所有人請留白。';
 $lang['updatecheck']           = '檢查更新與安全性警告? 使用此功能, DokuWiki 需要聯繫 splitbrain.org.';
 $lang['userewrite']            = '使用更整潔的 URL';
 $lang['useslash']              = '在 URL 中使用斜杠作为命名空间的分隔符';
@@ -105,7 +116,6 @@ $lang['send404']               = '存取不存在的頁面時送出"HTTP 404/Pag
 $lang['sitemap']               = '產生 Google sitemap (天)';
 $lang['broken_iua']            = 'ignore_user_abort 功能失效了？這有可能導致搜索索引不可用。IIS+PHP/CGI 已損壞。請參閱 <a href=\"http://bugs.splitbrain.org/?do=details&task_id=852\">Bug 852</a> 獲取更多信息。';
 $lang['xsendfile']             = '使用 X-Sendfile 頭讓服務器發送狀態文件？您的服務器需要支持該功能。';
-$lang['xmlrpc']                = '啟用/停用 XML-RPC 介面';
 $lang['renderer_xhtml']        = '主维基页面 (xhtml) 输出使用的渲染';
 $lang['renderer__core']        = '%s (dokuwiki 核心)';
 $lang['renderer__plugin']      = '%s (外掛)';
@@ -132,6 +142,7 @@ $lang['ftp____port']           = 'Safemode Hack 的 FTP 端口';
 $lang['ftp____user']           = 'Safemode Hack 的 FTP 用戶名';
 $lang['ftp____pass']           = 'Safemode Hack 的 FTP 密碼';
 $lang['ftp____root']           = 'Safemode Hack 的 FTP 根路徑';
+$lang['license_o_']            = '未選擇';
 $lang['typography_o_0']        = '無';
 $lang['typography_o_1']        = '仅限双引号';
 $lang['typography_o_2']        = '所有引號（不一定能正常運行）';
@@ -166,3 +177,9 @@ $lang['xsendfile_o_2']         = '標准 X-Sendfile 頭';
 $lang['xsendfile_o_3']         = '專有 Nginx X-Accel-Redirect 頭';
 $lang['showuseras_o_loginname'] = '登入名稱';
 $lang['showuseras_o_username'] = '完整姓名';
+$lang['showuseras_o_email']    = '使用者的 email 位址 (根據郵件監控設定來暗化)';
+$lang['showuseras_o_email_link'] = '使用者的 eamil 位址標示成 mailto: link';
+$lang['useheading_o_0']        = '永不';
+$lang['useheading_o_navigation'] = '只有導覽';
+$lang['useheading_o_content']  = '只有 Wiki 內容';
+$lang['useheading_o_1']        = '總是';

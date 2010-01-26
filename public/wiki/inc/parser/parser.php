@@ -260,7 +260,7 @@ class Doku_Parser_Mode_nocache extends Doku_Parser_Mode {
 class Doku_Parser_Mode_linebreak extends Doku_Parser_Mode {
 
     function connectTo($mode) {
-        $this->Lexer->addSpecialPattern('\x5C{2}(?=\s)',$mode,'linebreak');
+        $this->Lexer->addSpecialPattern('\x5C{2}(?:[ \t]|(?=\n))',$mode,'linebreak');
     }
 
     function getSort() {
@@ -276,7 +276,8 @@ class Doku_Parser_Mode_eol extends Doku_Parser_Mode {
         if ( in_array($mode, $badModes) ) {
             return;
         }
-        $this->Lexer->addSpecialPattern('\n',$mode,'eol');
+        // see FS#1652, pattern extended to swallow preceding whitespace to avoid issues with lines that only contain whitespace
+        $this->Lexer->addSpecialPattern('(?:^[ \t]*)?\n',$mode,'eol');
     }
 
     function getSort() {
@@ -451,7 +452,7 @@ class Doku_Parser_Mode_table extends Doku_Parser_Mode {
     function postConnect() {
         $this->Lexer->addPattern('\n\^','table');
         $this->Lexer->addPattern('\n\|','table');
-        #$this->Lexer->addPattern(' {2,}','table');
+        $this->Lexer->addPattern('[\t ]*:::[\t ]*(?=[\|\^])','table');
         $this->Lexer->addPattern('[\t ]+','table');
         $this->Lexer->addPattern('\^','table');
         $this->Lexer->addPattern('\|','table');
@@ -561,7 +562,7 @@ class Doku_Parser_Mode_code extends Doku_Parser_Mode {
 class Doku_Parser_Mode_file extends Doku_Parser_Mode {
 
     function connectTo($mode) {
-        $this->Lexer->addEntryPattern('<file>(?=.*</file>)',$mode,'file');
+        $this->Lexer->addEntryPattern('<file(?=.*</file>)',$mode,'file');
     }
 
     function postConnect() {
@@ -611,6 +612,7 @@ class Doku_Parser_Mode_acronym extends Doku_Parser_Mode {
     var $pattern = '';
 
     function Doku_Parser_Mode_acronym($acronyms) {
+    	usort($acronyms,array($this,'_compare'));
         $this->acronyms = $acronyms;
     }
 
@@ -632,6 +634,21 @@ class Doku_Parser_Mode_acronym extends Doku_Parser_Mode {
 
     function getSort() {
         return 240;
+    }
+
+    /**
+     * sort callback to order by string length descending
+     */
+    function _compare($a,$b) {
+        $a_len = strlen($a);
+        $b_len = strlen($b);
+        if ($a_len > $b_len) {
+          return -1;
+        } else if ($a_len < $b_len) {
+          return 1;
+        }
+
+    	return 0;
     }
 }
 
@@ -743,7 +760,7 @@ class Doku_Parser_Mode_multiplyentity extends Doku_Parser_Mode {
     function connectTo($mode) {
 
         $this->Lexer->addSpecialPattern(
-                    '(?<=\b)\d+[xX]\d+(?=\b)',$mode,'multiplyentity'
+                    '(?<=\b)(?:[1-9]|\d{2,})[xX]\d+(?=\b)',$mode,'multiplyentity'
                 );
 
     }

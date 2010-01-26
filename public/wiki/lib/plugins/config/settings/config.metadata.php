@@ -119,7 +119,7 @@ $meta['_authentication'] = array('fieldset');
 $meta['useacl']      = array('onoff');
 $meta['autopasswd']  = array('onoff');
 $meta['authtype']    = array('authtype');
-$meta['passcrypt']   = array('multichoice','_choices' => array('smd5','md5','apr1','sha1','ssha','crypt','mysql','my411'));
+$meta['passcrypt']   = array('multichoice','_choices' => array('smd5','md5','apr1','sha1','ssha','crypt','mysql','my411','kmd5'));
 $meta['defaultgroup']= array('string');
 $meta['superuser']   = array('string');
 $meta['manager']     = array('string');
@@ -132,6 +132,8 @@ $meta['disableactions'] = array('disableactions',
 $meta['sneaky_index'] = array('onoff');
 $meta['auth_security_timeout'] = array('numeric');
 $meta['securecookie'] = array('onoff');
+$meta['xmlrpc']       = array('onoff');
+$meta['xmlrpcuser']   = array('string');
 
 $meta['_anti_spam']  = array('fieldset');
 $meta['usewordblock']= array('onoff');
@@ -144,7 +146,7 @@ $meta['_editing']    = array('fieldset');
 $meta['usedraft']    = array('onoff');
 $meta['htmlok']      = array('onoff');
 $meta['phpok']       = array('onoff');
-$meta['notify']      = array('email');
+$meta['notify']      = array('email', '_multiple' => true);
 $meta['subscribers'] = array('onoff');
 $meta['locktime']    = array('numeric');
 $meta['cachetime']   = array('numeric');
@@ -184,7 +186,6 @@ $meta['recent_days'] = array('numeric');
 $meta['rss_show_summary'] = array('onoff');
 $meta['broken_iua']  = array('onoff');
 $meta['xsendfile']   = array('multichoice','_choices' => array(0,1,2,3));
-$meta['xmlrpc']      = array('onoff');
 $meta['renderer_xhtml'] = array('renderer','_format' => 'xhtml','_choices' => array('xhtml'));
 
 $meta['_network']    = array('fieldset');

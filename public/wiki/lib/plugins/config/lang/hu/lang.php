@@ -3,6 +3,8 @@
  * Hungarian language file
  *
  * @author Sandor TIHANYI <stihanyi+dw@gmail.com>
+ * @author Siaynoq Mage <siaynoqmage@gmail.com>
+ * @author schilling.janos@gmail.com
  */
 $lang['menu']                  = 'Beállító Központ';
 $lang['error']                 = 'Helytelen érték miatt a módosítások nem mentődtek. Nézd át a módosításokat, és ments újra.
@@ -11,6 +13,9 @@ $lang['updated']               = 'A módosítások sikeresen beállítva.';
 $lang['nochoice']              = '(nincs egyéb lehetőség)';
 $lang['locked']                = 'A beállításokat tartalmazó fájlt nem tudtam frissíteni.<br />
 Nézd meg, hogy a fájl neve és jogosultságai helyesen vannak-e beállítva!';
+$lang['danger']                = 'Figyelem: ezt a beállítást megváltoztatva a konfigurációs menü hozzáférhetetlenné válhat.';
+$lang['warning']               = 'Figyelmeztetés: a beállítás megváltoztatása nem kívánt viselkedést okozhat.';
+$lang['security']              = 'Biztonsági figyelmeztetés: a beállítás megváltoztatása biztonsági veszélyforrást okozhat.';
 $lang['_configuration_manager'] = 'Beállító Központ';
 $lang['_header_dokuwiki']      = 'DokuWiki beállítások';
 $lang['_header_plugin']        = 'Bővítmények beállításai';
@@ -82,6 +87,8 @@ $lang['disableactions_other']  = 'Egyéb tevékenységek (vesszővel elválasztv
 $lang['sneaky_index']          = 'Alapértelmezetten minden névtér látszik a DokuWiki áttekintő (index) oldalán. Ezen opció bekapcsolása után azok nem jelennek meg, melyekhez a felhasználónak nincs olvasás joga. De ezzel eltakarhatunk egyébként elérhető al-névtereket is, így bizonyos ACL beállításoknál használhatatlan indexet eredményez ez a beállítás.';
 $lang['auth_security_timeout'] = 'Authentikációs biztonsági időablak (másodperc)';
 $lang['securecookie']          = 'A böngészők a HTTPS felett beállított sütijüket csak HTTPS felett küldhetik? Kapcsoljuk ki ezt az opciót, ha csak a bejelentkezést védjük SSL-lel, a wiki tartalmának böngészése nyílt forgalommal történik.';
+$lang['xmlrpc']                = 'XML-RPC interfész engedélyezése/tiltása';
+$lang['xmlrpcuser']            = 'Korlátozza XML-RPC hozzáférést az itt megadott vesszővel elválasztott csoportok vagy felhasználók számára. Hagyja üresen, ha mindenki számára biztosítja a hozzáférést.';
 $lang['updatecheck']           = 'Frissítések és biztonsági figyelmeztetések figyelése. Ehhez a DokuWikinek kapcsolatba kell lépnie a splitbrain.org-gal.';
 $lang['userewrite']            = 'Szép URL-ek használata';
 $lang['useslash']              = 'Per-jel használata névtér-elválasztóként az URL-ekben';
@@ -102,12 +109,11 @@ $lang['im_convert']            = 'Útvonal az ImageMagick csomag convert parancs
 $lang['jpg_quality']           = 'JPG tömörítés minősége (0-100)';
 $lang['subscribers']           = 'Oldalváltozás-listára feliratkozás engedélyezése';
 $lang['compress']              = 'CSS és JavaScript fájlok tömörítése';
-$lang['hidepages']             = 'Az itt megadott oldalak elrejtése (regularis kifejezés)';
+$lang['hidepages']             = 'Az itt megadott oldalak elrejtése (reguláris kifejezés)';
 $lang['send404']               = '"HTTP 404/Page Not Found" küldése nemlétező oldalak esetén';
 $lang['sitemap']               = 'Hány naponként generáljunk Google sitemap-ot?';
 $lang['broken_iua']            = 'Az ignore_user_abort függvény hibát dob a rendszereden? Ez nem működő keresési indexet eredményezhet. Az IIS+PHP/CGI összeállításról tudjuk, hogy hibát dob. Lásd a <a href="http://bugs.splitbrain.org/?do=details&amp;task_id=852">Bug 852</a> oldalt a további infóért.';
 $lang['xsendfile']             = 'Használjuk az X-Sendfile fejlécet, hogy a webszerver statikus állományokat tudjon küldeni? A webszervernek is támogatnia kell ezt a funkciót.';
-$lang['xmlrpc']                = 'XML-RPC interfész engedélyezése/tiltása';
 $lang['renderer_xhtml']        = 'Az elsődleges (xhtml) wiki kimenet generálója';
 $lang['renderer__core']        = '%s (dokuwiki mag)';
 $lang['renderer__plugin']      = '%s (bővítmény)';

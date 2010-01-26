@@ -29,7 +29,7 @@ class cache {
   /**
    * public method to determine whether the cache can be used
    *
-   * to assist in cetralisation of event triggering and calculation of cache statistics, 
+   * to assist in cetralisation of event triggering and calculation of cache statistics,
    * don't override this function override _useCache()
    *
    * @param  array   $depends   array of cache dependencies, support dependecies:
@@ -183,7 +183,7 @@ class cache_parser extends cache {
   function _addDependencies() {
     global $conf, $config_cascade;
 
-    $this->depends['age'] = isset($this->depends['age']) ? 
+    $this->depends['age'] = isset($this->depends['age']) ?
                    min($this->depends['age'],$conf['cachetime']) : $conf['cachetime'];
 
     // parser cache file dependencies ...
@@ -217,24 +217,27 @@ class cache_renderer extends cache_parser {
 
     if (!parent::_useCache()) return false;
 
+    if (!isset($this->page)) {
+      return true;
+    }
+
+    // check current link existence is consistent with cache version
+    // first check the purgefile
+    // - if the cache is more recent than the purgefile we know no links can have been updated
+    if ($this->_time >= @filemtime($conf['cachedir'].'/purgefile')) {
+      return true;
+    }
+
     // for wiki pages, check metadata dependencies
-    if (isset($this->page)) {
-      $metadata = p_get_metadata($this->page);
+    $metadata = p_get_metadata($this->page);
 
-      // check currnent link existence is consistent with cache version
-      // first check the purgefile
-      // - if the cache is more recent that the purgefile we know no links can have been updated
-      if ($this->_time < @filemtime($conf['cachedir'].'/purgefile')) {
+    if (!isset($metadata['relation']['references']) ||
+         empty($metadata['relation']['references'])) {
+      return true;
+    }
 
-#       $links = p_get_metadata($this->page,"relation references");
-        $links = $metadata['relation']['references'];
-
-        if (!empty($links)) {
-          foreach ($links as $id => $exists) {
-            if ($exists != page_exists($id,'',false)) return false;
-          }
-        }
-      }
+    foreach ($metadata['relation']['references'] as $id => $exists) {
+      if ($exists != page_exists($id,'',false)) return false;
     }
 
     return true;
@@ -278,7 +281,7 @@ class cache_instructions extends cache_parser {
     parent::cache_parser($id, $file, 'i');
   }
 
-  function retrieveCache() {
+  function retrieveCache($clean=true) {
     $contents = io_readFile($this->cache, false);
     return !empty($contents) ? unserialize($contents) : array();
   }

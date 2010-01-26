@@ -7,6 +7,9 @@
  * @author Sergiu Baltariu <s_baltariu@yahoo.com>
  * @author s_baltariu@yahoo.com
  * @author Emanuel-Emeric Andrasi <n30@mandrivausers.ro>
+ * @author Emanuel-Emeric Andrași <n30@mandrivausers.ro>
+ * @author Emanuel-Emeric Andraşi <em.andrasi@mandrivausers.ro>
+ * @author Emanuel-Emeric Andrasi <em.andrasi@mandrivausers.ro>
  */
 $lang['encoding']              = 'utf-8';
 $lang['direction']             = 'ltr';
@@ -49,6 +52,7 @@ $lang['btn_resendpwd']         = 'Trimite parola nouă';
 $lang['btn_draft']             = 'Editează schiţă';
 $lang['btn_recover']           = 'Recuperează schiţă';
 $lang['btn_draftdel']          = 'Şterge schiţă';
+$lang['btn_revert']            = 'Revenire';
 $lang['loggedinas']            = 'Logat ca şi';
 $lang['user']                  = 'Utilizator';
 $lang['pass']                  = 'Parola';
@@ -87,6 +91,8 @@ $lang['resendpwdconfirm']      = 'Un link de confirmare a fost trimis prin email
 $lang['resendpwdsuccess']      = 'Parola nouă';
 $lang['license']               = 'Exceptând locurile unde este altfel specificat, conţinutul acestui wiki este licenţiat sub următoarea licenţă:';
 $lang['licenseok']             = 'Notă: Prin editarea acestei pagini sunteţi de acord să vă licenţiaţi conţintul sub următoarea licenţă:';
+$lang['searchmedia']           = 'Caută numele fişierului:';
+$lang['searchmedia_in']        = 'Caută în %s';
 $lang['txt_upload']            = 'Selectează fisierul de încărcat';
 $lang['txt_filename']          = 'Încarcă fişierul ca (opţional)';
 $lang['txt_overwrt']           = 'Suprascrie fişierul existent';
@@ -111,10 +117,14 @@ $lang['deletefail']            = '"%s" nu a putut fi şters - verificaţi dreptu
 $lang['mediainuse']            = 'Fişierul "%s" nu a fost şters - este încă în uz.';
 $lang['namespaces']            = 'Spaţii de nume';
 $lang['mediafiles']            = 'Fişiere disponibile în';
+$lang['js']['searchmedia']     = 'Caută fişiere';
 $lang['js']['keepopen']        = 'Menţine fereastra deschisă la selecţie';
 $lang['js']['hidedetails']     = 'Ascunde Detalii';
 $lang['js']['nosmblinks']      = 'Legăturile către sharing-uri Windows funcţioneaza numai in Microsoft Internet Explorer.
 Puteţi însă copia şi insera legătura.';
+$lang['js']['linkwiz']         = 'Asistent legătură';
+$lang['js']['linkto']          = 'Legătură la:';
+$lang['js']['del_confirm']     = 'Doriţi într-adevăr ştergerea elementelor selectate?';
 $lang['js']['mu_btn']          = 'Încarcă mai multe fişiere simultan';
 $lang['mediausage']            = 'Folosiţi următoarea sintaxă pentru a face referinţă la acest fişier:';
 $lang['mediaview']             = 'Vizualizează fişierul original';
@@ -142,11 +152,11 @@ $lang['restored']              = 'versiune veche restaurată';
 $lang['external_edit']         = 'editare externă';
 $lang['summary']               = 'Editează sumarul';
 $lang['noflash']               = 'Plugin-ul <a href="http://www.adobe.com/products/flashplayer/">Adobe Flash Plugin</a> este necesar pentru afişarea corectă a conţinutului.';
+$lang['download']              = 'Bloc descărcări';
 $lang['mail_newpage']          = 'pagina adăugată:';
 $lang['mail_changed']          = 'page schimbată:';
 $lang['mail_new_user']         = 'utilizator nou';
 $lang['mail_upload']           = 'fişier încărcat:';
-$lang['qb_alert']              = 'Introduceţi vă rog textul care doriţi să-l formataţi.\nVa fi adăugat la sfîtşitul documentului.';
 $lang['qb_bold']               = 'Text Îngroşat';
 $lang['qb_italic']             = 'Text Italic';
 $lang['qb_underl']             = 'Text Subliniat';
@@ -157,6 +167,11 @@ $lang['qb_h2']                 = 'Titlu de Nivel 2';
 $lang['qb_h3']                 = 'Titlu de Nivel 3';
 $lang['qb_h4']                 = 'Titlu de Nivel 4';
 $lang['qb_h5']                 = 'Titlu de Nivel 5';
+$lang['qb_h']                  = 'Titlu';
+$lang['qb_hs']                 = 'Selectaţi Titlul';
+$lang['qb_hplus']              = 'Titlu mai mare';
+$lang['qb_hminus']             = 'Titlu mai mic';
+$lang['qb_hequal']             = 'Titlu de acelaşi nivel';
 $lang['qb_link']               = 'Legătură internă';
 $lang['qb_extlink']            = 'Legătura externă';
 $lang['qb_hr']                 = 'Linie Orizontal';
@@ -166,7 +181,7 @@ $lang['qb_media']              = 'Adaugă imagini şi alte fişiere';
 $lang['qb_sig']                = 'Inserează semnătură';
 $lang['qb_smileys']            = 'Smiley-uri';
 $lang['qb_chars']              = 'Caractere speciale';
-$lang['del_confirm']           = 'Doriţi într-adevăr ştergerea elementelor selectate?';
+$lang['upperns']               = 'sari la numele de spaţiu părinte';
 $lang['admin_register']        = 'Adaugă utilizator nou';
 $lang['metaedit']              = 'Editează Metadata';
 $lang['metasaveerr']           = 'Scrierea metadatelor a eşuat';
@@ -224,4 +239,13 @@ $lang['mu_fail']               = 'eşuat';
 $lang['mu_authfail']           = 'sesiunea a expirat';
 $lang['mu_progress']           = '@PCT@% incărcat';
 $lang['mu_filetypes']          = 'Tipuri de fişiere permise';
+$lang['mu_info']               = 'fişiere încărcate';
+$lang['mu_lasterr']            = 'Ultima eroare:';
 $lang['recent_global']         = 'Acum vizualizaţi modificările în interiorul numelui de spaţiu <b>%s</b>. De asemenea puteţi <a href="%s">vizualiza modificările recente ale întregului wiki</a>.';
+$lang['years']                 = 'acum %d ani';
+$lang['months']                = 'acum %d luni';
+$lang['weeks']                 = 'acum %d săptămâni';
+$lang['days']                  = 'acum %d zile';
+$lang['hours']                 = 'acum %d ore';
+$lang['minutes']               = 'acum %d minute';
+$lang['seconds']               = 'acum %d secunde';

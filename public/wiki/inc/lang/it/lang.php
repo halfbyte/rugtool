@@ -10,6 +10,8 @@
  * @author Diego Pierotto ita.translations@tiscali.it
  * @author ita.translations@tiscali.it
  * @author Lorenzo Breda <lbreda@gmail.com>
+ * @author snarchio@alice.it
+ * @author robocap <robocap1@gmail.com>
  */
 $lang['encoding']              = 'utf-8';
 $lang['direction']             = 'ltr';
@@ -145,11 +147,11 @@ $lang['restored']              = 'versione precedente ripristinata';
 $lang['external_edit']         = 'modifica esterna';
 $lang['summary']               = 'Oggetto della modifica';
 $lang['noflash']               = 'E\' necessario <a href="http://www.adobe.com/products/flashplayer/">Adobe Flash Plugin</a> per visualizzare questo contenuto.';
+$lang['download']              = 'Scarica lo "snippet"';
 $lang['mail_newpage']          = 'pagina aggiunta:';
 $lang['mail_changed']          = 'pagina modificata:';
 $lang['mail_new_user']         = 'Nuovo utente:';
 $lang['mail_upload']           = 'file caricato:';
-$lang['qb_alert']              = 'Puoi inserire il testo che vuoi formattare.\nSarà  aggiunto alla fine del documento.';
 $lang['qb_bold']               = 'Grassetto';
 $lang['qb_italic']             = 'Corsivo';
 $lang['qb_underl']             = 'Sottolineato';
@@ -160,6 +162,11 @@ $lang['qb_h2']                 = 'Intestazione di livello 2';
 $lang['qb_h3']                 = 'Intestazione di livello 3';
 $lang['qb_h4']                 = 'Intestazione di livello 4';
 $lang['qb_h5']                 = 'Intestazione di livello 5';
+$lang['qb_h']                  = 'Titolo';
+$lang['qb_hs']                 = 'Seleziona il titolo';
+$lang['qb_hplus']              = 'Titolo superiore';
+$lang['qb_hminus']             = 'Titolo inferiore';
+$lang['qb_hequal']             = 'Titolo dello stesso livello';
 $lang['qb_link']               = 'Collegamento interno';
 $lang['qb_extlink']            = 'Collegamento esterno';
 $lang['qb_hr']                 = 'Riga orizzontale';
@@ -169,7 +176,7 @@ $lang['qb_media']              = 'Inserisci immagini o altri file';
 $lang['qb_sig']                = 'Inserisci la firma';
 $lang['qb_smileys']            = 'Smiley';
 $lang['qb_chars']              = 'Caratteri speciali';
-$lang['del_confirm']           = 'Cancellare questa voce?';
+$lang['js']['del_confirm']           = 'Cancellare questa voce?';
 $lang['admin_register']        = 'Aggiungi un nuovo utente';
 $lang['metaedit']              = 'Modifica metadati';
 $lang['metasaveerr']           = 'Scrittura metadati fallita';
@@ -229,4 +236,5 @@ $lang['mu_fail']               = 'fallito';
 $lang['mu_authfail']           = 'sessione scaduta';
 $lang['mu_progress']           = '@PCT@% caricato';
 $lang['mu_filetypes']          = 'Tipi di file permessi';
+$lang['mu_info']               = 'file caricati.';
 $lang['recent_global']         = 'Stai attualmente vedendo le modifiche dentro l\'area <b>%s</b>. Puoi anche <a href="%s">vedere le modifiche recenti dell\'intero wiki</a>.';

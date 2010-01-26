@@ -7,6 +7,10 @@
  * @author Змей Этерийский evil_snake@eternion.ru
  * @author Hikaru Nakajima <jisatsu@mail.ru>
  * @author Alexei Tereschenko <alexeitlex@yahoo.com>
+ * @author Irina Ponomareva irinaponomareva@webperfectionist.com
+ * @author Alexander Sorkin <kibizoid@gmail.com>
+ * @author Kirill Krasnov <krasnovforum@gmail.com>
+ * @author Vlad Tsybenko <vlad.development@gmail.com>
  */
 $lang['admin_acl']             = 'Управление списками контроля доступа';
 $lang['acl_group']             = 'Группа';
@@ -28,7 +32,7 @@ $lang['current']               = 'Текущие права ACL';
 $lang['where']                 = 'Страница/Пространство имён';
 $lang['who']                   = 'Пользователь/Группа';
 $lang['perm']                  = 'Права доступа';
-$lang['acl_perm0']             = 'Замечание';
+$lang['acl_perm0']             = 'Нет доступа';
 $lang['acl_perm1']             = 'Чтение';
 $lang['acl_perm2']             = 'Правка';
 $lang['acl_perm4']             = 'Создание';

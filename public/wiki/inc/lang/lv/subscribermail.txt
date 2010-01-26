@@ -8,10 +8,16 @@ Atšķirības ir:
 @DIFF@
 --------------------------------------------------------
 
-Lai atteiktos no šīm vēstulēm, ielogojies wiki sistēmā 
+Datums : @DATE@
+Lietotājs : @USER@
+Izmaiņu anotācija: @SUMMARY@
+Vecā versijan: @OLDPAGE@
+Jaunā versija: @NEWPAGE@
+
+Lai atteiktos no šīm vēstulēm, ielogojies wiki sistēmā
 @DOKUWIKIURL@, tad apmeklē @NEWPAGE@
 uz izvēlies 'Atteikties no izmaiņu paziņojumiem'.
 
 -- 
-Vestuli izveidoja 
+Vestuli izveidoja
 @DOKUWIKIURL@

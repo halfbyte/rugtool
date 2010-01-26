@@ -68,6 +68,8 @@ function getSecurityToken(){
  * Check the secret CSRF token
  */
 function checkSecurityToken($token=null){
+  if(!$_SERVER['REMOTE_USER']) return true; // no logged in user, no need for a check
+
   if(is_null($token)) $token = $_REQUEST['sectok'];
   if(getSecurityToken() != $token){
     msg('Security Token did not match. Possible CSRF attack.',-1);
@@ -109,16 +111,16 @@ function pageinfo(){
   $info['id'] = $ID;
   $info['rev'] = $REV;
 
-  if($_SERVER['REMOTE_USER']){
+    // set info about manager/admin status.
+    $info['isadmin']   = false;
+    $info['ismanager'] = false;
+  if(isset($_SERVER['REMOTE_USER'])){
     $info['userinfo']     = $USERINFO;
     $info['perm']         = auth_quickaclcheck($ID);
     $info['subscribed']   = is_subscribed($ID,$_SERVER['REMOTE_USER'],false);
     $info['subscribedns'] = is_subscribed($ID,$_SERVER['REMOTE_USER'],true);
     $info['client']       = $_SERVER['REMOTE_USER'];
 
-    // set info about manager/admin status
-    $info['isadmin']   = false;
-    $info['ismanager'] = false;
     if($info['perm'] == AUTH_ADMIN){
       $info['isadmin']   = true;
       $info['ismanager'] = true;
@@ -273,12 +275,9 @@ function breadcrumbs(){
   global $ID;
   global $ACT;
   global $conf;
-  $crumbs = $_SESSION[DOKU_COOKIE]['bc'];
 
   //first visit?
-  if (!is_array($crumbs)){
-    $crumbs = array();
-  }
+  $crumbs = isset($_SESSION[DOKU_COOKIE]['bc']) ? $_SESSION[DOKU_COOKIE]['bc'] : array();
   //we only save on show and existing wiki documents
   $file = wikiFN($ID);
   if($ACT != 'show' || !@file_exists($file)){
@@ -454,11 +453,13 @@ function ml($id='',$more='',$direct=true,$sep='&amp;',$abs=false){
   // external URLs are always direct without rewriting
   if(preg_match('#^(https?|ftp)://#i',$id)){
     $xlink .= 'lib/exe/fetch.php';
+    // add hash:
+    $xlink .= '?hash='.substr(md5(auth_cookiesalt().$id),0,6);
     if($more){
-      $xlink .= '?'.$more;
+      $xlink .= $sep.$more;
       $xlink .= $sep.'media='.rawurlencode($id);
     }else{
-      $xlink .= '?media='.rawurlencode($id);
+      $xlink .= $sep.'media='.rawurlencode($id);
     }
     return $xlink;
   }
@@ -531,17 +532,23 @@ function script($script='doku.php'){
  *      [name]         - real name (if logged in)
  *
  * @author Andreas Gohr <andi@splitbrain.org>
- * Michael Klier <chi@chimeric.de>
+ * @author Michael Klier <chi@chimeric.de>
+ * @param  string $text - optional text to check, if not given the globals are used
+ * @return bool         - true if a spam word was found
  */
-function checkwordblock(){
+function checkwordblock($text=''){
   global $TEXT;
+  global $PRE;
+  global $SUF;
   global $conf;
   global $INFO;
 
   if(!$conf['usewordblock']) return false;
 
+  if(!$text) $text = "$PRE $TEXT $SUF";
+
   // we prepare the text a tiny bit to prevent spammers circumventing URL checks
-  $text = preg_replace('!(\b)(www\.[\w.:?\-;,]+?\.[\w.:?\-;,]+?[\w/\#~:.?+=&%@\!\-.:?\-;,]+?)([.:?\-;,]*[^\w/\#~:.?+=&%@\!\-.:?\-;,])!i','\1http://\2 \2\3',$TEXT);
+  $text = preg_replace('!(\b)(www\.[\w.:?\-;,]+?\.[\w.:?\-;,]+?[\w/\#~:.?+=&%@\!\-.:?\-;,]+?)([.:?\-;,]*[^\w/\#~:.?+=&%@\!\-.:?\-;,])!i','\1http://\2 \2\3',$text);
 
   $wordblocks = getWordblocks();
   //how many lines to read at once (to work around some PCRE limits)
@@ -574,7 +581,7 @@ function checkwordblock(){
           $data['userinfo']['mail'] = $INFO['userinfo']['mail'];
       }
       $callback = create_function('', 'return true;');
-      return trigger_event('COMMON_WORDBLOCK_BLOCKED', $data, $callback, true); 
+      return trigger_event('COMMON_WORDBLOCK_BLOCKED', $data, $callback, true);
     }
   }
   return false;
@@ -876,7 +883,7 @@ function pageTemplate($data){
  * @author Andreas Gohr <andi@splitbrain.org>
  */
 function rawWikiSlices($range,$id,$rev=''){
-  list($from,$to) = split('-',$range,2);
+  list($from,$to) = explode('-',$range,2);
   $text = io_readWikiPage(wikiFN($id, $rev), $id, $rev);
   if(!$from) $from = 0;
   if(!$to)   $to   = strlen($text)+1;
@@ -1033,10 +1040,10 @@ function saveOldRevision($id){
 }
 
 /**
- * Sends a notify mail on page change
+ * Sends a notify mail on page change or registration
  *
  * @param  string  $id       The changed page
- * @param  string  $who      Who to notify (admin|subscribers)
+ * @param  string  $who      Who to notify (admin|subscribers|register)
  * @param  int     $rev      Old page revision
  * @param  string  $summary  What changed
  * @param  boolean $minor    Is this a minor edit?
@@ -1072,7 +1079,7 @@ function notify($id,$who,$rev='',$summary='',$minor=false,$replace=array()){
   }
 
   $ip   = clientIP();
-  $text = str_replace('@DATE@',strftime($conf['dformat']),$text);
+  $text = str_replace('@DATE@',dformat(),$text);
   $text = str_replace('@BROWSER@',$_SERVER['HTTP_USER_AGENT'],$text);
   $text = str_replace('@IPADDRESS@',$ip,$text);
   $text = str_replace('@HOSTNAME@',gethostsbyaddrs($ip),$text);
@@ -1093,8 +1100,8 @@ function notify($id,$who,$rev='',$summary='',$minor=false,$replace=array()){
     $subject = $lang['mail_changed'].' '.$id;
     $text = str_replace('@OLDPAGE@',wl($id,"rev=$rev",true,'&'),$text);
     require_once(DOKU_INC.'inc/DifferenceEngine.php');
-    $df  = new Diff(split("\n",rawWiki($id,$rev)),
-                    split("\n",rawWiki($id)));
+    $df  = new Diff(explode("\n",rawWiki($id,$rev)),
+                    explode("\n",rawWiki($id)));
     $dformat = new UnifiedDiffFormatter();
     $diff    = $dformat->format($df);
   }else{
@@ -1120,11 +1127,20 @@ function notify($id,$who,$rev='',$summary='',$minor=false,$replace=array()){
  * @author Todd Augsburger <todd@rollerorgans.com>
  */
 function getGoogleQuery(){
+  if (!isset($_SERVER['HTTP_REFERER'])) {
+    return '';
+  }
   $url = parse_url($_SERVER['HTTP_REFERER']);
-  if(!$url) return '';
 
   $query = array();
+
+  // temporary workaround against PHP bug #49733
+  // see http://bugs.php.net/bug.php?id=49733
+  if(UTF8_MBSTRING) $enc = mb_internal_encoding();
   parse_str($url['query'],$query);
+  if(UTF8_MBSTRING) mb_internal_encoding($enc);
+
+  $q = '';
   if(isset($query['q']))
     $q = $query['q'];        // google, live/msn, aol, ask, altavista, alltheweb, gigablast
   elseif(isset($query['p']))
@@ -1134,7 +1150,7 @@ function getGoogleQuery(){
   elseif(preg_match("#a9\.com#i",$url['host'])) // a9
     $q = urldecode(ltrim($url['path'],'/'));
 
-  if(!$q) return '';
+  if($q === '') return '';
   $q = preg_split('/[\s\'"\\\\`()\]\[?:!\.{};,#+*<>\\/]+/',$q,-1,PREG_SPLIT_NO_EMPTY);
   return $q;
 }
@@ -1180,6 +1196,57 @@ function filesize_h($size, $dec = 1){
   }
 
   return round($size, $dec) . ' ' . $sizes[$i];
+}
+
+/**
+ * Return the given timestamp as human readable, fuzzy age
+ *
+ * @author Andreas Gohr <gohr@cosmocode.de>
+ */
+function datetime_h($dt){
+  global $lang;
+
+  $ago = time() - $dt;
+  if($ago > 24*60*60*30*12*2){
+    return sprintf($lang['years'], round($ago/(24*60*60*30*12)));
+  }
+  if($ago > 24*60*60*30*2){
+    return sprintf($lang['months'], round($ago/(24*60*60*30)));
+  }
+  if($ago > 24*60*60*7*2){
+    return sprintf($lang['weeks'], round($ago/(24*60*60*7)));
+  }
+  if($ago > 24*60*60*2){
+    return sprintf($lang['days'], round($ago/(24*60*60)));
+  }
+  if($ago > 60*60*2){
+    return sprintf($lang['hours'], round($ago/(60*60)));
+  }
+  if($ago > 60*2){
+    return sprintf($lang['minutes'], round($ago/(60)));
+  }
+  return sprintf($lang['seconds'], $ago);
+
+}
+
+/**
+ * Wraps around strftime but provides support for fuzzy dates
+ *
+ * The format default to $conf['dformat']. It is passed to
+ * strftime - %f can be used to get the value from datetime_h()
+ *
+ * @see datetime_h
+ * @author Andreas Gohr <gohr@cosmocode.de>
+ */
+function dformat($dt=null,$format=''){
+  global $conf;
+
+  if(is_null($dt)) $dt = time();
+  $dt = (int) $dt;
+  if(!$format) $format = $conf['dformat'];
+
+  $format = str_replace('%f',datetime_h($dt),$format);
+  return strftime($format,$dt);
 }
 
 /**
@@ -1342,7 +1409,7 @@ function preg_quote_cb($string){
 /**
  * Shorten a given string by removing data from the middle
  *
- * You can give the string in two parts, teh first part $keep
+ * You can give the string in two parts, the first part $keep
  * will never be shortened. The second part $short will be cut
  * in the middle to shorten but only if at least $min chars are
  * left to display it. Otherwise it will be left off.
@@ -1353,7 +1420,7 @@ function preg_quote_cb($string){
  * @param int    $min    minimum number of chars to have left for middle shortening
  * @param string $char   the shortening character to use
  */
-function shorten($keep,$short,$max,$min=9,$char='⌇'){
+function shorten($keep,$short,$max,$min=9,$char='…'){
     $max = $max - utf8_strlen($keep);
    if($max < $min) return $keep;
     $len = utf8_strlen($short);
@@ -1376,7 +1443,7 @@ function editorinfo($username){
       case 'username':
       case 'email':
       case 'email_link':
-        $info = $auth->getUserData($username);
+        if($auth) $info = $auth->getUserData($username);
         break;
       default:
         return hsc($username);

@@ -12,16 +12,6 @@ require_once(DOKU_AUTH.'/basic.class.php');
 
 define('AUTH_USERFILE',DOKU_CONF.'users.auth.php');
 
-// we only accept page ids for auth_plain
-if(isset($_REQUEST['u']))
-  $_REQUEST['u'] = cleanID($_REQUEST['u']);
-if(isset($_REQUEST['acl_user']))
-  $_REQUEST['acl_user'] = cleanID($_REQUEST['acl_user']);
-// the same goes for password reset requests
-if(isset($_POST['login'])){
-  $_POST['login'] = cleanID($_POST['login']);
-}
-
 class auth_plain extends auth_basic {
 
     var $users = null;
@@ -261,6 +251,22 @@ class auth_plain extends auth_basic {
     }
 
     /**
+     * Only valid pageid's (no namespaces) for usernames
+     */
+    function cleanUser($user){
+        global $conf;
+        return cleanID(str_replace(':',$conf['sepchar'],$user));
+    }
+
+    /**
+     * Only valid pageid's (no namespaces) for groupnames
+     */
+    function cleanGroup($group){
+        global $conf;
+        return cleanID(str_replace(':',$conf['sepchar'],$group));
+    }
+
+    /**
      * Load all user data
      *
      * loads the user file into a datastructure
@@ -278,8 +284,8 @@ class auth_plain extends auth_basic {
         $line = trim($line);
         if(empty($line)) continue;
 
-        $row    = split(":",$line,5);
-        $groups = split(",",$row[4]);
+        $row    = explode(":",$line,5);
+        $groups = array_values(array_filter(explode(",",$row[4])));
 
         $this->users[$row[0]]['pass'] = $row[1];
         $this->users[$row[0]]['name'] = urldecode($row[2]);

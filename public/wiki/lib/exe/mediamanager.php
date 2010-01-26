@@ -2,6 +2,9 @@
     if(!defined('DOKU_INC')) define('DOKU_INC',dirname(__FILE__).'/../../');
     define('DOKU_MEDIAMANAGER',1);
 
+    // for multi uploader:
+    @ini_set('session.use_only_cookies',0);
+
     require_once(DOKU_INC.'inc/init.php');
     require_once(DOKU_INC.'inc/lang/en/lang.php');
     require_once(DOKU_INC.'inc/lang/'.$conf['lang'].'/lang.php');
@@ -42,7 +45,7 @@
     if($AUTH >= AUTH_UPLOAD) { io_createNamespace("$NS:xxx", 'media'); }
 
     // handle flash upload
-    if($_FILES['Filedata']['tmp_name']){
+    if(isset($_FILES['Filedata'])){
         $_FILES['upload'] =& $_FILES['Filedata'];
         $JUMPTO = media_upload($NS,$AUTH);
         if($JUMPTO == false){
@@ -54,14 +57,17 @@
     }
 
     // give info on PHP catched upload errors
-    if($_FILES['upload']['error']) switch($_FILES['upload']['error']){
-        case 1:
-        case 2:
-            msg(sprintf($lang['uploadsize'],
-                filesize_h(php_to_byte(ini_get('upload_max_filesize')))),-1);
-            break;
-        default:
-            msg($lang['uploadfail'],-1);
+    if($_FILES['upload']['error']){
+        switch($_FILES['upload']['error']){
+            case 1:
+            case 2:
+                msg(sprintf($lang['uploadsize'],
+                    filesize_h(php_to_byte(ini_get('upload_max_filesize')))),-1);
+                break;
+            default:
+                msg($lang['uploadfail'].' ('.$_FILES['upload']['error'].')',-1);
+        }
+        unset($_FILES['upload']);
     }
 
     // handle upload
@@ -80,14 +86,14 @@
         $INUSE = media_inuse($DEL);
         if(!$INUSE) {
             if(media_delete($DEL,$AUTH)) {
-                msg(sprintf(noNS($id),$lang['deletesucc']),1);
+                msg(sprintf($lang['deletesucc'],noNS($DEL)),1);
             } else {
-                msg(sprintf(noNS($DEL),$lang['deletefail']),-1);
+                msg(sprintf($lang['deletefail'],noNS($DEL)),-1);
             }
         } else {
             if(!$conf['refshow']) {
                 unset($INUSE);
-                msg(sprintf(noNS($DEL),$lang['mediainuse']),0);
+                msg(sprintf($lang['mediainuse'],noNS($DEL)),0);
             }
         }
     }

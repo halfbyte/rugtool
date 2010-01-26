@@ -6,6 +6,8 @@
  * @author Ziegler Gábor <gziegler@freemail.hu>
  * @author Sandor TIHANYI <stihanyi+dw@gmail.com>
  * @author Siaynoq Siaynoq <siaynoqmage@gmail.com>
+ * @author Siaynoq Mage <siaynoqmage@gmail.com>
+ * @author schilling.janos@gmail.com
  */
 $lang['encoding']              = 'utf-8';
 $lang['direction']             = 'ltr';
@@ -48,6 +50,7 @@ $lang['btn_resendpwd']         = 'Új jelszó küldése';
 $lang['btn_draft']             = 'Piszkozat szerkesztése';
 $lang['btn_recover']           = 'Piszkozat folytatása';
 $lang['btn_draftdel']          = 'Piszkozat törlése';
+$lang['btn_revert']            = 'Helyreállítás';
 $lang['loggedinas']            = 'Belépett felhasználó: ';
 $lang['user']                  = 'Azonosító';
 $lang['pass']                  = 'Jelszó';
@@ -86,6 +89,8 @@ $lang['resendpwdconfirm']      = 'A megerősítés linket e-mailben elküldtük.
 $lang['resendpwdsuccess']      = 'Az új jelszavadat elküldtük e-mailben.';
 $lang['license']               = 'Hacsak máshol nincs egyéb rendelkezés, ezen wiki tartalma a következő licenc alatt érhető el:';
 $lang['licenseok']             = 'Megjegyzés: az oldal szerkesztésével elfogadja, hogy a tartalom a következő licenc alatt lesz elérhető:';
+$lang['searchmedia']           = 'Keresett fájl neve:';
+$lang['searchmedia_in']        = 'Keresés a következőben: %s';
 $lang['txt_upload']            = 'Válaszd ki a feltöltendő fájlt';
 $lang['txt_filename']          = 'feltöltési név (elhagyható)';
 $lang['txt_overwrt']           = 'Létező fájl felülírása';
@@ -110,10 +115,14 @@ $lang['deletefail']            = 'A "%s" fájl nem törölhető. - Ellenőrizd a
 $lang['mediainuse']            = 'A "%s" fájl nem törlődött - még használat alatt van.';
 $lang['namespaces']            = 'Névtér';
 $lang['mediafiles']            = 'Elérhető fájlok itt:';
+$lang['js']['searchmedia']     = 'Fájlok keresése';
 $lang['js']['keepopen']        = 'Tartsd nyitva ezt az ablakot a kijelöléshez!';
 $lang['js']['hidedetails']     = 'Részletek elrejtése';
 $lang['js']['nosmblinks']      = 'A Windows megosztott könyvtárak kereszthivatkozása csak  Microsoft Internet Explorerben működik közvetlenül.
 A hivatkozást másolni és beszúrni ettől fügetlenül mndig tudod.';
+$lang['js']['linkwiz']         = 'Hivatkozás varázsló';
+$lang['js']['linkto']          = 'Hivatkozás erre:';
+$lang['js']['del_confirm']     = 'Valóban törölni akarod a kiválasztott elem(ek)et?';
 $lang['js']['mu_btn']          = 'Több fájl feltöltése egyszerre';
 $lang['mediausage']            = 'A következő formában hivatkozhatsz erre az állományra:';
 $lang['mediaview']             = 'Eredeti állomány megtekintése';
@@ -141,21 +150,26 @@ $lang['restored']              = 'az előző változat helyreállítva';
 $lang['external_edit']         = 'külső szerkesztés';
 $lang['summary']               = 'A változások összefoglalása';
 $lang['noflash']               = 'Ennek a tartalomnak a megtekintéséhez <a href="http://www.adobe.com/products/flashplayer/">Adobe Flash Plugin</a> szükséges.';
+$lang['download']              = 'Kódrészlet letöltése';
 $lang['mail_newpage']          = 'új oldal jött létre:';
 $lang['mail_changed']          = 'oldal megváltozott:';
 $lang['mail_new_user']         = 'Új felhasználó:';
 $lang['mail_upload']           = 'állományt töltöttek fel:';
-$lang['qb_alert']              = 'Írd be a formázandó szöveget.\nEz a dokumentum szövegének végéhez fog hozzáadódni.';
 $lang['qb_bold']               = 'Félkövér szöveg';
 $lang['qb_italic']             = 'Dőlt szöveg';
 $lang['qb_underl']             = 'Aláhúzott szöveg';
 $lang['qb_code']               = 'Forráskód szöveg';
 $lang['qb_strike']             = 'Áthúzott szöveg';
-$lang['qb_h1']                 = '1. színtű címsor';
-$lang['qb_h2']                 = '2. színtű címsor';
-$lang['qb_h3']                 = '3. színtű címsor';
-$lang['qb_h4']                 = '4. színtű címsor';
-$lang['qb_h5']                 = '5. színtű címsor';
+$lang['qb_h1']                 = '1. szintű címsor';
+$lang['qb_h2']                 = '2. szintű címsor';
+$lang['qb_h3']                 = '3. szintű címsor';
+$lang['qb_h4']                 = '4. szintű címsor';
+$lang['qb_h5']                 = '5. szintű címsor';
+$lang['qb_h']                  = 'Címsor';
+$lang['qb_hs']                 = 'Címsor kiválasztása';
+$lang['qb_hplus']              = 'Nagyobb címsor';
+$lang['qb_hminus']             = 'Kisebb címsor';
+$lang['qb_hequal']             = 'Azonos szintű címsor';
 $lang['qb_link']               = 'Belső hivatkozás';
 $lang['qb_extlink']            = 'Külső hivatkozás';
 $lang['qb_hr']                 = 'Vízszintes elválasztó vonal';
@@ -165,7 +179,7 @@ $lang['qb_media']              = 'Képek és más fájlok hozzáadása';
 $lang['qb_sig']                = 'Aláírás beszúrása';
 $lang['qb_smileys']            = 'Szmájlik';
 $lang['qb_chars']              = 'Speciális karakterek';
-$lang['del_confirm']           = 'Valóban törölni akarod a kiválasztott elem(ek)et?';
+$lang['upperns']               = 'Ugrás a szülő névtérhez';
 $lang['admin_register']        = 'Új felhasználó';
 $lang['metaedit']              = 'Meta-adatok szerkesztése';
 $lang['metasaveerr']           = 'A meta-adatok írása meghiúsult ';
@@ -207,7 +221,7 @@ $lang['i_success']             = 'A beállítás sikeresen befejeződött. Most 
 $lang['i_failure']             = 'Hiba lépett fel a konfigurációs állományok írásakor. Ki kell javítanod kézzel, mielőtt használni kezded az <a href="doku.php">új DokuWikidet</a>.';
 $lang['i_policy']              = 'Kezdeti hozzáférési politika';
 $lang['i_pol0']                = 'Nyitott Wiki (mindenki olvashatja, írhatja, és fájlokat tölthet fel)';
-$lang['i_pol1']                = 'Publikus Wiki (mindenki olvashatja, de csak regisztrált felhasználók írhatják, és tölthetnek fel fáljokat)';
+$lang['i_pol1']                = 'Publikus Wiki (mindenki olvashatja, de csak regisztrált felhasználók írhatják, és tölthetnek fel fájlokat)';
 $lang['i_pol2']                = 'Zárt Wiki (csak regisztrált felhasználók olvashatják, írhatják és tölthetnek fel fájlokat)';
 $lang['i_retry']               = 'Újra';
 $lang['mu_intro']              = 'Itt több fájlt is fel tudsz tölteni egyszerre. Kattints a "Kiválaszt" gombra és add hozzá a listához. Nyomd meg a Feltöltés gombot, amikor elkészültél.';
@@ -223,4 +237,13 @@ $lang['mu_fail']               = 'hibás';
 $lang['mu_authfail']           = 'session lejárt';
 $lang['mu_progress']           = '@PCT@% feltöltve';
 $lang['mu_filetypes']          = 'Megengedett fájltípusok';
+$lang['mu_info']               = 'Fájlok feltöltve.';
+$lang['mu_lasterr']            = 'Utolsó hiba:';
 $lang['recent_global']         = 'Jelenleg csak a <b>%s</b> névtér friss változásai látszanak. Megtekinthetők <a href="%s">a teljes wiki friss változásai</a> is.';
+$lang['years']                 = '%d évvel ezelőtt';
+$lang['months']                = '%d hónappal ezelőtt';
+$lang['weeks']                 = '%d héttel ezelőtt';
+$lang['days']                  = '%d nappal ezelőtt';
+$lang['hours']                 = '%d órával ezelőtt';
+$lang['minutes']               = '%d perccel ezelőtt';
+$lang['seconds']               = '%d másodperccel ezelőtt';

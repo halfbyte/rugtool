@@ -2,10 +2,12 @@
 /**
  * Chinese(Simplified) language file
  *
- * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html) 
+ * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author ZDYX <zhangduyixiong@gmail.com>
  * @author http://www.chinese-tools.com/tools/converter-tradsimp.html
  * @author George Sheraton guxd@163.com
+ * @author Simon zhan <simonzhan@21cn.com>
+ * @author mr.jinyi@gmail.com
  */
 $lang['encoding']              = 'utf-8';
 $lang['direction']             = 'ltr';
@@ -145,7 +147,6 @@ $lang['mail_newpage']          = '添加页面：';
 $lang['mail_changed']          = '更改页面：';
 $lang['mail_new_user']         = '新用户：';
 $lang['mail_upload']           = '已上传的文件：';
-$lang['qb_alert']              = '请输入您想格式化的文字。\n它将会被附加到文件的最后。';
 $lang['qb_bold']               = '粗体';
 $lang['qb_italic']             = '斜体';
 $lang['qb_underl']             = '下划线';
@@ -165,7 +166,7 @@ $lang['qb_media']              = '插入图像或其他文件';
 $lang['qb_sig']                = '插入签名';
 $lang['qb_smileys']            = '表情符号';
 $lang['qb_chars']              = '特殊字符';
-$lang['del_confirm']           = '真的要删除选中的项目吗？';
+$lang['js']['del_confirm']           = '真的要删除选中的项目吗？';
 $lang['admin_register']        = '添加新用户';
 $lang['metaedit']              = '编辑元数据';
 $lang['metasaveerr']           = '写入元数据失败';

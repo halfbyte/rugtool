@@ -6,6 +6,8 @@
  * @author Yuji Takenaka <webmaster@davilin.com>
  * @author Christopher Smith <chris@jalakai.co.uk>
  * @author Ikuo Obataya <i.obataya@gmail.com>
+ * @author Daniel Dupriest <kououken@gmail.com>
+ * @author Kazutaka Miyasaka <kazmiya@gmail.com>
  */
 $lang['menu']                  = 'プラグイン管理';
 $lang['download']              = 'プラグインのダウンロードとインストール';

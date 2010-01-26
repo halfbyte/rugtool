@@ -11,6 +11,11 @@
  * @author Tormod Otter Johansson <tormod@latast.se>
  * @author emil@sys.nu
  * @author Pontus Bergendahl <pontus.bergendahl@gmail.com>
+ * @author Tormod Johansson tormod.otter.johansson@gmail.com
+ * @author Emil Lind <emil@sys.nu>
+ * @author Bogge Bogge <bogge@bogge.com>
+ * @author Peter Åström <eaustreum@gmail.com>
+ * @author Håkan Sandell <hakan.sandell@home.se>
  */
 $lang['encoding']              = 'utf-8';
 $lang['direction']             = 'ltr';
@@ -54,6 +59,7 @@ $lang['btn_resendpwd']         = 'Skicka nytt lösenord';
 $lang['btn_draft']             = 'Redigera utkast';
 $lang['btn_recover']           = 'Återskapa utkast';
 $lang['btn_draftdel']          = 'Radera utkast';
+$lang['btn_revert']            = 'Återställ';
 $lang['loggedinas']            = 'Inloggad som';
 $lang['user']                  = 'Användarnamn';
 $lang['pass']                  = 'Lösenord';
@@ -92,6 +98,8 @@ $lang['resendpwdconfirm']      = 'En verifieringslänk har skickats med e-post.'
 $lang['resendpwdsuccess']      = 'Ditt nya lösenord har skickats med e-post.';
 $lang['license']               = 'Om inte annat angivet, innehållet i denna wiki är licensierat under följande licenser:';
 $lang['licenseok']             = 'Notera: Genom att ändra i denna sidan så accepterar du att licensiera ditt bidrag under följande licenser:';
+$lang['searchmedia']           = 'Sök efter filnamn:';
+$lang['searchmedia_in']        = 'Sök i %s';
 $lang['txt_upload']            = 'Välj fil att ladda upp';
 $lang['txt_filename']          = 'Ladda upp som (ej obligatoriskt)';
 $lang['txt_overwrt']           = 'Skriv över befintlig fil';
@@ -106,7 +114,7 @@ $lang['fileupload']            = 'Ladda upp mediafiler';
 $lang['uploadsucc']            = 'Uppladdningen lyckades';
 $lang['uploadfail']            = 'Uppladdningen misslyckades, fel filskydd?';
 $lang['uploadwrong']           = 'Uppladdning nekad. Filändelsen är inte tillåten!';
-$lang['uploadexist']           = 'Filen finns redan. Gjorde ingenting.';
+$lang['uploadexist']           = 'Filen finns redan. Ingenting gjordes.';
 $lang['uploadbadcontent']      = 'Det uppladdade innehållet stämde inte överens med filändelsen %s.';
 $lang['uploadspam']            = 'Uppladdningen stoppades av spärrlistan för spam.';
 $lang['uploadxss']             = 'Uppladdningen stoppades på grund av eventuellt skadligt innehåll.';
@@ -116,10 +124,14 @@ $lang['deletefail']            = 'Kunde inte radera "%s" - kontrollera filskydd.
 $lang['mediainuse']            = 'Filen "%s" har inte raderats - den används fortfarande.';
 $lang['namespaces']            = 'Namnrymder';
 $lang['mediafiles']            = 'Tillgängliga filer i';
+$lang['js']['searchmedia']     = 'Sök efter filer';
 $lang['js']['keepopen']        = 'Lämna fönstret öppet efter val av fil';
 $lang['js']['hidedetails']     = 'Dölj detaljer';
 $lang['js']['nosmblinks']      = 'Länkning till Windowsresurser fungerar bara med Microsofts Internet Explorer.
-Du kan klippa och klistra in länken om du använder en annan webbläsare än MSIE..';
+Du kan fortfarande klippa och klistra in länken om du använder en annan webbläsare än MSIE.';
+$lang['js']['linkwiz']         = 'Snabbguide Länkar';
+$lang['js']['linkto']          = 'Länk till:';
+$lang['js']['del_confirm']     = 'Vill du verkligen radera?';
 $lang['js']['mu_btn']          = 'Ladda upp flera filer samtidigt';
 $lang['mediausage']            = 'Använd följande syntax för att referera till denna fil:';
 $lang['mediaview']             = 'Visa originalfilen';
@@ -147,11 +159,11 @@ $lang['restored']              = 'tidigare version återställd';
 $lang['external_edit']         = 'extern redigering';
 $lang['summary']               = 'Redigeringskommentar';
 $lang['noflash']               = '<a href="http://www.adobe.com/products/flashplayer/">Adobe Flash Plugin</a> behövs för att visa detta innehåll.';
+$lang['download']              = 'Ladda ner kodfragmentet';
 $lang['mail_newpage']          = 'sida tillagd:';
 $lang['mail_changed']          = 'sida ändrad:';
 $lang['mail_new_user']         = 'Ny användare:';
 $lang['mail_upload']           = 'fil uppladdad:';
-$lang['qb_alert']              = 'Ange den text du vill formattera.\nDen kommer att läggas till i slutet av dokumentet.';
 $lang['qb_bold']               = 'Fet text';
 $lang['qb_italic']             = 'Kursiv text';
 $lang['qb_underl']             = 'Understruken text';
@@ -162,6 +174,11 @@ $lang['qb_h2']                 = 'Rubrik nivå 2';
 $lang['qb_h3']                 = 'Rubrik nivå 3';
 $lang['qb_h4']                 = 'Rubrik nivå 4';
 $lang['qb_h5']                 = 'Rubrik nivå 5';
+$lang['qb_h']                  = 'Rubrik';
+$lang['qb_hs']                 = 'Välj Rubrik';
+$lang['qb_hplus']              = 'Större Rubrik';
+$lang['qb_hminus']             = 'Mindre Rubrik';
+$lang['qb_hequal']             = 'Rubrik samma nivå.';
 $lang['qb_link']               = 'Intern Länk';
 $lang['qb_extlink']            = 'Extern Länk';
 $lang['qb_hr']                 = 'Horisontell linje';
@@ -171,7 +188,7 @@ $lang['qb_media']              = 'Lägg till bilder och andra filer';
 $lang['qb_sig']                = 'Infoga signatur';
 $lang['qb_smileys']            = 'Smileys';
 $lang['qb_chars']              = 'Specialtecken';
-$lang['del_confirm']           = 'Vill du verkligen radera?';
+$lang['upperns']               = 'hoppa till föräldernamnrymd';
 $lang['admin_register']        = 'Lägg till ny användare';
 $lang['metaedit']              = 'Redigera metadata';
 $lang['metasaveerr']           = 'Skrivning av metadata misslyckades';
@@ -232,4 +249,13 @@ $lang['mu_fail']               = 'misslyckades';
 $lang['mu_authfail']           = 'sessionen över tid';
 $lang['mu_progress']           = '@PCT@% uppladdade';
 $lang['mu_filetypes']          = 'Tillåtna filtyper';
+$lang['mu_info']               = 'filerna uppladdade.';
+$lang['mu_lasterr']            = 'Senaste fel:';
 $lang['recent_global']         = 'Du bevakar ändringar i namnrymden <b>%s</b>. Du kan också titta på <a href="%s">senaste ändringar för hela wikin</a>.';
+$lang['years']                 = '%d år sedan';
+$lang['months']                = '%d månader sedan';
+$lang['weeks']                 = '%d veckor sedan';
+$lang['days']                  = '%d dagar sedan';
+$lang['hours']                 = '%d timmar sedan';
+$lang['minutes']               = '%d minuter sedan';
+$lang['seconds']               = '%d sekunder sedan';

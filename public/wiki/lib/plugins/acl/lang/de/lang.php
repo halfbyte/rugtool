@@ -13,6 +13,9 @@
  * @author Florian Anderiasch <fa@art-core.org>
  * @author Robin Kluth <commi1993@gmail.com>
  * @author Arne Pelka <mail@arnepelka.de>
+ * @author Dirk Einecke <dirk@dirkeinecke.de>
+ * @author Blitzi94@gmx.de
+ * @author Robert Bogenschneider <robog@GMX.de>
  */
 $lang['admin_acl']             = 'Zugangsverwaltung';
 $lang['acl_group']             = 'Gruppe';

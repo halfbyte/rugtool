@@ -6,6 +6,8 @@
  * @author ZDYX <zhangduyixiong@gmail.com>
  * @author http://www.chinese-tools.com/tools/converter-tradsimp.html
  * @author George Sheraton guxd@163.com
+ * @author Simon zhan <simonzhan@21cn.com>
+ * @author mr.jinyi@gmail.com
  */
 $lang['admin_acl']             = '访问控制列表（ACL）管理器';
 $lang['acl_group']             = '组';

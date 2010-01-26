@@ -2,6 +2,7 @@
 <?php
 if ('cli' != php_sapi_name()) die();
 
+ini_set('memory_limit','128M');
 if(!defined('DOKU_INC')) define('DOKU_INC',realpath(dirname(__FILE__).'/../').'/');
 require_once(DOKU_INC.'inc/init.php');
 require_once(DOKU_INC.'inc/common.php');
@@ -79,7 +80,7 @@ function _update(){
 
     $data = array();
     _quietecho("Searching pages... ");
-    search($data,$conf['datadir'],'search_allpages',array());
+    search($data,$conf['datadir'],'search_allpages',array('skipacl' => true));
     _quietecho(count($data)." pages found.\n");
 
     foreach($data as $val){

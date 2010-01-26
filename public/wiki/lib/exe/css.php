@@ -11,6 +11,7 @@ if(!defined('NOSESSION')) define('NOSESSION',true); // we do not use a session o
 if(!defined('DOKU_DISABLE_GZIP_OUTPUT')) define('DOKU_DISABLE_GZIP_OUTPUT',1); // we gzip ourself here
 require_once(DOKU_INC.'inc/init.php');
 require_once(DOKU_INC.'inc/pageutils.php');
+require_once(DOKU_INC.'inc/httputils.php');
 require_once(DOKU_INC.'inc/io.php');
 require_once(DOKU_INC.'inc/confutils.php');
 
@@ -31,15 +32,10 @@ if(!defined('SIMPLE_TEST')){
 function css_out(){
     global $conf;
     global $lang;
-    switch ($_REQUEST['s']) {
-        case 'all':
-        case 'print':
-        case 'feed':
-            $style = $_REQUEST['s'];
-        break;
-        default:
-            $style = '';
-        break;
+    $style = '';
+    if (isset($_REQUEST['s']) &&
+        in_array($_REQUEST['s'], array('all', 'print', 'feed'))) {
+        $style = $_REQUEST['s'];
     }
 
     $tpl = trim(preg_replace('/[^\w-]+/','',$_REQUEST['t']));
@@ -75,9 +71,6 @@ function css_out(){
         $files[DOKU_CONF.'user'.$style.'.css'] = DOKU_BASE;
     }else{
         $files[DOKU_INC.'lib/styles/style.css'] = DOKU_BASE.'lib/styles/';
-        if($conf['spellchecker']){
-            $files[DOKU_INC.'lib/styles/spellcheck.css'] = DOKU_BASE.'lib/styles/';
-        }
         // load plugin, template, user styles
         $files = array_merge($files, css_pluginstyles('screen'));
         if (isset($tplstyles['screen'])) $files = array_merge($files, $tplstyles['screen']);
@@ -134,7 +127,7 @@ function css_out(){
 
     // save cache file
     io_saveFile($cache,$css);
-    copy($cache,"compress.zlib://$cache.gz");
+    if(function_exists('gzopen')) io_saveFile("$cache.gz",$css);
 
     // finally send output
     if ($conf['gzip_output']) {
@@ -154,7 +147,7 @@ function css_out(){
 function css_cacheok($cache,$files,$tplinc){
     global $config_cascade;
 
-    if($_REQUEST['purge']) return false; //support purge request
+    if(isset($_REQUEST['purge'])) return false; //support purge request
 
     $ctime = @filemtime($cache);
     if(!$ctime) return false; //There is no cache
@@ -237,18 +230,25 @@ function css_filetypes(){
     echo '}';
 
     // additional styles when icon available
-    $mimes = getMimeTypes();
-    foreach(array_keys($mimes) as $mime){
-        $class = preg_replace('/[^_\-a-z0-9]+/i','_',$mime);
-        if(@file_exists(DOKU_INC.'lib/images/fileicons/'.$mime.'.png')){
-            echo "a.mf_$class {";
-            echo '  background-image: url('.DOKU_BASE.'lib/images/fileicons/'.$mime.'.png)';
-            echo '}';
-        }elseif(@file_exists(DOKU_INC.'lib/images/fileicons/'.$mime.'.gif')){
-            echo "a.mf_$class {";
-            echo '  background-image: url('.DOKU_BASE.'lib/images/fileicons/'.$mime.'.gif)';
-            echo '}';
+    // scan directory for all icons
+    $exts = array();
+    if($dh = opendir(DOKU_INC.'lib/images/fileicons')){
+        while(false !== ($file = readdir($dh))){
+            if(preg_match('/([_\-a-z0-9]+(?:\.[_\-a-z0-9]+)*?)\.(png|gif)/i',$file,$match)){
+                $ext = strtolower($match[1]);
+                $type = '.'.strtolower($match[2]);
+                if($ext!='file' && (!isset($exts[$ext]) || $type=='.png')){
+                    $exts[$ext] = $type;
+                }
+            }
         }
+        closedir($dh);
+    }
+    foreach($exts as $ext=>$type){
+        $class = preg_replace('/[^_\-a-z0-9]+/','_',$ext);
+        echo "a.mf_$class {";
+        echo '  background-image: url('.DOKU_BASE.'lib/images/fileicons/'.$ext.$type.')';
+        echo '}';
     }
 }
 
@@ -328,4 +328,3 @@ function css_comment_cb($matches){
 }
 
 //Setup VIM: ex: et ts=4 enc=utf-8 :
-?>

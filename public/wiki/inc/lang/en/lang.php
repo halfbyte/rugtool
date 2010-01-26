@@ -49,6 +49,7 @@ $lang['btn_resendpwd']   = 'Send new password';
 $lang['btn_draft']    = 'Edit draft';
 $lang['btn_recover']  = 'Recover draft';
 $lang['btn_draftdel'] = 'Delete draft';
+$lang['btn_revert'] = 'Restore';
 
 $lang['loggedinas'] = 'Logged in as';
 $lang['user']       = 'Username';
@@ -93,6 +94,8 @@ $lang['resendpwdsuccess'] = 'Your new password has been sent by email.';
 $lang['license']   = 'Except where otherwise noted, content on this wiki is licensed under the following license:';
 $lang['licenseok'] = 'Note: By editing this page you agree to license your content under the following license:';
 
+$lang['searchmedia']  = 'Search file name:';
+$lang['searchmedia_in']  = 'Search in %s';
 $lang['txt_upload']   = 'Select file to upload';
 $lang['txt_filename'] = 'Upload as (optional)';
 $lang['txt_overwrt']  = 'Overwrite existing file';
@@ -120,6 +123,7 @@ $lang['mediainuse']  = 'The file "%s" hasn\'t been deleted - it is still in use.
 $lang['namespaces']  = 'Namespaces';
 $lang['mediafiles']  = 'Available files in';
 
+$lang['js']['searchmedia']    = 'Search for files';
 $lang['js']['keepopen']    = 'Keep window open on selection';
 $lang['js']['hidedetails'] = 'Hide Details';
 $lang['mediausage']  = 'Use the following syntax to reference this file:';
@@ -150,6 +154,7 @@ $lang['restored']   = 'old revision restored';
 $lang['external_edit'] = 'external edit';
 $lang['summary']    = 'Edit summary';
 $lang['noflash']    = 'The <a href="http://www.adobe.com/products/flashplayer/">Adobe Flash Plugin</a> is needed to display this content.';
+$lang['download']   = 'Download Snippet';
 
 $lang['mail_newpage']  = 'page added:';
 $lang['mail_changed']  = 'page changed:';
@@ -158,7 +163,6 @@ $lang['mail_upload']   = 'file uploaded:';
 
 $lang['js']['nosmblinks'] = "Linking to Windows shares only works in Microsoft Internet Explorer.\nYou still can copy and paste the link.";
 
-$lang['qb_alert']   = 'Please enter the text you want to format.\nIt will be appended to the end of the document.';
 $lang['qb_bold']    = 'Bold Text';
 $lang['qb_italic']  = 'Italic Text';
 $lang['qb_underl']  = 'Underlined Text';
@@ -169,6 +173,13 @@ $lang['qb_h2']      = 'Level 2 Headline';
 $lang['qb_h3']      = 'Level 3 Headline';
 $lang['qb_h4']      = 'Level 4 Headline';
 $lang['qb_h5']      = 'Level 5 Headline';
+
+$lang['qb_h']       = 'Headline';
+$lang['qb_hs']      = 'Select Headline';
+$lang['qb_hplus']   = 'Higher Headline';
+$lang['qb_hminus']  = 'Lower Headline';
+$lang['qb_hequal']  = 'Same Level Headline';
+
 $lang['qb_link']    = 'Internal Link';
 $lang['qb_extlink'] = 'External Link';
 $lang['qb_hr']      = 'Horizontal Rule';
@@ -179,7 +190,11 @@ $lang['qb_sig']     = 'Insert Signature';
 $lang['qb_smileys'] = 'Smileys';
 $lang['qb_chars']   = 'Special Chars';
 
-$lang['del_confirm']= 'Really delete selected item(s)?';
+$lang['upperns']       = 'jump to parent namespace';
+$lang['js']['linkwiz'] = 'Link Wizard';
+$lang['js']['linkto']  = 'Link to:';
+
+$lang['js']['del_confirm']= 'Really delete selected item(s)?';
 $lang['admin_register']= 'Add new user';
 
 $lang['metaedit']    = 'Edit Metadata';
@@ -249,7 +264,17 @@ $lang['mu_fail']      = 'failed';
 $lang['mu_authfail']  = 'session expired';
 $lang['mu_progress']  = '@PCT@% uploaded';
 $lang['mu_filetypes'] = 'Allowed Filetypes';
+$lang['mu_info']      = 'files uploaded.';
+$lang['mu_lasterr']   = 'Last error:';
 
 $lang['recent_global'] = 'You\'re currently watching the changes inside the <b>%s</b> namespace. You can also <a href="%s">view the recent changes of the whole wiki</a>.';
+
+$lang['years']   = '%d years ago';
+$lang['months']  = '%d months ago';
+$lang['weeks']   = '%d weeks ago';
+$lang['days']    = '%d days ago';
+$lang['hours']   = '%d hours ago';
+$lang['minutes'] = '%d minutes ago';
+$lang['seconds'] = '%d seconds ago';
 
 //Setup VIM: ex: et ts=2 enc=utf-8 :

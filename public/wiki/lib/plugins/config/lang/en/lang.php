@@ -17,6 +17,10 @@ $lang['nochoice']   = '(no other choices available)';
 $lang['locked']     = 'The settings file can not be updated, if this is unintentional, <br />
                        ensure the local settings file name and permissions are correct.';
 
+$lang['danger']     = 'Danger: Changing this option could make your wiki and the configuration menu inaccessible.';
+$lang['warning']    = 'Warning: Changing this option could cause unintended behaviour.';
+$lang['security']   = 'Security Warning: Changing this option could present a security risk.';
+
 /* --- Config Setting Headers --- */
 $lang['_configuration_manager'] = 'Configuration Manager'; //same as heading in intro.txt
 $lang['_header_dokuwiki'] = 'DokuWiki Settings';
@@ -50,9 +54,9 @@ $lang['_msg_setting_no_default'] = 'No default value.';
 
 $lang['fmode']       = 'File creation mode';
 $lang['dmode']       = 'Directory creation mode';
-$lang['lang']        = 'Language';
-$lang['basedir']     = 'Base directory';
-$lang['baseurl']     = 'Base URL';
+$lang['lang']        = 'Interface language';
+$lang['basedir']     = 'Server path (eg. <code>/dokuwiki/</code>). Leave blank for autodetection.';
+$lang['baseurl']     = 'Server URL (eg. <code>http://www.yourserver.com</code>). Leave blank for autodetection.';
 $lang['savedir']     = 'Directory for saving data';
 $lang['start']       = 'Start page name';
 $lang['title']       = 'Wiki title';
@@ -103,6 +107,8 @@ $lang['disableactions_other'] = 'Other actions (comma separated)';
 $lang['sneaky_index'] = 'By default, DokuWiki will show all namespaces in the index view. Enabling this option will hide those where the user doesn\'t have read permissions. This might result in hiding of accessable subnamespaces. This may make the index unusable with certain ACL setups.';
 $lang['auth_security_timeout'] = 'Authentication Security Timeout (seconds)';
 $lang['securecookie'] = 'Should cookies set via HTTPS only be sent via HTTPS by the browser? Disable this option when only the login of your wiki is secured with SSL but browsing the wiki is done unsecured.';
+$lang['xmlrpc']      = 'Enable/disable XML-RPC interface.';
+$lang['xmlrpcuser']  = 'Restrict XML-RPC access to the comma separated groups or users given here. Leave empty to give access to everyone.';
 
 /* Advanced Options */
 $lang['updatecheck'] = 'Check for updates and security warnings? DokuWiki needs to contact splitbrain.org for this feature.';
@@ -130,7 +136,6 @@ $lang['send404']     = 'Send "HTTP 404/Page Not Found" for non existing pages';
 $lang['sitemap']     = 'Generate Google sitemap (days)';
 $lang['broken_iua']  = 'Is the ignore_user_abort function broken on your system? This could cause a non working search index. IIS+PHP/CGI is known to be broken. See <a href="http://bugs.splitbrain.org/?do=details&amp;task_id=852">Bug 852</a> for more info.';
 $lang['xsendfile']   = 'Use the X-Sendfile header to let the webserver deliver static files? Your webserver needs to support this.';
-$lang['xmlrpc']      = 'Enable/disable XML-RPC interface.';
 $lang['renderer_xhtml']   = 'Renderer to use for main (xhtml) wiki output';
 $lang['renderer__core']   = '%s (dokuwiki core)';
 $lang['renderer__plugin'] = '%s (plugin)';

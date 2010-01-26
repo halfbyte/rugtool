@@ -10,21 +10,31 @@
 /**
  * Returns the (known) extension and mimetype of a given filename
  *
+ * If $knownonly is true (the default), then only known extensions
+ * are returned.
+ *
  * @author Andreas Gohr <andi@splitbrain.org>
  */
-function mimetype($file){
+function mimetype($file, $knownonly=true){
   $ret    = array(false,false,false); // return array
   $mtypes = getMimeTypes();     // known mimetypes
   $exts   = join('|',array_keys($mtypes));  // known extensions (regexp)
+  if(!$knownonly){
+    $exts = $exts.'|[_\-A-Za-z0-9]+';  // any extension
+  }
   if(preg_match('#\.('.$exts.')$#i',$file,$matches)){
     $ext = strtolower($matches[1]);
   }
 
-  if($ext && $mtypes[$ext]){
-    if($mtypes[$ext][0] == '!'){
-        $ret = array($ext, substr($mtypes[$ext],1), true);
-    }else{
-        $ret = array($ext, $mtypes[$ext], false);
+  if($ext){
+    if (isset($mtypes[$ext])){
+      if($mtypes[$ext][0] == '!'){
+          $ret = array($ext, substr($mtypes[$ext],1), true);
+      }else{
+          $ret = array($ext, $mtypes[$ext], false);
+      }
+    }elseif(!$knownonly){
+      $ret = array($ext, 'application/octet-stream', true);
     }
   }
 
@@ -123,19 +133,16 @@ function getSchemes() {
 }
 
 /**
- * Builds a hash from a configfile
+ * Builds a hash from an array of lines
  *
  * If $lower is set to true all hash keys are converted to
  * lower case.
  *
  * @author Harry Fuecks <hfuecks@gmail.com>
  * @author Andreas Gohr <andi@splitbrain.org>
+ * @author Gina Haeussge <gina@foosel.net>
  */
-function confToHash($file,$lower=false) {
-  $conf = array();
-  $lines = @file( $file );
-  if ( !$lines ) return $conf;
-
+function linesToHash($lines, $lower=false) {
   foreach ( $lines as $line ) {
     //ignore comments (except escaped ones)
     $line = preg_replace('/(?<![&\\\\])#.*$/','',$line);
@@ -152,6 +159,24 @@ function confToHash($file,$lower=false) {
   }
 
   return $conf;
+}
+
+/**
+ * Builds a hash from a configfile
+ *
+ * If $lower is set to true all hash keys are converted to
+ * lower case.
+ *
+ * @author Harry Fuecks <hfuecks@gmail.com>
+ * @author Andreas Gohr <andi@splitbrain.org>
+ * @author Gina Haeussge <gina@foosel.net>
+ */
+function confToHash($file,$lower=false) {
+  $conf = array();
+  $lines = @file( $file );
+  if ( !$lines ) return $conf;
+
+  return linesToHash($lines, $lower);
 }
 
 /**
