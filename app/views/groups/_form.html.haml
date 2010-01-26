@@ -6,7 +6,7 @@
 
 - if allowed_for_create_or_moderator?(@group)
   %p
-    Über den URL-Slug wird die Adresse Deiner Usergroup festgelegt. Wenn der URL-Slug beispielsweise "hamburg" lautet, kann man die 
+    Über den URL-Slug wird die Adresse Deiner Usergroup festgelegt. Wenn der URL-Slug beispielsweise "hamburg" lautet, kann man die
     Usergroup über rubyonrails-ug.de/hamburg erreichen, was natürlich ein schöner, und gut zu kommunizierender Shortcut ist.
   %p
     = f.label :url_slug
@@ -14,8 +14,8 @@
     = f.text_field :url_slug, :class => 'text'
 
 %p
-  Bitte erzähl doch kurz, wie und wann und wo Ihr Euch trefft, wie viele Leute 
-  da so kommen, wie Ihr Euch organisiert und was Du sonst noch dazu sagen 
+  Bitte erzähl doch kurz, wie und wann und wo Ihr Euch trefft, wie viele Leute
+  da so kommen, wie Ihr Euch organisiert und was Du sonst noch dazu sagen
   möchtest.
   Die Beschreibung kann per Textile formatiert werden.
 %p
@@ -40,6 +40,6 @@
 %p
   Die folgende Frage ist der Existenz von Spam-Robots geschuldet. Sorry.
 %p
-  = f.label :sum_field, "Was ist 1+1?"
+  = f.label :sum_field, "Was ist eins und eins?"
   %br
   = f.text_field :sum_field, :class => 'text'
