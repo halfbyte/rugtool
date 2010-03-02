@@ -26,7 +26,7 @@ namespace :deploy do
   task :restart, :roles => :app do
     run "touch #{current_path}/tmp/restart.txt"
   end
-  
+
   [:start, :stop].each do |t|
     desc "#{t} task is a no-op with mod_rails"
     task t, :roles => :app do ; end
@@ -36,6 +36,7 @@ end
 after 'deploy:update_code', :set_symlinks
 
 task :set_symlinks do
+  run "ln -f -s #{shared_path}/config/recaptcha.yml #{release_path}/config/recaptcha.yml"
   run "ln -f -s #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   run "ln -f -s #{shared_path}/wiki/data #{release_path}/public/wiki/data"
   run "ln -f -s #{shared_path}/wiki/conf #{release_path}/public/wiki/conf"
