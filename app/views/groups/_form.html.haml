@@ -38,8 +38,4 @@
   %br
   = f.text_field :location, :class => 'text'
 %p
-  Die folgende Frage ist der Existenz von Spam-Robots geschuldet. Sorry.
-%p
-  = f.label :sum_field, "Was ist eins und eins?"
-  %br
-  = f.text_field :sum_field, :class => 'text'
+  = recaptcha_tags

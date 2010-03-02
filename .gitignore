@@ -8,3 +8,4 @@ doc/api
 doc/app
 config/database.yml
 public/stylesheets/screen.css
+config/recaptcha.yml

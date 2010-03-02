@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
-  
+
   permit 'moderator for Group', :only => [:destroy]
-  
+
   resource_controller
 
   def show
@@ -20,10 +20,32 @@ class GroupsController < ApplicationController
     @groups = Group.all
   end
 
+
+  def update
+    @group = object
+    if verify_recaptcha(:model => @group) && @group.update_attributes(params[:group])
+      flash[:notice] = "Thanks for editing your group"
+      redirect_to @group
+    else
+      render :action => 'edit'
+    end
+
+  end
+
+  def create
+    @group = Group.new(params[:group])
+    if verify_recaptcha(:model => @group) && @group.save
+      flash[:notice] = "Thanks for adding your group"
+      redirect_to @group
+    else
+      render :action => 'new'
+    end
+  end
+
 private
 
   def object
     @object ||= Group.find_by_url_slug(params[:id])
   end
-  
+
 end

@@ -1,0 +1,6 @@
+development:
+  public_key: 6LfXjQsAAAAAAxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  private_key: 6LfXjQsAAAAAxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+test:
+  public_key: 6LfXjQsAAAAAAxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  private_key: 6LfXjQsAAAAAxxxxxxxxxxxxxxxxxxxxxxxxxxxx
